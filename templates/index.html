@@ -1,30 +1,13 @@
 {% extends "base.html" %}
-{% block title %}featurekatalog{% endblock %}
+{% block title %}featurekatalog {{ g.version }}{% endblock %}
 {% block content %}
-<h1>featurekatalog</h1>
+<h1>featurekatalog {{ g.version }}</h1>
 <p>
-Denne side indeholder en "omskrevet" version af visse aspekter
-af den officielle dokumentation fra ler.dk; 
-primært det såkaldte featurekatalog og tilhørende XML Schema.
+Du ser på en uofficiel gengivelse af LER's featurekatalog, for version {{ g.version }}.
+Alt info er en omskrevet udgave af LER's officielle dokumentation. 
 </p>
 <p>
-Motivation: Jeg har tit haft brug for at tjekke, hvad der var
-tilladt ift LER, herunder hvornår hvilke attributter var påkrævede,
-og jeg syntes det var besværligt/trægt at læse den officielle
-LER-dokumentation (dels docx og dels XSD-filer).
+Brug menuen ovenfor til at browse featuretyper, restriktioner og XSD-struktur
+for denne version.
 </p>
-<p>
-For nyligt har jeg implementeret min egen LER-robot,
-og i den forbindelse endte jeg med, som et biprodukt, at skrive
-nærværende dokumentation. Jeg håber på at publicere førnævnte
-LER-robot som open source inden længe.
-</p>
-<p>
-Kildekoden samt uddybende teknisk baggrund for denne side
-kan findes på: <a href="https://github.com/lerinfo/featurekatalog">https://github.com/lerinfo/featurekatalog</a>.
-</p>
-<p>
-Mvh Thomas Wessel, <a href="mailto:mrvelle@gmail.com">mrvelle@gmail.com</a>
-</p>
-
 {% endblock %}
