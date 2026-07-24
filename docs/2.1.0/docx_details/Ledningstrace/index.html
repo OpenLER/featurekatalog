@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledningstrace – featurekatalog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+  .pakke-badge { font-size: 0.85em; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="../../index.html">featurekatalog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_list/index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_tree/index.html">Tree</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../restriktioner/index.html">Restriktioner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../general_constraints/index.html">Andre krav</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container pb-5">
+<p class="text-muted pakke-badge">Pakke: Fælles</p>
+<h1>Ledningstrace</h1>
+<p class="text-muted">Denne side viser, hvad der står om featuretypen 'Ledningstrace' i featurekatalogets docx. Data kommer altså fra docx'en, ikke fra XSD-skemaet.</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Foretrukken term</dt>
+    <dd class="col-sm-10">ledningstrace</dd>
+    <dt class="col-sm-2">Definition</dt>
+    <dd class="col-sm-10">linjeføring hvor der ligger en eller flere ledninger i relativ nærhed af hinanden</dd>
+    <dt class="col-sm-2">Juridisk kilde</dt>
+    <dd class="col-sm-10">[LER-bekendtgørelsen]</dd>
+    <dt class="col-sm-2">Subtype af</dt>
+    <dd class="col-sm-10"><a href="../LedningEllerLedningstrace/index.html">LedningEllerLedningstrace</a></dd>
+    <dt class="col-sm-2">Type</dt>
+    <dd class="col-sm-10">Featuretype</dd>
+</dl>
+
+<h2 class="h4 mt-4">Attributter</h2>
+<p class="text-muted">Listen viser kun de attributter, der er defineret direkte for denne klasse. Eventuelt nedarvede attributter fra en overordnet klasse vises ikke.</p>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>Navn</th><th>Type</th><th>Multiplicitet</th><th>Voidable</th><th>Definition</th></tr>
+  <tr>
+    <td><code>bredde</code></td>
+    <td>Measure</td>
+    <td>0..1</td>
+    <td>ja</td>
+    <td>udstrækning på tværs af lednings midterlinje</td>
+  </tr>
+  <tr>
+    <td><code>forsyningsart</code></td>
+    <td>Forsyningsart (Kodeliste)</td>
+    <td>1..*</td>
+    <td>ja</td>
+    <td>forsyningsarten af den ledning eller de ledninger som ligger i ledningstraceet<ul class="mb-0"><li><code>afløb</code> — bortledning af vand
+opsamling og bortledning af spildevand, regnvand og drænvand</li><li><code>el</code> — elforsyning
+produktion og distribution af elektricitet</li><li><code>fjernvarme/fjernkøling</code> — fjernvarme eller fjernkøling
+produktion og distribution af varme eller kulde</li><li><code>gas</code> — gasforsyning
+indvinding og distribution af gas</li><li><code>olie</code> — olieforsyning
+indvinding og distribution af olie
+Note: olie: tyktflydende væske, der ikke er blandbar med vand [DSD] Omfatter bl.a. mineralolie (også kaldt jordolie eller råolie) og vegetabilsk olie. Olie anvendes bl.a. som energikilde, til opvarmning, i kraftværker og som brændstof til biler, fly og skibe [baseret på DSD].</li><li><code>telekommunikation</code> — transmission, emission eller modtagelse af tegn, signaler, skrift, billeder og lyd eller intelligens af enhver art vha. tråd, radio, optiske eller andre elektromagnetiske systemer
+Kilde: [IEV, ref 701-01-05]</li><li><code>vand</code> — vandforsyning
+indvinding og distribution af vand
+Kilde: [DSD]</li></ul></td>
+  </tr>
+  <tr>
+    <td><code>geometri</code></td>
+    <td>GM_MultiCurve</td>
+    <td>1</td>
+    <td>nej</td>
+    <td>geografisk placering af midterlinjen</td>
+  </tr>
+  <tr>
+    <td><code>ledningsetableringsmetode</code></td>
+    <td>Ledningsetableringsmetodetype (Enumeration)</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>fremgangsmåde som anvendes når en ledning skal anlægges<ul class="mb-0"><li><code>nedgravning</code> — metode hvor der graves en ledningsgrav med gravemaskine eller skovl
+Note: Metoden omfatter også kædegravning. kædegravning: gravning med et sæt knive eller tænder monteret på en kæde eller et hjul, der under rotation presses fra jordoverfladen gennem jorden, således at der opstår en åben rende [DS 475:2012]</li><li><code>styret boring</code> — etablering af en ledning ved boring
+Anvendelsesnote: Dybden kan afvige meget fra ledningens normale nedlægningsdybde.
+Kilde: [DS 475:2012]</li><li><code>indvendig foring</code> — etablering af en ledning inden i en eksisterende
+Note: Definitionen dækker metoderne: foring med lange sammensvejste rør, stram foring og strømpeføring.
+Kilde: [DS 475:2012]</li><li><code>foring med lange sammensvejste rør</code> — en lang sammensvejst PE-ledning trækkes ind i den eksisterende ledning via en mindre opgravning
+Kilde: [DS 475:2012]</li><li><code>stram foring</code> — en lang sammenfoldet plastledning, der trækkes ind i den eksisterende ledning. Ved hjælp af varme og tryk udvides den til den oprindelige dimension
+Kilde: [DS 475:2012]</li><li><code>strømpeforing</code> — en imprægneret strømpe af filt eller glasfiber, der trækkes ind i den eksisterende ledning. Her udvides den ved hjælp af overtryk, hvorefter den hærdes enten med varme eller lys
+Kilde: [DS 475:2012]</li><li><code>nedpløjning</code> — etablering af ledning i jord med en bugseret eller selvkørende ledningsplov, hvis skær ved passage gennem jorden efterlader en eller flere ledninger og evt. advarselsbånd eller afdækning
+Kilde: [DS 475:2012]</li><li><code>jordfortrængning</code> — etablering af en ledning uden ledningsgrav på en sådan måde, at der skabes plads til ledningen, uden at den tilsvarende jord fjernes
+Note: Definitionen dækker metoderne: skydning med jordraket og rørsprængning.
+Kilde: [DS 475:2012]</li><li><code>rørsprængning</code> — den eksisterende ledning knuses ved hjælp af et skærehoved eller en lufttryksdrevet hammer, og den knuste ledning presses ud i omkringfyldningen
+Note: Ved rørsprængning kan en eksisterende ledning udskiftes med en ledning i samme eller større dimension.
+Anvendelsesnote: Der ligger fragmenter fra den gamle ledning.
+Kilde: [DS 475:2012]</li><li><code>skydning med jordraket</code> — en jordraket består af en slaghammer, der bevæger sig frem i undergrunden ved brug af luft eller hydraulik. Det blivende rør installeres enten sammen med fremføringen af jordraketten, eller når den trækkes tilbage
+Kilde: [DS 475:2012]</li><li><code>underboring</code> — etablering af en ledning uden ledningsgrav på en sådan måde, at jorden fjernes i et vist omfang af borevolumenet. Det erstattes af medierøret og boremudder og/eller evt. et forstærkende indpumpet materiale
+Note: Definitionen dækker metoderne: styret boring, pilotrørsmetoden og mikrotunnellering.
+Kilde: [DS 475:2012]</li><li><code>mikrotunnellering</code> — mikrotunnellering er en laserstyret gennempresningsmetode, hvor indpresning af rør sker fra en hydraulisk presse- eller borerig. Et roterende borehoved i fronten af røret løsborer materialet, der bortskaffes fra rørfronten. Mikrotunnellering udføres fra e
+Kilde: [DS 475:2012]</li><li><code>pilotrørsmetoden</code> — en videooptisk styret boremetode, der giver mulighed for kontinuerlig kontrol og styring af pilotrøret under hele forløbet af gennempreseningen
+Note: Rørledningen installeres over 2 omgange. Først styres pilotrøret igennem. Herefter udføres der itrækning af medierøret.
+Kilde: [DS 475:2012]</li></ul></td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Associationsroller</h2>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>Navn</th><th>Type</th><th>Multiplicitet</th><th>Voidable</th><th>Definition</th></tr>
+  <tr>
+    <td><code>indeholdtLedning</code></td>
+    <td><a href="../Ledning/index.html">Ledning</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>ja</td>
+    <td>ledning som ligger i ledningstraceet</td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Restriktioner</h2>
+<p class="text-muted">Listen viser kun de restriktioner, der er defineret direkte for denne klasse. Eventuelt nedarvede restriktioner fra en overordnet klasse vises ikke.</p>
+<h3 class="h6 mt-3"><code>breddeMåleenhedsrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Måleenheden for bredden skal være millimeter.
+Millimeter skal angives med symbolet mm [UCUM].</pre>
+<h3 class="h6 mt-3"><code>geometriDatatyperestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Geometrien skal anvende lineær interpolation.
+Note: I en GML-indkodning betyder det, at geometrien, som er en multikurve, skal består af segmenter som skal have en geometritype der er en af følgende [GML SF]:
+* gml:LineString
+* gml:Curve med segmenter af typen gml:LineStringSegment</pre>
+<h3 class="h6 mt-3"><code>nøjagtighedsklasseBetingelse</code></h3>
+<pre class="bg-light p-2 rounded">Nøjagtighedsklassen skal være angivet.
+Note: Denne restriktion er nødvendig, da nøjagtighedsklasse er defineret på LedningEllerLedningstrace med multiplicitet 0..1.</pre>
+<h3 class="h6 mt-3"><code>nøjagtighedsklasseVoidrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Nøjagtighedsklassen må ikke være void hvis alle følgende betingelser er sande:
+* etableringstidspunktet er efter skæringsdatoen;
+* ejerskabsforholdet er ejet af udleverende ledningsejer.</pre>
+<h3 class="h6 mt-3"><code>vejledendeDybdeBetingelse</code></h3>
+<pre class="bg-light p-2 rounded">Den vejledende dybde skal være angivet hvis alle følgende betingelser er sande:
+* etableringstidspunktet er efter skæringsdatoen;
+* de vertikale koordinater i geometrien er ukendt-værdien på -99;
+* den primære forsyningsart er el eller telekommunikation.</pre>
+<h3 class="h6 mt-3"><code>vejledendeDybdeVoidrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Den vejledende dybde må ikke være void hvis alle følgende betingelser er sande:
+* etableringstidspunktet er efter skæringsdatoen;
+* ejerskabsforholdet er ejet af udleverende ledningsejer;
+* driftsstatussen er ikke under etablering;
+* de vertikale koordinater i geometrien er ukendt-værdien på -99;
+* den primære forsyningsart er el eller telekommunikation.</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

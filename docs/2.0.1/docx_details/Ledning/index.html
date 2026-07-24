@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledning – featurekatalog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+  .pakke-badge { font-size: 0.85em; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="../../index.html">featurekatalog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_list/index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_tree/index.html">Tree</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../restriktioner/index.html">Restriktioner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../general_constraints/index.html">Andre krav</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container pb-5">
+<p class="text-muted pakke-badge">Pakke: Fælles</p>
+<h1>Ledning</h1>
+<p class="text-muted">Denne side viser, hvad der står om featuretypen 'Ledning' i featurekatalogets docx. Data kommer altså fra docx'en, ikke fra XSD-skemaet.</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Foretrukken term</dt>
+    <dd class="col-sm-10">ledning</dd>
+    <dt class="col-sm-2">Definition</dt>
+    <dd class="col-sm-10">kabel eller rør der har som funktion at lede noget fra et sted til et andet</dd>
+    <dt class="col-sm-2">Note</dt>
+    <dd class="col-sm-10">Denne definition er baseret på den tekniske betydning af termen &#34;ledning&#34; i Den Danske Ordbog.
+I LER-lovgivningen anvendes termen i en mere specifik betydning. I lovens definition (LBK nr 206 af 15/03/2018 §5) er betydningen indsnævret til kun at omfatte ledninger, der er nedgravet i jord eller nedgravet i eller anbragt på havbunden - og altså ikke ledninger på jorden eller i luften. Betydningen er desuden udvidet til at omfatte betydelige ledningskomponenter (LBK nr 1674 af 26/12/2017, 12).
+I forsyningsbranchen anvendes termen &#34;ledninger&#34; ofte bredt om ledningsanlæg inklusive kabler, rør, relaterede ledningskomponenter og ledningstraceer.
+I Den Danske Ordbog beskrives også en almen betydning af &#34;ledning&#34;, som kun omfatter kabel – ikke rør. Det er denne betydning, der ofte anvendes i hverdagssproget.</dd>
+    <dt class="col-sm-2">Kilde</dt>
+    <dd class="col-sm-10">LER-forretning</dd>
+    <dt class="col-sm-2">Subtype af</dt>
+    <dd class="col-sm-10"><a href="../LedningEllerLedningstrace/index.html">LedningEllerLedningstrace</a></dd>
+    <dt class="col-sm-2">Supertype til</dt>
+    <dd class="col-sm-10">AndenLedning
+Elledning
+LedningUkendtForsyningsart
+Rørledning
+Telekommunikationsledning</dd>
+    <dt class="col-sm-2">Type</dt>
+    <dd class="col-sm-10">Featuretype</dd>
+    <dt class="col-sm-2">Abstrakt</dt>
+    <dd class="col-sm-10">ja</dd>
+</dl>
+
+<h2 class="h4 mt-4">Attributter</h2>
+<p class="text-muted">Listen viser kun de attributter, der er defineret direkte for denne klasse. Eventuelt nedarvede attributter fra en overordnet klasse vises ikke.</p>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>Navn</th><th>Type</th><th>Multiplicitet</th><th>Voidable</th><th>Definition</th></tr>
+  <tr>
+    <td><code>geometri</code></td>
+    <td>GM_Curve</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>geografisk placering af midterlinjen</td>
+  </tr>
+  <tr>
+    <td><code>indeholderLedninger</code></td>
+    <td>Boolean</td>
+    <td>0..1</td>
+    <td>ja</td>
+    <td>indeholder en eller flere ledninger</td>
+  </tr>
+  <tr>
+    <td><code>ledningsetableringsmetode</code></td>
+    <td>Ledningsetableringsmetodetype (Enumeration)</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>fremgangsmåde som anvendes når en ledning skal anlægges<ul class="mb-0"><li><code>nedgravning</code> — metode hvor der graves en ledningsgrav med gravemaskine eller skovl
+Note: Metoden omfatter også kædegravning. kædegravning: gravning med et sæt knive eller tænder monteret på en kæde eller et hjul, der under rotation presses fra jordoverfladen gennem jorden, således at der opstår en åben rende [DS 475:2012]</li><li><code>styret boring</code> — etablering af en ledning ved boring
+Anvendelsesnote: Dybden kan afvige meget fra ledningens normale nedlægningsdybde.
+Kilde: [DS 475:2012]</li><li><code>indvendig foring</code> — etablering af en ledning inden i en eksisterende
+Note: Definitionen dækker metoderne: foring med lange sammensvejste rør, stram foring og strømpeføring.
+Kilde: [DS 475:2012]</li><li><code>foring med lange sammensvejste rør</code> — en lang sammensvejst PE-ledning trækkes ind i den eksisterende ledning via en mindre opgravning
+Kilde: [DS 475:2012]</li><li><code>stram foring</code> — en lang sammenfoldet plastledning, der trækkes ind i den eksisterende ledning. Ved hjælp af varme og tryk udvides den til den oprindelige dimension
+Kilde: [DS 475:2012]</li><li><code>strømpeforing</code> — en imprægneret strømpe af filt eller glasfiber, der trækkes ind i den eksisterende ledning. Her udvides den ved hjælp af overtryk, hvorefter den hærdes enten med varme eller lys
+Kilde: [DS 475:2012]</li><li><code>nedpløjning</code> — etablering af ledning i jord med en bugseret eller selvkørende ledningsplov, hvis skær ved passage gennem jorden efterlader en eller flere ledninger og evt. advarselsbånd eller afdækning
+Kilde: [DS 475:2012]</li><li><code>jordfortrængning</code> — etablering af en ledning uden ledningsgrav på en sådan måde, at der skabes plads til ledningen, uden at den tilsvarende jord fjernes
+Note: Definitionen dækker metoderne: skydning med jordraket og rørsprængning.
+Kilde: [DS 475:2012]</li><li><code>rørsprængning</code> — den eksisterende ledning knuses ved hjælp af et skærehoved eller en lufttryksdrevet hammer, og den knuste ledning presses ud i omkringfyldningen
+Note: Ved rørsprængning kan en eksisterende ledning udskiftes med en ledning i samme eller større dimension.
+Anvendelsesnote: Der ligger fragmenter fra den gamle ledning.
+Kilde: [DS 475:2012]</li><li><code>skydning med jordraket</code> — en jordraket består af en slaghammer, der bevæger sig frem i undergrunden ved brug af luft eller hydraulik. Det blivende rør installeres enten sammen med fremføringen af jordraketten, eller når den trækkes tilbage
+Kilde: [DS 475:2012]</li><li><code>underboring</code> — etablering af en ledning uden ledningsgrav på en sådan måde, at jorden fjernes i et vist omfang af borevolumenet. Det erstattes af medierøret og boremudder og/eller evt. et forstærkende indpumpet materiale
+Note: Definitionen dækker metoderne: styret boring, pilotrørsmetoden og mikrotunnellering.
+Kilde: [DS 475:2012]</li><li><code>mikrotunnellering</code> — mikrotunnellering er en laserstyret gennempresningsmetode, hvor indpresning af rør sker fra en hydraulisk presse- eller borerig. Et roterende borehoved i fronten af røret løsborer materialet, der bortskaffes fra rørfronten. Mikrotunnellering udføres fra e
+Kilde: [DS 475:2012]</li><li><code>pilotrørsmetoden</code> — en videooptisk styret boremetode, der giver mulighed for kontinuerlig kontrol og styring af pilotrøret under hele forløbet af gennempreseningen
+Note: Rørledningen installeres over 2 omgange. Først styres pilotrøret igennem. Herefter udføres der itrækning af medierøret.
+Kilde: [DS 475:2012]</li></ul></td>
+  </tr>
+  <tr>
+    <td><code>liggerILedning</code></td>
+    <td>Boolean</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>ledningen er placeret i en anden ledning</td>
+  </tr>
+  <tr>
+    <td><code>niveau</code></td>
+    <td>Niveautype (Enumeration)</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>placering i forhold til terræn<ul class="mb-0"><li><code>delvist under terræn</code> — delvist under et landområdes jordoverflade
+Kilde: baseret på [DDO]</li><li><code>over terræn</code> — over et landområdes jordoverflade
+Kilde: baseret på [DDO]</li><li><code>under terræn</code> — under et landområdes jordoverflade
+Kilde: baseret på [DDO]</li></ul></td>
+  </tr>
+  <tr>
+    <td><code>udvendigDiameter</code></td>
+    <td>Measure</td>
+    <td>0..1</td>
+    <td>ja</td>
+    <td>(se billede på diagram)</td>
+  </tr>
+  <tr>
+    <td><code>udvendigFarve</code></td>
+    <td>CharacterString</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>farve af yderside</td>
+  </tr>
+  <tr>
+    <td><code>udvendigMateriale</code></td>
+    <td>CharacterString</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>stof brugt til fremstilling af lednings yderside</td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Associationsroller</h2>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>Navn</th><th>Type</th><th>Multiplicitet</th><th>Voidable</th><th>Definition</th></tr>
+  <tr>
+    <td><code>indeholdtLedning</code></td>
+    <td><a href="index.html">Ledning</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>ja</td>
+    <td>ledning som ligger i den givne ledning</td>
+  </tr>
+  <tr>
+    <td><code>slutkomponent</code></td>
+    <td><a href="../Ledningskomponent/index.html">Ledningskomponent</a> (Featuretype)</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>komponent hvor ledningen slutter</td>
+  </tr>
+  <tr>
+    <td><code>startkomponent</code></td>
+    <td><a href="../Ledningskomponent/index.html">Ledningskomponent</a> (Featuretype)</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>komponent hvor ledningen starter</td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Restriktioner</h2>
+<p class="text-muted">Listen viser kun de restriktioner, der er defineret direkte for denne klasse. Eventuelt nedarvede restriktioner fra en overordnet klasse vises ikke.</p>
+<h3 class="h6 mt-3"><code>driftsstatusVoidrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Driftsstatussen må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+Note: m.a.o.: værdien for driftstatussen skal være angivet hvis etableringstidspunktet er efter skæringsdatoen, selvom denne attribut er deklareret som voidable.</pre>
+<h3 class="h6 mt-3"><code>fareklasseVoidrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Fareklassen må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+Note: m.a.o.: værdien for fareklassen skal være angivet hvis etableringstidspunktet er efter skæringsdatoen, selvom denne attribut er deklareret som voidable.</pre>
+<h3 class="h6 mt-3"><code>geometriBetingelse</code></h3>
+<pre class="bg-light p-2 rounded">Geometrien skal være angivet hvis alle følgende betingelser er sande:
+* ledningen er ikke indeholdt i et ledningstracé
+* ledningen er ikke indeholdt i en anden ledning</pre>
+<h3 class="h6 mt-3"><code>geometriDatatyperestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Geometrien skal anvende lineær interpolation.
+Note: I en GML-indkodning betyder det, at geometrien, som er en kurve, skal have en geometritype der er en af følgende [GML SF]:
+* gml:LineString
+* gml:Curve med segmenter af typen gml:LineStringSegment</pre>
+<h3 class="h6 mt-3"><code>nøjagtighedsklasseBetingelse</code></h3>
+<pre class="bg-light p-2 rounded">Nøjagtighedsklassen skal være angivet hvis geometrien er angivet.
+Nøjagtighedsklassen må ikke være angivet hvis geometrien ikke er angivet.</pre>
+<h3 class="h6 mt-3"><code>nøjagtighedsklasseVoidrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Nøjagtighedsklassen må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+Note: m.a.o.: værdien for nøjagtighedsklassen skal være angivet hvis etableringstidspunktet er efter skæringsdatoen, selvom denne attribut er deklareret som voidable.</pre>
+<h3 class="h6 mt-3"><code>udvendigDiameterMåleenhedsrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Måleenheden for den udvendige diameter skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].</pre>
+<h3 class="h6 mt-3"><code>udvendigDiameterVoidrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Den udvendige diameter må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

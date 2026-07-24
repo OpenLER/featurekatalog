@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graveforespørgselssvar – featurekatalog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+  .pakke-badge { font-size: 0.85em; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="../../index.html">featurekatalog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_list/index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_tree/index.html">Tree</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../restriktioner/index.html">Restriktioner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../general_constraints/index.html">Andre krav</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container pb-5">
+<p class="text-muted pakke-badge">Pakke: Fælles</p>
+<h1>Graveforespørgselssvar</h1>
+<p class="text-muted">Denne side viser, hvad der står om featuretypen 'Graveforespørgselssvar' i featurekatalogets docx. Data kommer altså fra docx'en, ikke fra XSD-skemaet.</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Foretrukken term</dt>
+    <dd class="col-sm-10">graveforespørgselssvar</dd>
+    <dt class="col-sm-2">Definition</dt>
+    <dd class="col-sm-10">svar fra ledningsejer til LER-forretning på anmodning om udlevering af ledningsoplysninger</dd>
+    <dt class="col-sm-2">Note</dt>
+    <dd class="col-sm-10">Svaret angiver type af graveforespørgselssvar samt de eventuelle ledningsoplysninger, som en ledningsejer har udleveret.
+I tilfælde hvor ledningsejer ikke har sendt ledningsoplysninger, fremgår i stedet et alternativt svar fx &#34;ingen ledninger i graveområde&#34; eller &#34;udtaget til manuel behandling&#34;.</dd>
+    <dt class="col-sm-2">Kilde</dt>
+    <dd class="col-sm-10">[LER-forretningsbegreber]</dd>
+    <dt class="col-sm-2">Type</dt>
+    <dd class="col-sm-10">Featuretype</dd>
+    <dt class="col-sm-2">Modelleringsnote</dt>
+    <dd class="col-sm-10">Er en feature collection, dvs. en samling af features som i sig selv betragtes som en feature, se også [OGC 99-110] og [GML 3.2.2], afsnit 9.</dd>
+    <dt class="col-sm-2">GML-note</dt>
+    <dd class="col-sm-10">For at en klasse indkodes som en GML feature collection, skal den (1) have tagged value isCollection=true og (2) skal relationerne mellem klassen og de klasser som den indeholder, være en UML-aggregationer eller en UML-kompositioner. Derfor har Graveforespørgselssvar tagged value isCollection=true og er relationerne til Ledningstrace, Ledning, osv. modelleret som aggregeringer [GML 3.2.2].</dd>
+</dl>
+
+<h2 class="h4 mt-4">Attributter</h2>
+<p class="text-muted">Listen viser kun de attributter, der er defineret direkte for denne klasse. Eventuelt nedarvede attributter fra en overordnet klasse vises ikke.</p>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>Navn</th><th>Type</th><th>Multiplicitet</th><th>Voidable</th><th>Definition</th></tr>
+  <tr>
+    <td><code>forventetAfleveringstidspunkt</code></td>
+    <td>DateTime</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>tidspunkt hvor et nyt graveforespørgselssvar forventes fremsendt af ledningsejer</td>
+  </tr>
+  <tr>
+    <td><code>gyldigTil</code></td>
+    <td>Date</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>sidste dag hvor noget er gyldigt</td>
+  </tr>
+  <tr>
+    <td><code>id</code></td>
+    <td>CharacterString</td>
+    <td>1</td>
+    <td>nej</td>
+    <td>sproglig uafhængig rækkefølge af tegn der er egnet til unikt og permanent at identificere det som det er knyttet til</td>
+  </tr>
+  <tr>
+    <td><code>type</code></td>
+    <td>Graveforespørgselssvartype (Enumeration)</td>
+    <td>1</td>
+    <td>nej</td>
+    <td>kategori af graveforespørgselssvar<ul class="mb-0"><li><code>ingen ledninger i graveområde</code> — ledningsejer har ingen ledninger i det angivne graveområde
+Note: Ledningsejeren benytter denne kategori til at bekræfte at denne ikke har ledninger i graveområdet.
+Kilde: LER-forretning</li><li><code>ledningsoplysninger udleveres ikke</code> — ledningsejer har valgt ikke at udlevere ledningsoplysninger
+Note: Ledningsejeren har ledninger i området, men ønsker ikke at oplyse om disse. Dette vil som oftest begrundes med sikkerhedshensyn.
+Kilde: LER-forretning</li><li><code>ledningsoplysninger udleveret</code> — ledningsejer har udleveret ledningsoplysninger
+Note: Denne kategori benyttes samtidige med at ledningsejeren udleverer ledningsoplysninger.
+Kilde: LER-forretning</li><li><code>udtaget til manuel behandling</code> — ledningsejer foretager en manuel vurdering af den specifikke graveforespørgsel
+Kilde: LER-forretning</li><li><code>udtaget til påvisning - ledningsoplysninger udleveres ikke</code> — ledningsejer ønsker at uddybe placeringen og/eller andre forhold ved ledningen - som udgangspunkt ved fysisk tilstedeværelse - og udleverer ikke ledningsoplysninger
+Note: Benyttes ofte ved gas- og elledninger med høj fareklasse.
+Kilde: LER-forretning</li><li><code>udtaget til påvisning - ledningsoplysninger udleveret</code> — ledningsejer ønsker at uddybe placeringen og/eller andre forhold ved ledningen - som udgangspunkt ved fysisk tilstedeværelse - og udleverer ledningsoplysninger
+Note: Benyttes ofte ved gas- og elledninger med høj fareklasse.
+Kilde: LER-forretning</li></ul></td>
+  </tr>
+  <tr>
+    <td><code>typeSupplerendeInfo</code></td>
+    <td>CharacterString</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>supplerende oplysninger om graveforespørgselssvaret</td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Associationsroller</h2>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>Navn</th><th>Type</th><th>Multiplicitet</th><th>Voidable</th><th>Definition</th></tr>
+  <tr>
+    <td><code>bilag</code></td>
+    <td><a href="../Informationsressource/index.html">Informationsressource</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>informationsressource som vedlægges graveforespørgselssvaret</td>
+  </tr>
+  <tr>
+    <td><code>kontaktprofilTilTekniskeSpørgsmål</code></td>
+    <td><a href="../Kontaktprofil/index.html">Kontaktprofil</a> (Featuretype)</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>kontaktprofil der giver adgang til kontaktoplysninger på nogen man kan kontakte for at få svar på tekniske spørgsmål</td>
+  </tr>
+  <tr>
+    <td><code>ledning</code></td>
+    <td><a href="../Ledning/index.html">Ledning</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>ledning som er en del af graveforespørgselssvaret</td>
+  </tr>
+  <tr>
+    <td><code>ledningskomponent</code></td>
+    <td><a href="../Ledningskomponent/index.html">Ledningskomponent</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>komponent som er en del af graveforespørgselssvaret</td>
+  </tr>
+  <tr>
+    <td><code>ledningstrace</code></td>
+    <td><a href="../Ledningstrace/index.html">Ledningstrace</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>ledningstrace som er en del af graveforespørgselssvaret</td>
+  </tr>
+  <tr>
+    <td><code>lineærMålsætning</code></td>
+    <td><a href="../LinearDimension/index.html">LinearDimension</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>lineær målsætning som er en del af graveforespørgselssvaret</td>
+  </tr>
+  <tr>
+    <td><code>linjeannotation</code></td>
+    <td><a href="../LinearAnnotation/index.html">LinearAnnotation</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>linjeannotation som er en del af graveforespørgselssvaret</td>
+  </tr>
+  <tr>
+    <td><code>tekstannotation</code></td>
+    <td><a href="../TextAnnotation/index.html">TextAnnotation</a> (Featuretype)</td>
+    <td>0..*</td>
+    <td>nej</td>
+    <td>tekstannotation som er en del af graveforespørgselssvaret</td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Restriktioner</h2>
+<p class="text-muted">Listen viser kun de restriktioner, der er defineret direkte for denne klasse. Eventuelt nedarvede restriktioner fra en overordnet klasse vises ikke.</p>
+<h3 class="h6 mt-3"><code>forventetAfleveringstidspunktRestriktion</code></h3>
+<pre class="bg-light p-2 rounded">Det forventede afleveringstidspunkt må ikke være angivet hvis typen af graveforespørgselssvaret ikke er &#34;udtaget til manuel behandling&#34;.
+Det forventede afleveringstidspunkt må godt være angivet hvis typen af graveforespørgselssvaret er &#34;udtaget til manuel behandling&#34;.</pre>
+<h3 class="h6 mt-3"><code>idRestriktion</code></h3>
+<pre class="bg-light p-2 rounded">id&#39;et skal være en UUID, som defineret i [ITU-T X.667].
+Note: Bemærk, at en anbefaling i [ITU-T X.667] er følgende: &#34;It is recommended that the hexadecimal representation used in all human-readable formats be restricted to lower-case letters. Software processing this representation is, however, required to accept both upper and lower case letters&#34;.</pre>
+<h3 class="h6 mt-3"><code>indholdGM_ObjectSRIDrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">En featuretype indeholdt i et graveforespørgselssvar skal anvende det sammensatte koordinatreferencesystem med URI http://www.opengis.net/def/crs/EPSG/0/7416 som koordinatreferencesystemet for attributter der har GM_Object eller en af dets subtyper som typer.
+Note 1: Koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/7416 har som navn &#34;ETRS89 / UTM zone 32N + DVR90 height&#34;.
+Note 2: GM_Object har bl.a. GM_Point, GM_Curve og GM_MultiCurve som subtyper, se også ISO 19107.
+Note 3: Det betyder, at fx Ledning.geometri og LinearDimension.dimensionLine skal anvende koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/7416.</pre>
+<h3 class="h6 mt-3"><code>indholdKoteSRIDrestriktion</code></h3>
+<pre class="bg-light p-2 rounded">En featuretype indeholdt i et graveforespørgselssvar skal anvende det vertikale koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799 som koordinatreferencesystemet for attributter der repræsenterer en kote.
+Note 1: Koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799 har som navn &#34;DVR90 height&#34;.
+Note 2: En attribut der repræsenterer en kote har DirectPosition som type.
+Note 3: Det betyder, at fx Gaskomponent.topkote skal anvende koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799.
+Note 4: Ukendte vertikale koordinater angives vha. ukendt-værdien på -99. Bemærk at visse objekttyper indeholder en restriktion der ikke tillader at bruge denne værdi.</pre>
+<h3 class="h6 mt-3"><code>indholdNilReasonRestriktion</code></h3>
+<pre class="bg-light p-2 rounded">En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, skal have &#34;unknown&#34; som værdi for XML-attributten med navn &#34;nilReason&#34; hvis egenskaben er void og XML-attributten med navn &#34;nilReason&#34; er angivet.
+En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, behøver ikke at have en XML-attribut med navn &#34;nilReason&#34; hvis egenskaben er void.
+Note: Det betyder, at fx &lt;ler:udvendigDiameter xsi:nil=&#34;true&#34; nilReason=&#34;withheld&#34; /&gt; ikke er tilladt.</pre>
+<h3 class="h6 mt-3"><code>typeSupplerendeInfoBetingelse</code></h3>
+<pre class="bg-light p-2 rounded">Supplerende information om graveforespørgsselsvaret skal være angivet hvis typen af graveforespørgsselsvaret er &#34;ledningsoplysninger udleveres ikke&#34;.
+Supplerende information om graveforespørgsselsvaret må godt være angivet hvis typen af graveforespørgsselsvaret ikke er &#34;ledningsoplysninger udleveres ikke&#34;.</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Tree – featurekatalog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+  .pakke-badge { font-size: 0.85em; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">featurekatalog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../featuretype_list/index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Tree</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../restriktioner/index.html">Restriktioner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../general_constraints/index.html">Andre krav</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container pb-5">
+<h1>Type Tree</h1>
+<p class="text-muted">
+Data kommer fra XSD'en (via xmlschema's kompilerede model),
+ikke fra featurekatalogets docx.
+</p>
+<h2 class="h4 mt-4">Type-hierarki</h2>
+<p class="text-muted">
+Viser type-hierarkiet fra rodtypen <code>gml:AbstractGMLType</code> og ned gennem alle dens
+undertyper, indrykket efter arve-dybde, samt om hver type er abstrakt. Med er alle typer, der
+enten bruges direkte af mindst én featuretype, eller er en forfader til en type, der bruges
+(fx <code>gml:AbstractGMLType</code> og <code>gml:AbstractFeatureType</code> selv, som intet
+element bruger direkte, men som alle de øvrige typer nedarver fra). De øvrige ~85 XSD-typer i
+skemaet (kodelister, PropertyType-wrappers m.m.), der aldrig optræder i featurekatalogets docx,
+er filtreret fra. Arvekæden på de enkelte typers "details"-sider går opad og kan nøjes med
+SISSA's <code>xmlschema</code>-bibliotek direkte, som for hver type kender dens <code>base_type</code>.
+Dette hierarki går den modsatte vej, nedad fra forælder til undertyper — det kan <code>xmlschema</code>
+ikke selv slå op, så her bruger vi vores egen <code>SchemaEx</code>-wrapper (i <code>wrapper.py</code>),
+som ved opstart bygger et omvendt indeks over hele skemaet (forælder → liste af undertyper) og
+bruger det til at gå nedad i træet.
+</p>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>name</th><th>type</th><th>abstract</th><th>details</th></tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 12px;">gml:AbstractGMLType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td>abstract</td>
+    <td><a href="../xsdtype_details/gml-abstractgmltype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 60px;">gml:AbstractFeatureType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td>abstract</td>
+    <td><a href="../xsdtype_details/gml-abstractfeaturetype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">ler:LedningskomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td>abstract</td>
+    <td><a href="../xsdtype_details/ler-ledningskomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:AfloebskomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-afloebskomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:AndenKomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-andenkomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:ElkomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-elkomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:GaskomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-gaskomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:OliekomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-oliekomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:TelekommunikationskomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-telekommunikationskomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:TermiskKomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-termiskkomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:VandkomponentType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-vandkomponenttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">ler:LedningEllerLedningstraceType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td>abstract</td>
+    <td><a href="../xsdtype_details/ler-ledningellerledningstracetype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:LedningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td>abstract</td>
+    <td><a href="../xsdtype_details/ler-ledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 204px;">ler:RoerledningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td>abstract</td>
+    <td><a href="../xsdtype_details/ler-roerledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 252px;">ler:AfloebsledningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-afloebsledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 252px;">ler:FoeringsroerType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-foeringsroertype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 252px;">ler:GasledningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-gasledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 252px;">ler:OlieledningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-olieledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 252px;">ler:TermiskLedningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-termiskledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 252px;">ler:VandledningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-vandledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 204px;">ler:AndenLedningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-andenledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 204px;">ler:ElledningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-elledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 204px;">ler:LedningUkendtForsyningsartType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-ledningukendtforsyningsarttype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 204px;">ler:TelekommunikationsledningType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-telekommunikationsledningtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 156px;">ler:LedningstraceType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-ledningstracetype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">ler:GraveforespoergselssvarType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-graveforespoergselssvartype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">ler:InformationsressourceType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-informationsressourcetype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">ler:KontaktprofilType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ler-kontaktprofiltype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">ann:LinearAnnotationType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ann-linearannotationtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">ann:TextAnnotationType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/ann-textannotationtype/index.html">details</a></td>
+  </tr>
+  <tr>
+    <td class="font-monospace" style="padding-left: 108px;">dim:LinearDimensionType</td>
+    <td class="font-monospace">XsdComplexType</td>
+    <td></td>
+    <td><a href="../xsdtype_details/dim-lineardimensiontype/index.html">details</a></td>
+  </tr>
+</table>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

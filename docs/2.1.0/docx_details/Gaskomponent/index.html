@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaskomponent – featurekatalog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+  .pakke-badge { font-size: 0.85em; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="../../index.html">featurekatalog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_list/index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../featuretype_tree/index.html">Tree</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../restriktioner/index.html">Restriktioner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../general_constraints/index.html">Andre krav</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container pb-5">
+<p class="text-muted pakke-badge">Pakke: Gas</p>
+<h1>Gaskomponent</h1>
+<p class="text-muted">Denne side viser, hvad der står om featuretypen 'Gaskomponent' i featurekatalogets docx. Data kommer altså fra docx'en, ikke fra XSD-skemaet.</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Foretrukken term</dt>
+    <dd class="col-sm-10">gaskomponent</dd>
+    <dt class="col-sm-2">Definition</dt>
+    <dd class="col-sm-10">komponent der har tilknytning til gasledninger</dd>
+    <dt class="col-sm-2">Subtype af</dt>
+    <dd class="col-sm-10"><a href="../Ledningskomponent/index.html">Ledningskomponent</a></dd>
+    <dt class="col-sm-2">Type</dt>
+    <dd class="col-sm-10">Featuretype</dd>
+</dl>
+
+<h2 class="h4 mt-4">Attributter</h2>
+<p class="text-muted">Listen viser kun de attributter, der er defineret direkte for denne klasse. Eventuelt nedarvede attributter fra en overordnet klasse vises ikke.</p>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr><th>Navn</th><th>Type</th><th>Multiplicitet</th><th>Voidable</th><th>Definition</th></tr>
+  <tr>
+    <td><code>topkote</code></td>
+    <td>DirectPosition</td>
+    <td>0..1</td>
+    <td>nej</td>
+    <td>koten af komponentens højeste punkt</td>
+  </tr>
+  <tr>
+    <td><code>type</code></td>
+    <td>Gaskomponenttype (Kodeliste)</td>
+    <td>1</td>
+    <td>nej</td>
+    <td>kategori<ul class="mb-0"><li><code>afmærkningsstander</code> — stander har til formål at vise det omtrentlige trace for farlige ledninger
+Note: Afmærkningsstander dækker også over måle- og mærkepæl.
+Anvendelsesnote: Afmærkningsstandere bruges ifm. påvisning af ledninger.
+Kilde: Dansk Gas Forening</li><li><code>anboring</code> — komponent der bruges til at koble en stikledning på en distributionsledning
+Kilde: LER-arbejdsgruppe for gas</li><li><code>anodebed</code> — anlæg med en fysisk udbredelse til brug for katodisk beskyttelse af stålledninger
+Kilde: LER-arbejdsgruppe for gas</li><li><code>anodebed - transmission</code> — større anlæg med en fysisk udbredelse til brug for katodisk beskyttelse af stålledninger
+Kilde: LER-arbejdsgruppe for gas</li><li><code>beskyttelsesplade</code> — beskyttelsesplade
+dækplade
+plade der beskytter en ledning for last ovenfra
+Kilde: HOFOR</li><li><code>boring</code> — boring
+indvindingsboring
+indvinding af gas fra gamle affaldsdepoter
+Kilde: Kredsløb A/S</li><li><code>gasbehandlingsanlæg</code> — anlæg hvor der sker en behandling af gas
+Kilde: HOFOR</li><li><code>isolerende kobling</code> — komponent der kan adskille to net af stålrør, så de bliver elektrisk isolerede
+Kilde: LER-arbejdsgruppe for gas</li><li><code>jordhane</code> — lille ventil der anvendes på et stikrør
+Kilde: LER-arbejdsgruppe for gas</li><li><code>jordspyd</code> — komponent der bruges til at jorde en stålledning eller et ktb-anlæg
+Kilde: LER-arbejdsgruppe for gas</li><li><code>materialeskift</code> — komponent der udgør en tæt samling mellem en stålledning og en plastledning
+Kilde: LER-arbejdsgruppe for gas</li><li><code>MR-skab</code> — måler- og regulatorskab der står ude ved kunderne
+Note: Den står over jorden.
+Kilde: LER-arbejdsgruppe for gas</li><li><code>MR-station</code> — komponent der regulerer trykket op eller ned mellem noget infrastruktur (i en bygning over jorden)
+Kilde: LER-arbejdsgruppe for gas</li><li><code>målepunkt på stålrør</code> — sted hvor noget kan måles
+Kilde: LER-arbejdsgruppe for gas</li><li><code>punkt på rør</code> — målepunkt med X,Y og Z-koordinat
+Kilde: LER-arbejdsgruppe for gas</li><li><code>reduktion</code> — komponent der udgør en tæt samling mellem 2 rør med forskellig diameter
+Kilde: LER-arbejdsgruppe for gas</li><li><code>slutmuffe</code> — tæt samling for enden af en rørledning
+Kilde: LER-arbejdsgruppe for gas</li><li><code>tee</code> — komponent der samler 3 rør med den samme dimension
+Note: Svejses uden på de rør, der samles.
+Kilde: LER-arbejdsgruppe for gas</li><li><code>tunnel</code> — boret, gravet eller på anden måde tildannet passage der fører under eller gennem noget
+Kilde: HOFOR</li><li><code>udluftningsventil</code> — ventil der giver mulighed for at lufte luftet i røret ud
+Note: Når ny infrastruktur bygges skal luften i røret &#34;luftes ud&#34; - for at ledningen kan blive fyldt med gas.
+Kilde: LER-arbejdsgruppe for gas</li><li><code>vandsamler</code> — komponent der rager ud fra en gasledning
+Kilde: LER-arbejdsgruppe for gas</li><li><code>ventil</code> — komponent hvor man kan åbne og lukke for gas efter behov
+Kilde: LER-arbejdsgruppe for gas</li><li><code>ventilbrønd</code> — brøndkonstruktion til at få adgang til at betjene en ventil
+Kilde: LER-arbejdsgruppe for gas</li></ul></td>
+  </tr>
+</table>
+</div>
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
