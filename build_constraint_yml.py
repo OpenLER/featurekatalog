@@ -5,7 +5,7 @@ import yaml
 
 from featurekatalog import parse_featurekatalog
 
-DOCX_PATH = Path(__file__).parent / 'ler_featurekatalog.docx'
+DOCX_PATH = Path(__file__).parent / 'versions' / '2.2.0' / 'ler_featurekatalog.docx'
 OUT_DIR = Path(__file__).parent / 'constraints'
 
 

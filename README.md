@@ -36,9 +36,30 @@ parsing af ovennævnte docx.
 
 - `featurekatalog.py` parser `ler_featurekatalog.docx` (attributter, restriktioner,
   associationsroller pr. featuretype).
-- `wrapper.py` (`SchemaEx`) parser `schemas/2.2_ler.xsd` (og de importerede
+- `wrapper.py` (`SchemaEx`) parser `<version>_ler.xsd` (og de importerede
   Dimensions/Annotations-namespaces) for XSD-struktur (elementer, typehierarki).
 - `app.py` fletter de to og server dem som én sammenhængende Flask-app.
+
+### Flere versioner af datamodellen
+
+Sitet dækker flere udgivne versioner af LER's datamodel, ikke kun den seneste.
+Kildefilerne (featurekatalog-docx + XSD'er) for hver version ligger under
+`versions/<version>/`:
+
+```
+versions/2.0.0/ler_featurekatalog.docx, schemas/2.0_ler.xsd, ...
+versions/2.0.1/...
+versions/2.1.0/...
+versions/2.2.0/...
+```
+
+`app.py`'s `VERSIONS`-dict styrer hvilke der er med. `schemas/http/` og
+`schemas/https/` (vendorede kopier af GML/xlink/ISO 19139/Dublin Core) er
+fælles for alle versioner - de er eksterne standarder, uafhængige af LER's
+egen versionering.
+
+Hver side findes under `/<version>/`, fx `/2.2.0/restriktioner/`. Selve
+roden (`/`) er en liste over de tilgængelige versioner.
 
 ## Kør som standard Flask site
 

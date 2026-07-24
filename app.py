@@ -4,15 +4,25 @@ from pathlib import Path
 
 from xmlschema import XMLSchema
 from xmlschema.validators.wildcards import XsdAnyElement, XsdAnyAttribute
-from flask import Flask, abort, current_app, render_template
+from flask import Flask, abort, current_app, g, render_template
 from flask_frozen import Freezer
 from markupsafe import Markup, escape
 
 from featurekatalog import all_restriktioner, parse_featurekatalog
 from wrapper import SchemaEx
 
-DOCX_PATH = Path(__file__).parent / 'ler_featurekatalog.docx'
-XSD_PATH = Path(__file__).parent / 'schemas' / '2.2_ler.xsd'
+ROOT = Path(__file__).parent
+VERSIONS_DIR = ROOT / 'versions'
+
+# Newest first - used as the display order on the version landing page.
+VERSIONS = {
+    '2.2.0': '2.2_ler.xsd',
+    '2.1.0': '2.1_ler.xsd',
+    '2.0.1': '2.0_ler.xsd',
+    '2.0.0': '2.0_ler.xsd',
+}
+LATEST_VERSION = '2.2.0'
+
 GML_ABSTRACT_TYPE = '{http://www.opengis.net/gml/3.2}AbstractGMLType'
 
 # 2.2_ler.xsd imports both of these (LinearDimension, LinearAnnotation, TextAnnotation
@@ -24,6 +34,18 @@ LER_FAMILY_NAMESPACES = {
     'http://data.gov.dk/schemas/annotations/2/gml',
 }
 
+# External standards (GML, ISO 19139/gmx, Dublin Core) are vendored once under
+# schemas/http|https/, shared across every LER version. 2.2.0's own XSD already
+# references them via relative paths into that vendored tree; 2.0.0/2.0.1/2.1.0's
+# XSDs reference the same namespaces via absolute ler.dk-external URLs instead.
+# Passing this uniformly for every version resolves both cases against the local
+# vendored copies, so loading a schema never depends on a live network fetch.
+EXTERNAL_LOCATIONS = [
+    ('http://www.opengis.net/gml/3.2', str(ROOT / 'schemas/http/schemas.opengis.net/gml/3.2.1/gml.xsd')),
+    ('http://www.isotc211.org/2005/gmx', str(ROOT / 'schemas/https/schemas.isotc211.org/19139/-/gmx/1.0/gmx.xsd')),
+    ('http://purl.org/dc/terms/', str(ROOT / 'schemas/https/www.dublincore.org/schemas/xmls/qdc/2008/02/11/dcterms.xsd')),
+]
+
 
 def normalize_navn(navn):
     """ASCII-fold Danish names the same way the XSD's element names do
@@ -31,29 +53,29 @@ def normalize_navn(navn):
     return navn.lower().replace('æ', 'ae').replace('ø', 'oe').replace('å', 'aa')
 
 app = Flask(__name__)
-app.config['FREEZER_DESTINATION'] = str(Path(__file__).parent / 'docs')
+app.config['FREEZER_DESTINATION'] = str(ROOT / 'docs')
 app.config['FREEZER_RELATIVE_URLS'] = True
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
-_featuretyper = None
-_schex = None
-_type_tree = None
-_chains = None
-_xsdelement_details = None
+_featuretyper = {}
+_schex = {}
+_type_tree = {}
+_chains = {}
+_xsdelement_details = {}
 
 
-def get_featuretyper():
-    global _featuretyper
-    if _featuretyper is None:
-        _featuretyper = parse_featurekatalog(str(DOCX_PATH))
-    return _featuretyper
+def get_featuretyper(version):
+    if version not in _featuretyper:
+        docx_path = VERSIONS_DIR / version / 'ler_featurekatalog.docx'
+        _featuretyper[version] = parse_featurekatalog(str(docx_path))
+    return _featuretyper[version]
 
 
-def get_schex():
-    global _schex
-    if _schex is None:
-        schex = SchemaEx(XMLSchema(str(XSD_PATH)))
+def get_schex(version):
+    if version not in _schex:
+        xsd_path = VERSIONS_DIR / version / 'schemas' / VERSIONS[version]
+        schex = SchemaEx(XMLSchema(str(xsd_path), locations=EXTERNAL_LOCATIONS))
         # SchemaEx's own type-hierarchy walk (built in __init__) only seeds from
         # schex.schema.elements (ler.xsd's own namespace). Extend it with every
         # element in the imported dimensions/annotations namespaces too, so Type
@@ -63,23 +85,23 @@ def get_schex():
         for elm in schex.schema.maps.elements.values():
             if elm.target_namespace in LER_FAMILY_NAMESPACES:
                 schex._register_type_and_ancestors(elm.type)
-        _schex = schex
-    return _schex
+        _schex[version] = schex
+    return _schex[version]
 
 
-def get_all_xsd_elements():
+def get_all_xsd_elements(version):
     """Every element across LER + Dimensions + Annotations (not just ler.xsd's own
     namespace) - these are what the featurekatalog docx calls featuretyper."""
-    schex = get_schex()
+    schex = get_schex(version)
     return [
         elm for elm in schex.schema.maps.elements.values()
         if elm.target_namespace in LER_FAMILY_NAMESPACES
     ]
 
 
-def get_xsd_element_by_navn(navn):
+def get_xsd_element_by_navn(version, navn):
     target = normalize_navn(navn)
-    for elm in get_all_xsd_elements():
+    for elm in get_all_xsd_elements(version):
         if normalize_navn(elm.local_name) == target:
             return elm
     return None
@@ -261,58 +283,57 @@ def describe_xsd_element_type(elm):
     return xsd_type.prefixed_name or '(anonym, element content)'
 
 
-def get_type_tree():
+def get_type_tree(version):
     """List of (depth, xsdtype), walking the type hierarchy from AbstractGMLType down,
     filtered to only the types actually used by a featurekatalog featuretype (ie. the
-    same 30 featuretyper documented in the docx) plus their ancestor types (eg.
+    same featuretyper documented in the docx) plus their ancestor types (eg.
     AbstractGMLType/AbstractFeatureType themselves, which no element uses directly but
-    which every used type descends from) - not the ~85 other XSD-only types (kodelister,
+    which every used type descends from) - not the other XSD-only types (kodelister,
     PropertyType wrappers, ...) that never appear in the docx."""
-    global _type_tree
-    if _type_tree is None:
-        schex = get_schex()
+    if version not in _type_tree:
+        schex = get_schex(version)
         absgmltype = schex.maps.types[GML_ABSTRACT_TYPE]
-        known_types = {elm.type for elm in get_all_xsd_elements()}
+        known_types = {elm.type for elm in get_all_xsd_elements(version)}
         relevant_types = known_types | {
             ancestor
             for known_type in known_types
             for ancestor in schex.iter_type_ancestors(known_type)
         }
-        _type_tree = [
+        tree = [
             (depth, xsdtype)
             for depth, xsdtype in schex.walk_type_hierarchy(absgmltype)
             if xsdtype in relevant_types
         ]
-        for _depth, xsdtype in _type_tree:
+        for _depth, xsdtype in tree:
             _assert_own_content_is_flat(xsdtype)
             _assert_derivation_is_extension_or_root(xsdtype)
             _assert_not_mixed_content(xsdtype)
             _assert_no_wildcards(xsdtype)
             _assert_no_abstract_elements(xsdtype)
-    return _type_tree
+        _type_tree[version] = tree
+    return _type_tree[version]
 
 
-def get_chains():
+def get_chains(version):
     """List of (xsdtype, [ancestors..., xsdtype]) for every type in the tree."""
-    global _chains
-    if _chains is None:
-        schex = get_schex()
+    if version not in _chains:
+        schex = get_schex(version)
         chains = []
-        for _depth, xsdtype in get_type_tree():
+        for _depth, xsdtype in get_type_tree(version):
             chain = [xsdtype] + list(schex.iter_type_ancestors(xsdtype))
             chain.reverse()
             chains.append((xsdtype, chain))
-        _chains = chains
-    return _chains
+        _chains[version] = chains
+    return _chains[version]
 
 
-def get_element_defining_types(xsd_type):
+def get_element_defining_types(version, xsd_type):
     """Dict of {sub-element prefixed_name: xsd_type} mapping every element allowed by
     xsd_type's content model to the type - xsd_type itself, or one of its ancestors -
     that actually introduces it. xsd_type.content already includes inherited elements
     flattened in, so without walking the ancestor chain there's no way to tell which
     level of the inheritance chain originally declares a given element."""
-    schex = get_schex()
+    schex = get_schex(version)
     chain = [xsd_type] + list(schex.iter_type_ancestors(xsd_type))
     chain.reverse()
     defining_type = {}
@@ -323,15 +344,14 @@ def get_element_defining_types(xsd_type):
     return defining_type
 
 
-def get_xsdelement_details():
+def get_xsdelement_details(version):
     """List of {'elm': element, 'allowed_elms': [children...]} for every schema element."""
-    global _xsdelement_details
-    if _xsdelement_details is None:
-        _xsdelement_details = [
+    if version not in _xsdelement_details:
+        _xsdelement_details[version] = [
             {'elm': elm, 'allowed_elms': list(elm.iterchildren())}
-            for elm in get_all_xsd_elements()
+            for elm in get_all_xsd_elements(version)
         ]
-    return _xsdelement_details
+    return _xsdelement_details[version]
 
 
 @app.template_filter('anchor')
@@ -339,22 +359,22 @@ def anchor_filter(prefixed_name):
     return prefixed_name.lower().replace(':', '-')
 
 
-def get_by_navn(navn):
-    for ft in get_featuretyper():
+def get_by_navn(version, navn):
+    for ft in get_featuretyper(version):
         if ft['navn'] == navn:
             return ft
     return None
 
 
-def get_xsdelement_detail_by_slug(slug):
-    for elmdict in get_xsdelement_details():
+def get_xsdelement_detail_by_slug(version, slug):
+    for elmdict in get_xsdelement_details(version):
         if anchor_filter(elmdict['elm'].prefixed_name) == slug:
             return elmdict
     return None
 
 
-def get_chain_by_slug(slug):
-    for xsdtype, chain in get_chains():
+def get_chain_by_slug(version, slug):
+    for xsdtype, chain in get_chains(version):
         if anchor_filter(xsdtype.prefixed_name) == slug:
             return xsdtype, chain
     return None
@@ -366,7 +386,7 @@ def linkify_filter(value):
     if 'Ledning' is a known featuretype."""
     if not isinstance(value, str):
         return value
-    known_names = {ft['navn'] for ft in get_featuretyper()}
+    known_names = {ft['navn'] for ft in get_featuretyper(g.version)}
     match = re.match(r'^(.*?)(\s\(\w+\))?$', value, re.DOTALL)
     name, suffix = match.group(1), match.group(2) or ''
     if name in known_names:
@@ -378,76 +398,106 @@ def linkify_filter(value):
     return escape(value)
 
 
-## OVERVIEW PAGES (list like)
+## VERSION-PREFIXED ROUTING
+##
+## Every route below except the bare '/' takes a leading /<version>/ segment.
+## url_value_preprocessor/url_defaults make this transparent to templates: every
+## existing url_for(...) call keeps working unmodified, automatically picking up
+## whichever version the current page belongs to.
+
+
+@app.url_value_preprocessor
+def pull_version(endpoint, values):
+    if values is not None and 'version' in values:
+        g.version = values['version']
+
+
+@app.url_defaults
+def add_version(endpoint, values):
+    if 'version' in values or getattr(g, 'version', None) is None:
+        return
+    if current_app.url_map.is_endpoint_expecting(endpoint, 'version'):
+        values['version'] = g.version
+
+
+## FORSIDE (unprefixed - the site's actual front page, lists the versions)
 
 
 @app.route('/')
-def index():
+def forside():
+    return render_template('forside.html', versions=VERSIONS, latest_version=LATEST_VERSION)
+
+
+## OVERVIEW PAGES (list like)
+
+
+@app.route('/<version>/')
+def index(version):
     return render_template('index.html')
 
 
-@app.route('/featuretype_list/')
-def featuretype_list():
+@app.route('/<version>/featuretype_list/')
+def featuretype_list(version):
     grupper = {}
-    for ft in get_featuretyper():
+    for ft in get_featuretyper(version):
         ft = dict(ft)
-        ft['xsd_elm'] = get_xsd_element_by_navn(ft['navn'])
+        ft['xsd_elm'] = get_xsd_element_by_navn(version, ft['navn'])
         grupper.setdefault(ft['pakke'], []).append(ft)
     return render_template('featuretype_list.html', grupper=grupper.items())
 
 
-@app.route('/featuretype_tree/')
-def featuretype_tree():
-    return render_template('featuretype_tree.html', absgmltype_tree=get_type_tree())
+@app.route('/<version>/featuretype_tree/')
+def featuretype_tree(version):
+    return render_template('featuretype_tree.html', absgmltype_tree=get_type_tree(version))
 
 
-@app.route('/restriktioner/')
-def restriktioner():
-    return render_template('restriktioner.html', restriktioner=all_restriktioner(get_featuretyper()))
+@app.route('/<version>/restriktioner/')
+def restriktioner(version):
+    return render_template('restriktioner.html', restriktioner=all_restriktioner(get_featuretyper(version)))
 
 
-@app.route('/general_constraints/')
-def general_constraints():
+@app.route('/<version>/general_constraints/')
+def general_constraints(version):
     return render_template('general_constraints.html')
 
 
 ## SUMMARY PAGE (cross-source overview of a single feature type)
 
 
-@app.route('/featuretype_summary/<navn>/')
-def featuretype_summary(navn):
-    ft = get_by_navn(navn)
+@app.route('/<version>/featuretype_summary/<navn>/')
+def featuretype_summary(version, navn):
+    ft = get_by_navn(version, navn)
     if ft is None:
         abort(404)
-    return render_template('featuretype_summary.html', ft=ft, xsd_elm=get_xsd_element_by_navn(navn))
+    return render_template('featuretype_summary.html', ft=ft, xsd_elm=get_xsd_element_by_navn(version, navn))
 
 
 ## DETAILS PAGES (for individual feature types, xsd elemenets or xsd types)
 
 
-@app.route('/docx_details/<navn>/')
-def docx_details(navn):
-    ft = get_by_navn(navn)
+@app.route('/<version>/docx_details/<navn>/')
+def docx_details(version, navn):
+    ft = get_by_navn(version, navn)
     if ft is None:
         abort(404)
     return render_template('docx_details.html', ft=ft)
 
 
-@app.route('/xsdelement_details/<slug>/')
-def xsdelement_details(slug):
-    elmdict = get_xsdelement_detail_by_slug(slug)
+@app.route('/<version>/xsdelement_details/<slug>/')
+def xsdelement_details(version, slug):
+    elmdict = get_xsdelement_detail_by_slug(version, slug)
     if elmdict is None:
         abort(404)
     return render_template('xsdelement_details.html', elmdict=elmdict)
 
 
-@app.route('/xsdtype_details/<slug>/')
-def xsdtype_details(slug):
-    result = get_chain_by_slug(slug)
+@app.route('/<version>/xsdtype_details/<slug>/')
+def xsdtype_details(version, slug):
+    result = get_chain_by_slug(version, slug)
     if result is None:
         abort(404)
     xsdtype, chain = result
-    defining_types = get_element_defining_types(xsdtype)
+    defining_types = get_element_defining_types(version, xsdtype)
     own_elements = {t: [] for t in chain}
     for name, defining_type in defining_types.items():
         own_elements[defining_type].append(name)
@@ -470,27 +520,66 @@ freezer = Freezer(app)
 
 
 @freezer.register_generator
+def forside_urls():
+    yield 'forside', {}
+
+
+@freezer.register_generator
+def index_urls():
+    for version in VERSIONS:
+        yield 'index', {'version': version}
+
+
+@freezer.register_generator
+def featuretype_list_urls():
+    for version in VERSIONS:
+        yield 'featuretype_list', {'version': version}
+
+
+@freezer.register_generator
+def featuretype_tree_urls():
+    for version in VERSIONS:
+        yield 'featuretype_tree', {'version': version}
+
+
+@freezer.register_generator
+def restriktioner_urls():
+    for version in VERSIONS:
+        yield 'restriktioner', {'version': version}
+
+
+@freezer.register_generator
+def general_constraints_urls():
+    for version in VERSIONS:
+        yield 'general_constraints', {'version': version}
+
+
+@freezer.register_generator
 def featuretype_summary_urls():
-    for ft in get_featuretyper():
-        yield 'featuretype_summary', {'navn': ft['navn']}
+    for version in VERSIONS:
+        for ft in get_featuretyper(version):
+            yield 'featuretype_summary', {'version': version, 'navn': ft['navn']}
 
 
 @freezer.register_generator
 def docx_details_urls():
-    for ft in get_featuretyper():
-        yield 'docx_details', {'navn': ft['navn']}
+    for version in VERSIONS:
+        for ft in get_featuretyper(version):
+            yield 'docx_details', {'version': version, 'navn': ft['navn']}
 
 
 @freezer.register_generator
 def xsdelement_details_urls():
-    for elmdict in get_xsdelement_details():
-        yield 'xsdelement_details', {'slug': anchor_filter(elmdict['elm'].prefixed_name)}
+    for version in VERSIONS:
+        for elmdict in get_xsdelement_details(version):
+            yield 'xsdelement_details', {'version': version, 'slug': anchor_filter(elmdict['elm'].prefixed_name)}
 
 
 @freezer.register_generator
 def xsdtype_details_urls():
-    for xsdtype, _chain in get_chains():
-        yield 'xsdtype_details', {'slug': anchor_filter(xsdtype.prefixed_name)}
+    for version in VERSIONS:
+        for xsdtype, _chain in get_chains(version):
+            yield 'xsdtype_details', {'version': version, 'slug': anchor_filter(xsdtype.prefixed_name)}
 
 
 if __name__ == '__main__':

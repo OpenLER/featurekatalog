@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:dim="http://data.gov.dk/schemas/dimensions/2/gml"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        elementFormDefault="qualified"
+        targetNamespace="http://data.gov.dk/schemas/dimensions/2/gml"
+        version="2.0.0">
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="LinearDimension"
+            substitutionGroup="gml:AbstractFeature"
+            type="dim:LinearDimensionType">
+      <annotation>
+         <documentation>linear size of a feature of size or a linear distance between two features</documentation>
+      </annotation>
+   </element>
+   <complexType name="LinearDimensionType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="dimensionalValue" type="gml:MeasureType">
+                  <annotation>
+                     <documentation>nominal numerical value expressed in a specific unit relevant to a linear or angular dimension</documentation>
+                  </annotation>
+               </element>
+               <element name="dimensionLine" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>straight or curved line with terminators at each end or origin and terminator at each end, indicating the size of a feature or the extent of a feature or between two features, or between a feature and an extension line, or between two extension lines</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="LinearDimensionPropertyType">
+      <sequence minOccurs="0">
+         <element ref="dim:LinearDimension"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>
