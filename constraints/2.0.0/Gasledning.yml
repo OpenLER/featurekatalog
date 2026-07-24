@@ -1,0 +1,8 @@
+- feature_type: Gasledning
+  name: fareklasseRestriktion
+  expression: |-
+    Fareklassen skal være meget farlig hvis gasledningen har et tryk på 19 bar eller mere.
+    Fareklassen må ikke være meget farlig hvis gasledningen har et tryk på mindre end 19 bar.
+- feature_type: Gasledning
+  name: trykMåleenhedsrestriktion
+  expression: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].

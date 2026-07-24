@@ -1,0 +1,41 @@
+- feature_type: Rørledning
+  name: udvendigBreddeBetingelse
+  expression: |-
+    Den udvendige bredde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige bredde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- feature_type: Rørledning
+  name: udvendigBreddeMåleenhedsrestriktion
+  expression: Måleenheden for den udvendige bredde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: Rørledning
+  name: udvendigBreddeVoidrestriktion
+  expression: |-
+    Den udvendige bredde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- feature_type: Rørledning
+  name: udvendigDiameterBetingelse
+  expression: |-
+    Den udvendige diameter skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er cirkulær.
+    Den udvendige diameter må ikke være angivet hvis tværsnitsformen ikke er cirkulær.
+- feature_type: Rørledning
+  name: udvendigHøjdeBetingelse
+  expression: |-
+    Den udvendige højde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige højde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- feature_type: Rørledning
+  name: udvendigHøjdeMåleenhedsrestriktion
+  expression: Måleenheden for den udvendige højde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: Rørledning
+  name: udvendigHøjdeVoidrestriktion
+  expression: |-
+    Den udvendige højde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.

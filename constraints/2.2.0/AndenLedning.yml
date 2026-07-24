@@ -1,0 +1,53 @@
+- feature_type: AndenLedning
+  name: forsyningsartRestriktion
+  expression: |-
+    Forsyningsarten må ikke være en af de prædefinerede værdier fra kodelisten Forsyningsart.
+    Note: Hvis man har behov for at afgive oplysninger om en ledning som har en forsyningsart som er prædefineret i kodelisten Forsyningsart, så skal man i stedet for AndenLedning bruge den subklasse af Ledning som hører til den forsyningsart. Fx Telekommunikationsledning for forsyningsarten telekommunikation.
+- feature_type: AndenLedning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- feature_type: AndenLedning
+  name: udvendigBreddeBetingelse
+  expression: |-
+    Den udvendige bredde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige bredde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- feature_type: AndenLedning
+  name: udvendigBreddeMåleenhedsrestriktion
+  expression: Måleenheden for den udvendige bredde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: AndenLedning
+  name: udvendigBreddeVoidrestriktion
+  expression: |-
+    Den udvendige bredde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- feature_type: AndenLedning
+  name: udvendigDiameterBetingelse
+  expression: |-
+    Den udvendige diameter skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er cirkulær.
+    Den udvendige diameter må ikke være angivet hvis tværsnitsformen ikke er cirkulær.
+- feature_type: AndenLedning
+  name: udvendigHøjdeBetingelse
+  expression: |-
+    Den udvendige højde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige højde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- feature_type: AndenLedning
+  name: udvendigHøjdeMåleenhedsrestriktion
+  expression: Måleenheden for den udvendige højde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: AndenLedning
+  name: udvendigHøjdeVoidrestriktion
+  expression: |-
+    Den udvendige højde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.

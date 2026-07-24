@@ -1,0 +1,6 @@
+- feature_type: Kontaktprofil
+  name: mailadresseBetingelse
+  expression: Mailadressen skal være angivet hvis ikke telefonnummeret er angivet.
+- feature_type: Kontaktprofil
+  name: telefonnummerBetingelse
+  expression: Telefonnummeret skal være angivet hvis ikke mailadressen er angivet.

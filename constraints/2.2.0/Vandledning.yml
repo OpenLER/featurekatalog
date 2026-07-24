@@ -1,0 +1,10 @@
+- feature_type: Vandledning
+  name: fareklasseRestriktion
+  expression: Fareklassen må ikke være meget farlig.
+- feature_type: Vandledning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.

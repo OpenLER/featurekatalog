@@ -1,0 +1,15 @@
+- feature_type: Afløbskomponent
+  name: brøndformTilladelse
+  expression: Brøndformen må kun være angivet hvis typen er brønd.
+- feature_type: Afløbskomponent
+  name: bunddiameterbreddeMåleenhedsrestriktion
+  expression: Måleenheden for bunddiameterbredden skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: Afløbskomponent
+  name: bundlængdeMåleenhedsrestriktion
+  expression: Måleenheden for bundlængden skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: Afløbskomponent
+  name: bundlængdeTilladelse
+  expression: |-
+    Bundlængden må kun være angivet hvis alle følgende betingelser er sande:
+    * typen er brønd
+    * brøndformkoden er kvadratisk eller rektangulær

@@ -1,0 +1,10 @@
+- feature_type: Gasledning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- feature_type: Gasledning
+  name: trykMåleenhedsrestriktion
+  expression: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].

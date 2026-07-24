@@ -5,22 +5,27 @@ import yaml
 
 from featurekatalog import parse_featurekatalog
 
-DOCX_PATH = Path(__file__).parent / 'versions' / '2.2.0' / 'ler_featurekatalog.docx'
+VERSIONS_DIR = Path(__file__).parent / 'versions'
 OUT_DIR = Path(__file__).parent / 'constraints'
 
 
 def main():
-    OUT_DIR.mkdir(exist_ok=True)
-    for ft in parse_featurekatalog(str(DOCX_PATH)):
-        if not ft['restriktioner']:
+    for version_dir in sorted(VERSIONS_DIR.iterdir()):
+        docx_path = version_dir / 'ler_featurekatalog.docx'
+        if not docx_path.exists():
             continue
-        rows = [
-            {'feature_type': ft['navn'], 'name': r['Navn'], 'expression': r['Udtryk']}
-            for r in ft['restriktioner']
-        ]
-        (OUT_DIR / f"{ft['navn']}.yml").write_text(
-            yaml.dump(rows, allow_unicode=True, sort_keys=False, width=1000)
-        )
+        out_dir = OUT_DIR / version_dir.name
+        out_dir.mkdir(parents=True, exist_ok=True)
+        for ft in parse_featurekatalog(str(docx_path)):
+            if not ft['restriktioner']:
+                continue
+            rows = [
+                {'feature_type': ft['navn'], 'name': r['Navn'], 'expression': r['Udtryk']}
+                for r in ft['restriktioner']
+            ]
+            (out_dir / f"{ft['navn']}.yml").write_text(
+                yaml.dump(rows, allow_unicode=True, sort_keys=False, width=1000)
+            )
 
 
 if __name__ == '__main__':

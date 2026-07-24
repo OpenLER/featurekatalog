@@ -1,0 +1,13 @@
+- feature_type: TermiskLedning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- feature_type: TermiskLedning
+  name: temperaturMåleenhedsrestriktion
+  expression: Måleenheden for temperaturen skal være grader celsius. Grader celsius skal angives med symbolet Cel [UCUM].
+- feature_type: TermiskLedning
+  name: trykMåleenhedsrestriktion
+  expression: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].

@@ -1,0 +1,6 @@
+- feature_type: Afløbsledning
+  name: fareklasseRestriktion
+  expression: Fareklassen må ikke være meget farlig.
+- feature_type: Afløbsledning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis etableringstidspunktet er efter skæringsdatoen.

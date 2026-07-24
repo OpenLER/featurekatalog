@@ -1,0 +1,5 @@
+- feature_type: AndenKomponent
+  name: forsyningsartRestriktion
+  expression: |-
+    Forsyningsarten må ikke være en af de prædefinerede værdier fra kodelisten Forsyningsart.
+    Note: Hvis man har behov for at afgive oplysninger om en ledningskomponent som har en forsyningsart som er prædefineret i kodelisten Forsyningsart, så skal man i stedet for AndenKomponent bruge den subklasse af Ledningskomponent som hører til den forsyningsart. Fx Telekommunikationskomponent for forsyningsarten telekommunikation.

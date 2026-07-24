@@ -1,0 +1,20 @@
+- feature_type: Ledningskomponent
+  name: geometriDatatyperestriktion
+  expression: |-
+    Geometrien skal have en af følgende typer: GM_Point, GM_MultiPoint, GM_Curve, GM_MultiCurve, GM_Surface eller GM_MultiSurface.
+    Geometrien skal anvende lineær interpolation hvis dens type er GM_Curve eller GM_MultiCurve.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:LineString
+    * gml:Curve som består af segmenter af typen gml:LineStringSegment
+    Note 2: En kurve kan være enkeltstående eller kan indgå i en flade, som del af en grænse.
+    Geometrien skal anvende 2-dimensionel interpolation (på engelsk: "planar interpolation") hvis dens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:Polygon
+    * gml:Surface som består af dele af typen gml:PolygonPatch
+    Geometriens grænser skal anvende lineær interpolation hvis geometriens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at en grænse af en flade eller en multiflade skal have en af følgende geometrityper [GML SF]:
+    * gml:LinearRing
+    * gml:Ring som består af kurver der anvender lineær interpolation (se ovenfor)
+- feature_type: Ledningskomponent
+  name: vejledendeDybdeMåleenhedsrestriktion
+  expression: Måleenheden for den vejledende dybde i forhold til terræn ved etablering skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].

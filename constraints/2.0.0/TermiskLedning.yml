@@ -1,0 +1,15 @@
+- feature_type: TermiskLedning
+  name: fareklasseRestriktion
+  expression: |-
+    Fareklassen skal være meget farlig hvis en eller flere af følgende betingelser er sande:
+    * den termiske ledning har en temperatur på mere end 130 °C
+    * den termiske ledning har et tryk på 10 bar eller mere
+    Fareklassen må ikke være meget farlig hvis alle følgende betingelser er sande:
+    * den termiske ledning har en temperatur på 130 °C eller mindre
+    * den termiske ledning har et tryk på mindre end 10 bar
+- feature_type: TermiskLedning
+  name: temperaturMåleenhedsrestriktion
+  expression: Måleenheden for temperaturen skal være grader celsius. Grader celsius skal angives med symbolet Cel [UCUM].
+- feature_type: TermiskLedning
+  name: trykMåleenhedsrestriktion
+  expression: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].

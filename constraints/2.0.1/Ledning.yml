@@ -1,0 +1,39 @@
+- feature_type: Ledning
+  name: driftsstatusVoidrestriktion
+  expression: |-
+    Driftsstatussen må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+    Note: m.a.o.: værdien for driftstatussen skal være angivet hvis etableringstidspunktet er efter skæringsdatoen, selvom denne attribut er deklareret som voidable.
+- feature_type: Ledning
+  name: fareklasseVoidrestriktion
+  expression: |-
+    Fareklassen må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+    Note: m.a.o.: værdien for fareklassen skal være angivet hvis etableringstidspunktet er efter skæringsdatoen, selvom denne attribut er deklareret som voidable.
+- feature_type: Ledning
+  name: geometriBetingelse
+  expression: |-
+    Geometrien skal være angivet hvis alle følgende betingelser er sande:
+    * ledningen er ikke indeholdt i et ledningstracé
+    * ledningen er ikke indeholdt i en anden ledning
+- feature_type: Ledning
+  name: geometriDatatyperestriktion
+  expression: |-
+    Geometrien skal anvende lineær interpolation.
+    Note: I en GML-indkodning betyder det, at geometrien, som er en kurve, skal have en geometritype der er en af følgende [GML SF]:
+    * gml:LineString
+    * gml:Curve med segmenter af typen gml:LineStringSegment
+- feature_type: Ledning
+  name: nøjagtighedsklasseBetingelse
+  expression: |-
+    Nøjagtighedsklassen skal være angivet hvis geometrien er angivet.
+    Nøjagtighedsklassen må ikke være angivet hvis geometrien ikke er angivet.
+- feature_type: Ledning
+  name: nøjagtighedsklasseVoidrestriktion
+  expression: |-
+    Nøjagtighedsklassen må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+    Note: m.a.o.: værdien for nøjagtighedsklassen skal være angivet hvis etableringstidspunktet er efter skæringsdatoen, selvom denne attribut er deklareret som voidable.
+- feature_type: Ledning
+  name: udvendigDiameterMåleenhedsrestriktion
+  expression: Måleenheden for den udvendige diameter skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: Ledning
+  name: udvendigDiameterVoidrestriktion
+  expression: Den udvendige diameter må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.

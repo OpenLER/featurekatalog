@@ -1,0 +1,7 @@
+- feature_type: Afløbsledning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.

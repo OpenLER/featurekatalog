@@ -1,0 +1,6 @@
+- feature_type: Elkomponent
+  name: relativNiveauTilladelse
+  expression: Det relative niveau må kun være angivet hvis typen er rørblok.
+- feature_type: Elkomponent
+  name: spændingsniveauMåleenhedsrestriktion
+  expression: Måleenheden for spændingsniveauet skal være kilovolt. Kilovolt skal angives med symbolet kV [UCUM].

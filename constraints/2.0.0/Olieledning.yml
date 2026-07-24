@@ -1,0 +1,6 @@
+- feature_type: Olieledning
+  name: fareklasseRestriktion
+  expression: Fareklassen må ikke være meget farlig.
+- feature_type: Olieledning
+  name: trykMåleenhedsrestriktion
+  expression: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].

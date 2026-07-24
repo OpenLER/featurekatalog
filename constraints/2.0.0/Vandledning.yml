@@ -1,0 +1,3 @@
+- feature_type: Vandledning
+  name: fareklasseRestriktion
+  expression: Fareklassen må ikke være meget farlig.

@@ -1,0 +1,3 @@
+- feature_type: LedningEllerLedningstrace
+  name: vejledendeDybdeMåleenhedsrestriktion
+  expression: Måleenheden for den vejledende dybde i forhold til terræn ved etablering skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].

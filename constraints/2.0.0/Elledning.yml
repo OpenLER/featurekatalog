@@ -1,0 +1,17 @@
+- feature_type: Elledning
+  name: fareklasseRestriktion
+  expression: |-
+    Fareklassen skal være meget farlig hvis elledningen har et spændingsniveau på 10 kV eller mere.
+    Fareklassen må ikke være meget farlig hvis elledningen har et spændingsniveau på mindre end 10 kV.
+- feature_type: Elledning
+  name: spændingsniveauMåleenhedsrestriktion
+  expression: Måleenheden for spændingsniveauet skal være kilovolt. Kilovolt skal angives med symbolet kV [UCUM].
+- feature_type: Elledning
+  name: udvendigDiameterBetingelse
+  expression: Den udvendige diameter skal være angivet hvis etableringstidspunktet er efter skæringsdatoen.
+- feature_type: Elledning
+  name: vejledendeDybdeRestriktion
+  expression: |-
+    Den vejledende dybde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99

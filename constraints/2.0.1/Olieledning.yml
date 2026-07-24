@@ -1,0 +1,9 @@
+- feature_type: Olieledning
+  name: fareklasseRestriktion
+  expression: Fareklassen må ikke være meget farlig.
+- feature_type: Olieledning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis etableringstidspunktet er efter skæringsdatoen.
+- feature_type: Olieledning
+  name: trykMåleenhedsrestriktion
+  expression: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].

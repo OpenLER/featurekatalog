@@ -1,0 +1,36 @@
+- feature_type: Graveforespørgselssvar
+  name: forventetAfleveringstidspunktBetingelse
+  expression: |-
+    Det forventede afleveringstidspunkt må ikke være angivet hvis typen af graveforespørgselssvaret ikke er "udtaget til manuel behandling".
+    Det forventede afleveringstidspunkt må godt være angivet hvis typen af graveforespørgselssvaret er "udtaget til manuel behandling".
+- feature_type: Graveforespørgselssvar
+  name: idRestriktion
+  expression: |-
+    id'et skal være en UUID, som defineret i [ITU-T X.667].
+    Note: Bemærk, at en anbefaling i [ITU-T X.667] er følgende: "It is recommended that the hexadecimal representation used in all human-readable formats be restricted to lower-case letters. Software processing this representation is, however, required to accept both upper and lower case letters".
+- feature_type: Graveforespørgselssvar
+  name: indholdGM_ObjectSRIDrestriktion
+  expression: |-
+    En featuretype indeholdt i et graveforespørgselssvar skal anvende det sammensatte koordinatreferencesystem med URI http://www.opengis.net/def/crs/EPSG/0/7416 som koordinatreferencesystemet for attributter der har GM_Object eller en af dets subtyper som typer.
+    Note 1: Koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/7416 har som navn "ETRS89 / UTM zone 32N + DVR90 height".
+    Note 2: GM_Object har bl.a. GM_Point, GM_Curve og GM_MultiCurve som subtyper, se også ISO 19107.
+    Note 3: Det betyder, at fx Ledning.geometri og LinearDimension.dimensionLine skal anvende koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/7416.
+- feature_type: Graveforespørgselssvar
+  name: indholdKoteSRIDrestriktion
+  expression: |-
+    En featuretype indeholdt i et graveforespørgselssvar skal anvende det vertikale koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799 som koordinatreferencesystemet for attributter der repræsenterer en kote.
+    Note 1: Koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799 har som navn "DVR90 height".
+    Note 2: En attribut der repræsenterer en kote har DirectPosition som type.
+    Note 3: Det betyder, at fx Gaskomponent.topkote skal anvende koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799.
+    Note 4: Ukendte vertikale koordinater angives vha. ukendt-værdien på -99. Bemærk at visse objekttyper indeholder en restriktion der ikke tillader at bruge denne værdi.
+- feature_type: Graveforespørgselssvar
+  name: indholdNilReasonRestriktion
+  expression: |-
+    En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, skal have "unknown" som værdi for XML-attributten med navn "nilReason" hvis egenskaben er void og XML-attributten med navn "nilReason" er angivet.
+    En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, behøver ikke at have en XML-attribut med navn "nilReason" hvis egenskaben er void.
+    Note: Det betyder, at fx <ler:udvendigDiameter xsi:nil="true" nilReason="withheld" /> ikke er tilladt.
+- feature_type: Graveforespørgselssvar
+  name: typeSupplerendeInfoBetingelse
+  expression: |-
+    Supplerende information om graveforespørgsselsvaret skal være angivet hvis typen af graveforespørgsselsvaret er "ledningsoplysninger udleveres ikke".
+    Supplerende information om graveforespørgsselsvaret må godt være angivet hvis typen af graveforespørgsselsvaret ikke er "ledningsoplysninger udleveres ikke".

@@ -1,0 +1,12 @@
+- feature_type: Telekommunikationsledning
+  name: fareklasseRestriktion
+  expression: Fareklassen må ikke være meget farlig.
+- feature_type: Telekommunikationsledning
+  name: udvendigDiameterBetingelse
+  expression: Den udvendige diameter skal være angivet hvis etableringstidspunktet er efter skæringsdatoen.
+- feature_type: Telekommunikationsledning
+  name: vejledendeDybdeRestriktion
+  expression: |-
+    Den vejledende dybde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99

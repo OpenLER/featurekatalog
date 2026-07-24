@@ -1,0 +1,7 @@
+- feature_type: LinearAnnotation
+  name: geometryDataTypeConstraint
+  expression: |-
+    The geometry shall use linear interpolation.
+    Note: In a GML encoding, this means that the geometry, which is a curve, must have a geometry type that is one of the following [GML SF]:
+    * gml:LineString
+    * gml:Curve consisting of segments having type gml:LineStringSegment

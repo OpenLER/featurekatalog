@@ -89,9 +89,11 @@ GitHub ikke forsøger at Jekyll-processere sitet).
 python3 build_constraint_yml.py
 ```
 
-Skriver én YAML-fil pr. featuretype til `constraints/` (fx `constraints/Ledning.yml`),
-med de restriktioner featuretypen har fra docx'en (`feature_type`, `name`, `expression`).
-Featuretyper uden restriktioner får ingen fil.
+Skriver én YAML-fil pr. featuretype pr. version til `constraints/<version>/`
+(fx `constraints/2.2.0/Ledning.yml`), med de restriktioner featuretypen har fra
+den pågældende versions docx (`feature_type`, `name`, `expression`).
+Featuretyper uden restriktioner får ingen fil. Kører automatisk for alle
+versioner i `versions/`.
 
 Formålet er at give et maskinlæsbart udtræk af restriktionerne til brug i andre
 repos/værktøjer (fx et der implementerer dem i Schematron) — uden fortolkning

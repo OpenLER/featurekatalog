@@ -1,0 +1,9 @@
+- feature_type: Vandkomponent
+  name: anborstedTilladelse
+  expression: Anborstedet må kun være angivet hvis typen er tilslutningspunkt.
+- feature_type: Vandkomponent
+  name: stutskoteTilladelse
+  expression: 'Stutskoten må kun være angivet hvis typen er en af følgende: tapsted, ventil.'
+- feature_type: Vandkomponent
+  name: tapstedstypeTilladelse
+  expression: Tapstedstypen må kun være angivet hvis typen er tapsted.

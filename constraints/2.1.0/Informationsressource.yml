@@ -1,0 +1,48 @@
+- feature_type: Informationsressource
+  name: formatRestriktion
+  expression: |-
+    Formatværdien skal være en af følgende: CSV, DGN, DOC, DOCX, DWF, DWG, DXF, IFC-SPF, IFC-XML, JPEG, PDF, SAT, SHP, SKP, TAB, TIFF, XLS, XLSX.
+    Formattypen skal være text/csv hvis formatværdien er CSV.
+    Formattypen skal være application/octet-stream hvis formatværdien er DGN.
+    Formattypen skal være application/msword hvis formatværdien er DOC.
+    Formattypen skal være application/vnd.openxmlformats-officedocument.wordprocessingml.document hvis formatværdien er DOCX.
+    Formattypen skal være model/vnd.dwf hvis formatværdien er DWF.
+    Formattypen skal være image/vnd.dwg hvis formatværdien er DWG.
+    Formattypen skal være image/vnd.dxf hvis formatværdien er DXF.
+    Formattypen skal være application/x-step hvis formatværdien er IFC-SPF.
+    Formattypen skal være application/xml hvis formatværdien er IFC-XML.
+    Formattypen skal være image/jpeg hvis formatværdien er JPEG.
+    Formattypen skal være application/pdf hvis formatværdien er PDF.
+    Formattypen skal være application/octet-stream hvis formatværdien er SAT.
+    Formattypen skal være application/x-shapefile hvis formatværdien er SHP.
+    Formattypen skal være application/octet-stream hvis formatværdien er SKP.
+    Formattypen skal være application/x-tab hvis formatværdien er TAB.
+    Formattypen skal være image/tiff hvis formatværdien er TIFF.
+    Formattypen skal være application/vnd.ms-excel hvis formatværdien er XLS.
+    Formattypen skal være application/vnd.openxmlformats-officedocument.spreadsheetml.sheet hvis formatværdien er XLSX.
+    Note 1: Formatværdien er Informationsressource.format.value, se også MediaType.
+    Note 2: Formattypen er Informationsressource.format.type, se også MediaType.
+    Note 3: Følgende filformater er optaget på IANAs liste over mediatyper [IANA]: CSV, DOC, DOCX, DWF, DWG, DXF, JPEG, PDF, TIFF, XLS, XLSX.
+    Note 4: Følgende filformater er optaget i INSPIREs register over mediatyper [INSPIRE]: SHP, TAB.
+    Note 5: Følgende filformater er specificeret i [buildingSMART]: IFC-SPF, IFC-XML.
+    Note 6: Ovenstående følger regler beskrevet i [RFC 2046] og [RFC 4288].
+- feature_type: Informationsressource
+  name: geometriDatatyperestriktion
+  expression: |-
+    Geometrien skal have en af følgende typer: GM_Point, GM_MultiPoint, GM_Curve, GM_MultiCurve, GM_Surface eller GM_MultiSurface.
+    Geometrien skal anvende lineær interpolation hvis dens type er GM_Curve eller GM_MultiCurve.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:LineString
+    * gml:Curve som består af segmenter af typen gml:LineStringSegment
+    Note 2: En kurve kan være enkeltstående eller kan indgå i en flade, som del af en grænse.
+    Geometrien skal anvende 2-dimensionel interpolation (på engelsk: "planar interpolation") hvis dens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:Polygon
+    * gml:Surface som består af dele af typen gml:PolygonPatch
+    Geometriens grænser skal anvende lineær interpolation hvis geometriens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at en grænse af en flade eller en multiflade skal have en af følgende geometrityper [GML SF]:
+    * gml:LinearRing
+    * gml:Ring som består af kurver der anvender lineær interpolation (se ovenfor)
+- feature_type: Informationsressource
+  name: stiRestriktion
+  expression: Stien skal være en relativ sti.

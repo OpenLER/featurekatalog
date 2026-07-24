@@ -1,0 +1,20 @@
+- feature_type: AndenLedning
+  name: fareklasseRestriktion
+  expression: Fareklassen må ikke være meget farlig.
+- feature_type: AndenLedning
+  name: forsyningsartRestriktion
+  expression: |-
+    Forsyningsarten må ikke være en af de prædefinerede værdier fra kodelisten Forsyningsart.
+    Note: Hvis man har behov for at afgive oplysninger om en ledning som har en forsyningsart som er prædefineret i kodelisten Forsyningsart, så skal man i stedet for AndenLedning bruge den subklasse af Ledning som hører til den forsyningsart. Fx Telekommunikationsledning for forsyningsarten telekommunikation.
+- feature_type: AndenLedning
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis etableringstidspunktet er efter skæringsdatoen.
+- feature_type: AndenLedning
+  name: udvendigBreddeMåleenhedsrestriktion
+  expression: Måleenheden for den udvendige bredde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: AndenLedning
+  name: udvendigDiameterBetingelse
+  expression: Den udvendige diameter skal være angivet hvis etableringstidspunktet er efter skæringsdatoen.
+- feature_type: AndenLedning
+  name: udvendigHøjdeMåleenhedsrestriktion
+  expression: Måleenheden for den udvendige højde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].

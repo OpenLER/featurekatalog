@@ -1,0 +1,14 @@
+- feature_type: Føringsrør
+  name: geometriVertikaleKoordinaterRestriktion
+  expression: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen
+    * den primære forsyningsart er ikke el
+    * den primære forsyningsart er ikke telekommunikation
+- feature_type: Føringsrør
+  name: vejledendeDybdeBetingelse
+  expression: |-
+    Den vejledende dybde skal være angivet hvis alle følgende betingelser er sande:
+    * den primære forsyningsart er el eller telekommunikation
+    * etableringstidspunktet er efter skæringsdatoen
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99

@@ -1,0 +1,39 @@
+- feature_type: Ledningstrace
+  name: breddeMåleenhedsrestriktion
+  expression: |-
+    Måleenheden for bredden skal være millimeter.
+    Millimeter skal angives med symbolet mm [UCUM].
+- feature_type: Ledningstrace
+  name: geometriDatatyperestriktion
+  expression: |-
+    Geometrien skal anvende lineær interpolation.
+    Note: I en GML-indkodning betyder det, at geometrien, som er en multikurve, skal består af segmenter som skal have en geometritype der er en af følgende [GML SF]:
+    * gml:LineString
+    * gml:Curve med segmenter af typen gml:LineStringSegment
+- feature_type: Ledningstrace
+  name: nøjagtighedsklasseBetingelse
+  expression: |-
+    Nøjagtighedsklassen skal være angivet.
+    Note: Denne restriktion er nødvendig, da nøjagtighedsklasse er defineret på LedningEllerLedningstrace med multiplicitet 0..1.
+- feature_type: Ledningstrace
+  name: nøjagtighedsklasseVoidrestriktion
+  expression: |-
+    Nøjagtighedsklassen må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer.
+- feature_type: Ledningstrace
+  name: vejledendeDybdeBetingelse
+  expression: |-
+    Den vejledende dybde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99;
+    * den primære forsyningsart er el eller telekommunikation.
+- feature_type: Ledningstrace
+  name: vejledendeDybdeVoidrestriktion
+  expression: |-
+    Den vejledende dybde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering;
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99;
+    * den primære forsyningsart er el eller telekommunikation.
