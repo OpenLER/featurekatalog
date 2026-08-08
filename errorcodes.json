@@ -1,0 +1,642 @@
+[
+  {
+    "StatusCode": "00-100",
+    "ErrorMessage": "Der skete en uventet fejl."
+  },
+  {
+    "StatusCode": "00-110",
+    "ErrorMessage": "API kunne ikke forbinde til LER kernen."
+  },
+  {
+    "StatusCode": "00-200",
+    "ErrorMessage": "Den benyttede konto har ikke adgang til den efterspurgte ressource."
+  },
+  {
+    "StatusCode": "00-210",
+    "ErrorMessage": "Den benyttede konto har ikke en aktiv tjenesteaftale med den efterspurgte tjenesteaftager."
+  },
+  {
+    "StatusCode": "00-220",
+    "ErrorMessage": "Den benyttede konto er ikke oprettet i LER. Sørg for at oprette kontoen ved at logge ind i LERs brugergrænseflade, inden du benytter LERs service API."
+  },
+  {
+    "StatusCode": "00-230",
+    "ErrorMessage": "Det benyttede certifikat svarer ikke til det/de certifikater der er registreret som tilladte for den givne konto."
+  },
+  {
+    "StatusCode": "00-240",
+    "ErrorMessage": "Den angivne konto er ikke tilsluttet LER 2.0. Tilslut kontoen til LER 2.0 i LERs kontoadministration."
+  },
+  {
+    "StatusCode": "00-250",
+    "ErrorMessage": "Den angivne konto er ikke tilsluttet Samføring 2.1. Tilslut kontoen til Samføring 2.1 i LERs kontoadministration."
+  },
+  {
+    "StatusCode": "00-260",
+    "ErrorMessage": "Det angivne CVR-nummer er tomt."
+  },
+  {
+    "StatusCode": "00-261",
+    "ErrorMessage": "Det angivne CVR-nummer er ugyldigt."
+  },
+  {
+    "StatusCode": "00-262",
+    "ErrorMessage": "Det angivne thumbprint er ugyldigt."
+  },
+  {
+    "StatusCode": "00-270",
+    "ErrorMessage": "Det benyttede certifikat er blevet tilbagekaldt."
+  },
+  {
+    "StatusCode": "00-280",
+    "ErrorMessage": "Det benyttede certifikat kunne ikke verificeres. Det skyldes sandsynligvis at LER ikke kender til den udstedende 'Certificate Authority'."
+  },
+  {
+    "StatusCode": "00-300",
+    "ErrorMessage": "Det indsendte data er ikke validt."
+  },
+  {
+    "StatusCode": "00-310",
+    "ErrorMessage": "Brug af LER webservices til samføring er slået fra."
+  },
+  {
+    "StatusCode": "00-300",
+    "ErrorMessage": "Headeren \"Subject\" var forventet i requesten men var ikke fundet"
+  },
+  {
+    "StatusCode": "00-300",
+    "ErrorMessage": "Headeren \"Thumbprint\" var forventet i requesten men var ikke fundet"
+  },
+  {
+    "StatusCode": "00-391",
+    "ErrorMessage": "Den indsendte GML skal indeholde enten et kontaktperson eller kontaktadresse element."
+  },
+  {
+    "StatusCode": "00-400",
+    "ErrorMessage": "Den indsendte kontaktperson email overstiger længdebegrænsningen på 50 tegn."
+  },
+  {
+    "StatusCode": "00-410",
+    "ErrorMessage": "Den indsendte kontaktadresse email overstiger længdebegrænsningen på 50 tegn."
+  },
+  {
+    "StatusCode": "00-530",
+    "ErrorMessage": "Der er opstået en timeout, foretag venligst graveforespørgslen med samme requestId igen."
+  },
+  {
+    "StatusCode": "00-540",
+    "ErrorMessage": "Kontoen har overskredet grænsen for samtidige forespørgsler. Prøv igen senere."
+  },
+  {
+    "StatusCode": "19-100",
+    "ErrorMessage": "Kontoen er blokeret for betaling med kreditkort og kan derfor ikke oprette graveforespørgsler via web API."
+  },
+  {
+    "StatusCode": "19-300",
+    "ErrorMessage": "Den medsendte GML er ikke valid."
+  },
+  {
+    "StatusCode": "19-310",
+    "ErrorMessage": "Beskrivelsen af graveforespørgslen/samføringssøgningen må højest være 100 tegn."
+  },
+  {
+    "StatusCode": "19-320",
+    "ErrorMessage": "Format på graveperiodens startdato er invalidt. Validt format er 'åååå-mm-dd'."
+  },
+  {
+    "StatusCode": "19-330",
+    "ErrorMessage": "Format på graveperiodens slutdato er invalidt. Validt format er 'åååå-mm-dd'."
+  },
+  {
+    "StatusCode": "19-340",
+    "ErrorMessage": "Graveperiodens startdato er for langt tilbage i tiden."
+  },
+  {
+    "StatusCode": "19-350",
+    "ErrorMessage": "Graveperiodens slutdato er for langt tilbage i tiden."
+  },
+  {
+    "StatusCode": "19-360",
+    "ErrorMessage": "Graveperiodens slutdato må ikke være mindre en startdato."
+  },
+  {
+    "StatusCode": "19-370",
+    "ErrorMessage": "Det indsendte geometriske data er ugyldigt."
+  },
+  {
+    "StatusCode": "19-375",
+    "ErrorMessage": "Det indsendte geometriske data er ikke et polygon."
+  },
+  {
+    "StatusCode": "19-380",
+    "ErrorMessage": "Der er ikke indsendt geometrisk data, WKT-listen er tom."
+  },
+  {
+    "StatusCode": "19-385",
+    "ErrorMessage": "Den indsendte geometri indeholder ugyldige elemeter."
+  },
+  {
+    "StatusCode": "19-390",
+    "ErrorMessage": "En eller flere indsendte geometrier overlapper ikke."
+  },
+  {
+    "StatusCode": "19-391",
+    "ErrorMessage": "Sammensmeltning af geometrier resulterede i et ugyldigt polygon, kontrollér det indsendte."
+  },
+  {
+    "StatusCode": "19-392",
+    "ErrorMessage": "Sammensmeltning af geometrier resulterede i et multipolygon, som ikke er tilladt i LER. Kontrollér der indsendte."
+  },
+  {
+    "StatusCode": "19-393",
+    "ErrorMessage": "Der er indsendt flere geometrier end tilladt."
+  },
+  {
+    "StatusCode": "19-395",
+    "ErrorMessage": "Den indsendte geometri er ugyldig, da det indeholder et multipolygon."
+  },
+  {
+    "StatusCode": "19-400",
+    "ErrorMessage": "Der skal angives mindst én forsyningsart."
+  },
+  {
+    "StatusCode": "19-410",
+    "ErrorMessage": "Den/de indsendte forsyningsarter er ikke valide."
+  },
+  {
+    "StatusCode": "19-420",
+    "ErrorMessage": "Der skal angives et formål."
+  },
+  {
+    "StatusCode": "19-430",
+    "ErrorMessage": "Det indsendte formål er ikke validt."
+  },
+  {
+    "StatusCode": "19-440",
+    "ErrorMessage": "Der er for mange indsendte formål."
+  },
+  {
+    "StatusCode": "19-465",
+    "ErrorMessage": "For mange indsendte papirformater."
+  },
+  {
+    "StatusCode": "19-470",
+    "ErrorMessage": "Der skal tilføjes en bemærkning til graveforespørgslen. Noden bemaerkning findes ikke."
+  },
+  {
+    "StatusCode": "19-480",
+    "ErrorMessage": "Den indsendte bemærkning er ikke korrekt."
+  },
+  {
+    "StatusCode": "19-490",
+    "ErrorMessage": "Der skal angives en kontaktperson eller en adresse."
+  },
+  {
+    "StatusCode": "19-500",
+    "ErrorMessage": "Der skal angives en email."
+  },
+  {
+    "StatusCode": "19-510",
+    "ErrorMessage": "Den indsendte kontaktperson er ikke korrekt."
+  },
+  {
+    "StatusCode": "19-520",
+    "ErrorMessage": "Den indsendte kontaktadresse er ikke korrekt."
+  },
+  {
+    "StatusCode": "19-530",
+    "ErrorMessage": "ordrenummer_ikke_angivet skal sættes og angive, om graveforespørgslen skal oprettes med eller uden ordrenummer."
+  },
+  {
+    "StatusCode": "19-540",
+    "ErrorMessage": "Hvis ordrenummer specificeres i graveforespørgslen, skal ordrenummer_ikke_angivet angives som false."
+  },
+  {
+    "StatusCode": "19-550",
+    "ErrorMessage": "Hvis ordrenummmer ikke specificeres i graveforespørgslen, skal ordrenummer_ikke_angivet angives som true."
+  },
+  {
+    "StatusCode": "19-560",
+    "ErrorMessage": "Ordrenummeret må ikke være end 12 karaktere langt."
+  },
+  {
+    "StatusCode": "27-300",
+    "ErrorMessage": "Den medsendte GML er ikke valid."
+  },
+  {
+    "StatusCode": "27-310",
+    "ErrorMessage": "Interesseområdet er ikke tilsluttet LER 2.0."
+  },
+  {
+    "StatusCode": "27-320",
+    "ErrorMessage": "Den indsendte kontaktadresse findes ikke."
+  },
+  {
+    "StatusCode": "27-321",
+    "ErrorMessage": "Der er angivet en kontaktperson eller en kontaktadresse, men emailen er tom."
+  },
+  {
+    "StatusCode": "27-330",
+    "ErrorMessage": "Den indsendte kontaktperson findes ikke."
+  },
+  {
+    "StatusCode": "27-340",
+    "ErrorMessage": "Den indsendte GML skal indeholde elementet bemaerkning"
+  },
+  {
+    "StatusCode": "27-350",
+    "ErrorMessage": "Den indsendte bemærkning overstiger den maksimale længde på 4000 tegn."
+  },
+  {
+    "StatusCode": "27-360",
+    "ErrorMessage": "En eller flere objekter i WKTList er ugyldige."
+  },
+  {
+    "StatusCode": "27-370",
+    "ErrorMessage": "WKTList indeholder elementer der ikke er polygoner."
+  },
+  {
+    "StatusCode": "27-380",
+    "ErrorMessage": "Den indsendte forsyningsart findes ikke."
+  },
+  {
+    "StatusCode": "27-381",
+    "ErrorMessage": "Der er en fejl i angivelsen af forsyningsart_id og forsyningsart_andet."
+  },
+  {
+    "StatusCode": "27-382",
+    "ErrorMessage": "Der er ikke angivet forsyningsart_id i den indsendte GML. Der skal angives mindst én forsyningsart."
+  },
+  {
+    "StatusCode": "27-383",
+    "ErrorMessage": "Den indsendte GML skal indeholde elementet forsyningsart_andet når forsyningsart_id indeholder ID 99."
+  },
+  {
+    "StatusCode": "27-384",
+    "ErrorMessage": "Den indsendte tekst i forsyningsart_andet overstiger den maksimale længde på 50 tegn."
+  },
+  {
+    "StatusCode": "27-390",
+    "ErrorMessage": "GML filen har både en kontaktperson og kontaktadresse. Dette er ikke tilladt."
+  },
+  {
+    "StatusCode": "27-400",
+    "ErrorMessage": "Interesseområdet findes ikke."
+  },
+  {
+    "StatusCode": "27-410",
+    "ErrorMessage": "Uautoriseret adgang."
+  },
+  {
+    "StatusCode": "27-420",
+    "ErrorMessage": "Ingen ændringer fundet. Indberetningen blev ikke opdateret."
+  },
+  {
+    "StatusCode": "27-430",
+    "ErrorMessage": "Den indsendte GML skal indeholde enten et ler2signed eller ler20signed element."
+  },
+  {
+    "StatusCode": "27-431",
+    "ErrorMessage": "Den indsendte GML indeholder både elementet ler2signed og ler20signed. Der må kun angives én af disse elementer."
+  },
+  {
+    "StatusCode": "27-432",
+    "ErrorMessage": "Den angivne værdi for ler2signed/ler20signed er ikke en af de tilladte værdier."
+  },
+  {
+    "StatusCode": "27-440",
+    "ErrorMessage": "Den indsendte GML skal indeholde elementet polygonProperty."
+  },
+  {
+    "StatusCode": "27-441",
+    "ErrorMessage": "Elementet polygonProperty indeholder ikke et Polygon, Surface eller MultiSurface element."
+  },
+  {
+    "StatusCode": "27-900",
+    "ErrorMessage": "Forbindelsen til Dataforsyningen fejlede. Prøv igen senere."
+  },
+  {
+    "StatusCode": "27-999",
+    "ErrorMessage": "Kritisk fejl. Systemet annulleret handlingen."
+  },
+  {
+    "StatusCode": "18-300",
+    "ErrorMessage": "Det medsendte data er ikke validt."
+  },
+  {
+    "StatusCode": "24-400",
+    "ErrorMessage": "Der findes ingen graveforespørgselskvittering for den angivne graveforespørgsel endnu. Prøv igen senere."
+  },
+  {
+    "StatusCode": "24-410",
+    "ErrorMessage": "Der findes ingen samføringssøgningskvittering for den angivne samføringssøgning endnu. Prøv igen senere."
+  },
+  {
+    "StatusCode": "13-100",
+    "ErrorMessage": "Der skete en uventet fejl. Prøv igen."
+  },
+  {
+    "StatusCode": "13-300",
+    "ErrorMessage": "Den indsendte GML fil er ikke valid."
+  },
+  {
+    "StatusCode": "13-310",
+    "ErrorMessage": "Forkert brug af IsOpdatering."
+  },
+  {
+    "StatusCode": "16-400",
+    "ErrorMessage": "Den efterspurgte ledningspakke findes ikke."
+  },
+  {
+    "StatusCode": "16-410",
+    "ErrorMessage": "Den efterspurgte ledningspakke er arkiveret."
+  },
+  {
+    "StatusCode": "26-500",
+    "ErrorMessage": "Den angivne ledningspakke er allerede parkeret som modtaget."
+  },
+  {
+    "StatusCode": "UnexpectedError",
+    "ErrorMessage": "Unexpected error"
+  },
+  {
+    "StatusCode": "ExpectedNumericValue",
+    "ErrorMessage": "Værdi skal være et tal, hvis der er angivet et kommatal skal man benytte punktum til decimaler."
+  },
+  {
+    "StatusCode": "IdRestriktion",
+    "ErrorMessage": "idRestriktion: id'et skal være en UUID, som defineret i [ITU-T X.667]"
+  },
+  {
+    "StatusCode": "IndholdNilReasonRestriktion",
+    "ErrorMessage": "IndholdNilReasonRestriktion: En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, skal have \"unknown\" som værdi for XML-attributten med navn \"nilReason\" hvis egenskaben er void og XML-attributten med navn \"nilReason\" er angivet. En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, behøver ikke at have en XML-attribut med navn \"nilReason\" hvis egenskaben er void"
+  },
+  {
+    "StatusCode": "UdvendigDiameterBetingelseRule",
+    "ErrorMessage": "UdvendigDiameterBetingelse: Den udvendige diameter skal være angivet, hvis ledningen er anbragt efter skæringsdatoen og tværsnitsformen er cirkulær. Den udvendige diameter må ikke være angivet, hvis tværsnitsformen ikke er cirkulær"
+  },
+  {
+    "StatusCode": "UdvendigDiameterBetingelseRuleElTeleEllerAnden",
+    "ErrorMessage": "UdvendigDiameterBetingelse: Den udvendige diameter skal være angivet, hvis etableringstidspunktet er efter skæringsdatoen."
+  },
+  {
+    "StatusCode": "UdvendigDiameterVoidRestriktionRule",
+    "ErrorMessage": "UdvendigDiameterVoidRestriktion: Den udvendige diameter må ikke være void, hvis ledningen er anbragt efter skæringsdatoen, driftsstatussen ikke er 'under etablering' og ejerskabsforholdet er 'ejet af udleverende ledningsejer' "
+  },
+  {
+    "StatusCode": "VejledendeDybdeMaaleenhedRestriktionRule",
+    "ErrorMessage": "VejledendeDybdeMaaleenhedRestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "GeometriVertikaleKoordinaterRestriktionRule",
+    "ErrorMessage": "GeometriVertikaleKoordinaterRestriktion: En vertikal koordinat i geometrien må ikke have ukendt-værdien på -99, hvis rørledningen er nedgravet eller anbragt efter skæringsdatoen, driftsstatussen ikke er 'under etablering' og ejerskabsforholdet er 'ejet af udleverende ledningsejer'"
+  },
+  {
+    "StatusCode": "VejledendeDybdeBetingelseRule",
+    "ErrorMessage": "VejledendeDybdeBetingelse: Der skal angives en vejledende dybde, når etableringstidspunkt er efter skæringsdato, der angives ukendte vertikale koordinater (-99) og den primære forsyning er el eller telekommunikation"
+  },
+  {
+    "StatusCode": "TvaersnitsformRestriktionEfterSkaeringsDato",
+    "ErrorMessage": "Ukendt tværsnitsform: Når tværsnitsformen angives som ukendt (void) skal der enten indsendes en udvendigDiameter eller både udvendigBredde og udvendigHøjde"
+  },
+  {
+    "StatusCode": "TvaersnitsformRestriktionFoerSkaeringsDato",
+    "ErrorMessage": "Ukendt tværsnitsform: Når tværsnitsformen angives som ukendt (void) kan der indsendes enten udvendigDiameter eller en kombination af udvendigBredde og/eller udvendigHøjde"
+  },
+  {
+    "StatusCode": "FareklasseMegetFarligRestriktion",
+    "ErrorMessage": "FareklasseMegetFarligRestriktion: Fareklassen må ikke være meget farlig"
+  },
+  {
+    "StatusCode": "UdvendigBreddeMaaleenhedsRestriktionRule",
+    "ErrorMessage": "UdvendigBreddeMaaleenhedsRestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "UdvendigHoejdeMaaleenhedsRestriktionRule",
+    "ErrorMessage": "UdvendigHoejdeMaaleenhedsRestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "HrefHashtagRule",
+    "ErrorMessage": "Id for værdi til xlink:href attribut skal være foranstillet med et '#' og værdi til xsi:nil skal være true, hvis der ikke er nogen xlink:href -værdi. F.eks. <indeholdtLedning xsi:nil = \"true\"/>.\nIndeholdtLedning- og bilag -elementerne må ikke være tomme."
+  },
+  {
+    "StatusCode": "ManglendeGmlIdHenvisningRule",
+    "ErrorMessage": "ManglendeGmlIdHenvisning: Det gml:id som xlink:href attributten henviser til findes ikke"
+  },
+  {
+    "StatusCode": "UdvendigBreddeVoidRestriktionRule",
+    "ErrorMessage": "UdvendigBreddeVoidrestriktion: Den udvendige bredde må ikke være void, hvis ledningen er anbragt efter skæringsdatoen, driftsstatussen ikke er 'under etablering' og ejerskabsforholdet er 'ejet af udleverende ledningsejer'"
+  },
+  {
+    "StatusCode": "UdvendigHojdeVoidrestriktionRule",
+    "ErrorMessage": "UdvendigHøjdeVoidrestriktion: Den udvendige højde må ikke være void, hvis ledningen er anbragt efter skæringsdatoen, driftsstatussen ikke er 'under etablering' og ejerskabsforholdet er 'ejet af udleverende ledningsejer'"
+  },
+  {
+    "StatusCode": "UdvendigHojdeBetingelseRule",
+    "ErrorMessage": "UdvendigHøjdeBetingelse: Den udvendige højde skal være angivet, hvis ledningen er anbragt efter skæringsdatoen og tværsnitsformen ikke er cirkulær. Den udvendige højde må ikke være angivet hvis tværsnitsformen er cirkulær"
+  },
+  {
+    "StatusCode": "TrykMaaleenhedsRestriktionRule",
+    "ErrorMessage": "TrykMaaleenhedsRestriktion: Enhed skal være 'bar'"
+  },
+  {
+    "StatusCode": "GfForventetAfleveringstidspunktRule",
+    "ErrorMessage": "ForventetAfleveringstidspunkt: Det forventede afleveringstidspunkt må ikke være angivet, hvis typen af graveforespørgselssvaret ikke er \"udtaget til manuel behandling\". Det forventede afleveringstidspunkt må godt være angivet hvis typen af graveforespørgselssvaret er \"udtaget til manuel behandling\""
+  },
+  {
+    "StatusCode": "GfTypeSupplerendeInfoBetingelseRule",
+    "ErrorMessage": "TypeSupplerendeInfoBetingelse: Supplerende information om typen af graveforespørgsselsvaret skal være angivet, hvis typen af graveforespørgsselsvaret er \"ledningsoplysninger udleveres ikke\". Supplerende information om typen af graveforespørgsselsvaret må godt være angivet hvis typen af graveforespørgsselsvaret ikke er \"ledningsoplysninger udleveres ikke\""
+  },
+  {
+    "StatusCode": "IndholdGM_ObjectSRIdRestriktionRule",
+    "ErrorMessage": "IndholdGM_ObjectSRIdRestriktion: En featuretype indeholdt i et graveforespørgselssvar skal anvende det sammensatte koordinatreferencesystem med URI http://www.opengis.net/def/crs/EPSG/0/7416 som koordinatreferencesystemet for attributter der har GM_Object eller en af dets subtyper som typer"
+  },
+  {
+    "StatusCode": "IndholdKoteSRIDrestriktion",
+    "ErrorMessage": "IndholdKoteSRIDrestriktion: En featuretype indeholdt i et graveforespørgselssvar skal anvende det vertikale koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799 som koordinatreferencesystemet for attributter der repræsenterer en kote"
+  },
+  {
+    "StatusCode": "Check3DGeometryRule",
+    "ErrorMessage": "Check3DGeometry: Geometrier er ikke angivet i 3 dimensioner"
+  },
+  {
+    "StatusCode": "GmlContentRule",
+    "ErrorMessage": "graveforespørgselssvar: attributten type må ikke være tom"
+  },
+  {
+    "StatusCode": "GmlContentNonEmptyRule",
+    "ErrorMessage": "graveforespørgselssvar: ledningsoplysninger mangler"
+  },
+  {
+    "StatusCode": "GmlContentEmptyRule",
+    "ErrorMessage": "graveforespørgselssvar: svaret skal ikke indeholde ledningsoplysninger"
+  },
+  {
+    "StatusCode": "SimpleFeatureRule",
+    "ErrorMessage": "graveforespørgselssvar: ledningsoplysninger geometri opfylder ikke GML Simple Feature Profile"
+  },
+  {
+    "StatusCode": "UtilityGeometryWithinDiggingAreaRule",
+    "ErrorMessage": "graveforespørgselssvar: ledningsoplysninger ligger ikke i graveområdet"
+  },
+  {
+    "StatusCode": "SupportedGeometryRule",
+    "ErrorMessage": "graveforespørgselssvar: geometri type er ikke understøttet"
+  },
+  {
+    "StatusCode": "EtableringsTidsPunktRule",
+    "ErrorMessage": "EtableringstidspunktRule"
+  },
+  {
+    "StatusCode": "EtableringsTidsPunktRule_ValueIsNullOrEmpty",
+    "ErrorMessage": "EtableringstidspunktRule dateString value is null or empty"
+  },
+  {
+    "StatusCode": "EtableringsTidsPunktRule_calendarEraNameAttributeNotNull",
+    "ErrorMessage": "EtableringstidspunktRule calendarEraName is not null"
+  },
+  {
+    "StatusCode": "EtableringsTidsPunktRule_NotValid_IndeterminatePositionValue",
+    "ErrorMessage": "EtableringstidspunktRule indeterminatePosition value is not null or before"
+  },
+  {
+    "StatusCode": "EtableringsTidsPunktRule_DateValueIsNotValid",
+    "ErrorMessage": "EtableringstidspunktRule value is not valid dateFormat"
+  },
+  {
+    "StatusCode": "EtableringsTidsPunktRule_ValueIsYearFormat_MatchConfiguration_IndeterminatePositionIsNull",
+    "ErrorMessage": "EtableringstidspunktRule value is year format, matching configuration and indeterminatePosition is null"
+  },
+  {
+    "StatusCode": "EtableringsTidsPunktRule_ValueIsHigherThanConfiguration_IndeterminatePositionIsNotNull",
+    "ErrorMessage": "EtableringstidspunktRule value is higher than configuration and indeterminatePosition is not null"
+  },
+  {
+    "StatusCode": "RorledningUdvendigBreddeBetingelseRule",
+    "ErrorMessage": "UdvendigBreddeBetingelse: Den udvendige bredde skal være angivet, hvis ledningen er anbragt efter skæringsdatoen, tværsnitsformen ikke er cirkulær. Den udvendige bredde må ikke være angivet hvis tværsnitsformen er cirkulær"
+  },
+  {
+    "StatusCode": "RorledningUdvendigBreddeMaleenhedsRestriktionRule",
+    "ErrorMessage": "UdvendigBreddeMaleenhedsRestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "RorledningUdvendigHojdeMaleenhedsrestriktionRule",
+    "ErrorMessage": "UdvendigHøjdeMaleenhedsrestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "AfloebBroendformTilladelse",
+    "ErrorMessage": "BroendformTilladelse: Brøndformen må kun være angivet, hvis typen er brønd"
+  },
+  {
+    "StatusCode": "AfloebBundlaengdeTilladelse",
+    "ErrorMessage": "BundlaengdeTilladelse: Bundlængden må kun være angivet, hvis alle følgende betingelser er sande: typen er brønd og brøndformkoden er kvadratisk eller rektangulær"
+  },
+  {
+    "StatusCode": "AfloebBundlaengdeMaaleenhedsRestriktionRule",
+    "ErrorMessage": "BundlaengdeMaaleenhedsRestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "AfloebBunddiameterbreddeMaaleenhedsRestriktionRule",
+    "ErrorMessage": "BunddiameterbreddeMaaleenhedsRestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "SpaendingsniveauMaleenhedsRestriktionRule",
+    "ErrorMessage": "SpaendingsniveauMaleenhedsRestriktion: Enhed skal være 'kV'"
+  },
+  {
+    "StatusCode": "ElkomponentRelativNiveauTilladelseRule",
+    "ErrorMessage": "RelativNiveauTilladelse: Det relative niveau må kun være angivet, hvis typen er rørblok"
+  },
+  {
+    "StatusCode": "ForsyningsartRestriktionRule",
+    "ErrorMessage": "ForsyningsartRestriktion: Forsyningsarten må ikke være en af de prædefinerede værdier fra kodelisten Forsyningsart"
+  },
+  {
+    "StatusCode": "IRFormatRestriktionRule",
+    "ErrorMessage": "FormatRestriktion: type eller format er ikke valid"
+  },
+  {
+    "StatusCode": "IRFileExtensionRestriktionRuleNoFile",
+    "ErrorMessage": "Der findes ikke nogen fil"
+  },
+  {
+    "StatusCode": "IRFileExtensionRestriktionRuleFormatNotEqualToFileExtension",
+    "ErrorMessage": "Det angivne format i ler:format stemmer ikke overens med den angivne filendelse i ler:sti."
+  },
+  {
+    "StatusCode": "KontaktProfilMailadresseBetingelseRule",
+    "ErrorMessage": "MailadresseBetingelseRule: Mailadressen skal være angivet, hvis ikke telefonnummeret er angivet"
+  },
+  {
+    "StatusCode": "KontaktProfilTelefonnummerBetingelseRule",
+    "ErrorMessage": "TelefonnummerBetingelse: Telefonnummeret skal være angivet, hvis ikke mailadressen er angivet"
+  },
+  {
+    "StatusCode": "LedningDriftsstatusVoidrestriktionRuleNotValid",
+    "ErrorMessage": "LedningDriftsstatusVoidrestriktion: Driftsstatussen må ikke være void, hvis ledningen er anbragt efter skæringsdatoen"
+  },
+  {
+    "StatusCode": "LedningFareklasseVoidrestriktionRule",
+    "ErrorMessage": "FareklasseVoidrestriktion: Fareklassen må ikke være void, hvis ledningen er anbragt efter skæringsdatoen"
+  },
+  {
+    "StatusCode": "LedningNoejagtighedsklasseBetingelseRule",
+    "ErrorMessage": "NojagtighedsklasseBetingelse: Nøjagtighedsklassen skal være angivet"
+  },
+  {
+    "StatusCode": "LedningNoejagtighedsklasseVoidRestriktionRule",
+    "ErrorMessage": "NojagtighedsklasseVoidRestriktion: Nøjagtighedsklassen må ikke være void, hvis ledning/trace er anbragt efter skæringsdatoen og og ejerskabsforholdet er 'ejet af udleverende ledningsejer'"
+  },
+  {
+    "StatusCode": "LedningNoejagtighedsklasseVertikalBetingelseRule",
+    "ErrorMessage": "NojagtighedsklasseVertikalBetingelse: NøjagtighedsklasseVertikal skal være angivet"
+  },
+  {
+    "StatusCode": "LedningNoejagtighedsklasseVertikalVoidRestriktionRule",
+    "ErrorMessage": "NojagtighedsklasseVertikalVoidRestriktion: NøjagtighedsklasseVertikal må ikke være void, hvis ledning/trace er anbragt efter skæringsdatoen og og ejerskabsforholdet er 'ejet af udleverende ledningsejer'"
+  },
+  {
+    "StatusCode": "LedningUdvendigDiameterMaleenhedsRestriktionRule",
+    "ErrorMessage": "UdvendigDiameterMaleenhedsRestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "LedningGeometriBetingelseRule",
+    "ErrorMessage": "GeometriBetingelse: Geometrien skal være angivet, hvis alle følgende betingelser er sande: ledningen er ikke indeholdt i et ledningstracé og ledningen er ikke indeholdt i en anden ledning"
+  },
+  {
+    "StatusCode": "LedningTraceBreddeMaaleenhedsRuleNotValid",
+    "ErrorMessage": "BreddeMaleenhedsrestriktion: Enhed skal være 'mm'"
+  },
+  {
+    "StatusCode": "LedningTraceVejledendeDybdeVoidRestriktion",
+    "ErrorMessage": "VejledendeDybdeVoidRestriktion: Der skal angives en vejledende dybde, når etableringstidspunktet er efter skæringsdato, der angives ukendte vertikale koordinater(-99), når driftsstatussen er 'under etablering' og ejerskabsforholdet er 'ejet er udleveret ledningsejer'"
+  },
+  {
+    "StatusCode": "TermiskTemperaturMaaleenhedsRestriktion",
+    "ErrorMessage": "TemperaturMaaleenhedsRestriktion: Enhed skal være 'Cel'"
+  },
+  {
+    "StatusCode": "StutskoteTilladelseRule",
+    "ErrorMessage": "StutskoteTilladelse: Stutskoten må kun være angivet, hvis typen er en af følgende: tapsted, ventil"
+  },
+  {
+    "StatusCode": "TapstedstypeTilladelseRule",
+    "ErrorMessage": "TapstedstypeTilladelse: Tapstedstypen må kun være angivet, hvis typen er tapsted"
+  },
+  {
+    "StatusCode": "AnborstedTilladelseRule",
+    "ErrorMessage": "AnborstedTilladelse: Anborstedet må kun være angivet, hvis typen er tilslutningspunkt"
+  },
+  {
+    "StatusCode": "FareklasseRestriktionRule",
+    "ErrorMessage": "FareklasseRestriktion: Fareklassen må ikke være meget farlig"
+  },
+  {
+    "StatusCode": "UtilityPackageAlreadyDelivered",
+    "ErrorMessage": "Der er allerede indsendt ledningsoplysninger til denne graveforespørgsel"
+  },
+  {
+    "StatusCode": "UtilityPackageErroneouslyMarkedAsUpdate",
+    "ErrorMessage": "Der er ikke indsendt ledningsoplysninger til denne graveforespørgsel, men svaret er markeret som opdatering"
+  }
+]

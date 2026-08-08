@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import re
 from pathlib import Path
 
@@ -13,6 +14,7 @@ from wrapper import SchemaEx
 
 ROOT = Path(__file__).parent
 VERSIONS_DIR = ROOT / 'versions'
+ERRORCODES_PATH = ROOT / 'errorcodes.json'
 
 # Newest first - used as the display order on the version landing page.
 VERSIONS = {
@@ -63,6 +65,7 @@ _schex = {}
 _type_tree = {}
 _chains = {}
 _xsdelement_details = {}
+_errorcodes = None
 
 
 def get_featuretyper(version):
@@ -354,6 +357,34 @@ def get_xsdelement_details(version):
     return _xsdelement_details[version]
 
 
+NUMBERED_ERRORCODE = re.compile(r'^\d\d-\d+$')
+
+
+def get_errorcodes():
+    """(numeric_groups, named_rules), from errorcodes.json (see fetch_errorcodes.py).
+    LER's /api/errorcodes returns one flat list mixing two things that behave
+    differently in an API response: numbered codes (StatusCode like '13-300') that
+    actually appear as Error.ErrorCode, and named business rules (StatusCode like
+    'Check3DGeometryRule') that only ever show up as free text inside
+    Error.PrettyErrorMessage, with ErrorCode staying the generic code of the
+    rejecting service. numeric_groups is [(prefix, [codes...]), ...] sorted by
+    prefix, e.g. ('13', [...]) for all 13-xxx codes."""
+    global _errorcodes
+    if _errorcodes is None:
+        codes = json.loads(ERRORCODES_PATH.read_text())
+        numeric = [c for c in codes if NUMBERED_ERRORCODE.match(c['StatusCode'])]
+        named = sorted(
+            (c for c in codes if not NUMBERED_ERRORCODE.match(c['StatusCode'])),
+            key=lambda c: c['StatusCode'],
+        )
+        groups = {}
+        for c in numeric:
+            groups.setdefault(c['StatusCode'].split('-')[0], []).append(c)
+        numeric_groups = [(prefix, groups[prefix]) for prefix in sorted(groups)]
+        _errorcodes = (numeric_groups, named)
+    return _errorcodes
+
+
 @app.template_filter('anchor')
 def anchor_filter(prefixed_name):
     return prefixed_name.lower().replace(':', '-')
@@ -426,6 +457,19 @@ def add_version(endpoint, values):
 @app.route('/')
 def forside():
     return render_template('forside.html', versions=VERSIONS, latest_version=LATEST_VERSION)
+
+
+## FEJLKODER (unprefixed - identical across every LER/featurekatalog version, see
+## adr/901-ler-api-error-codes.md. Unlike XSD/docx-derived content, LER's error codes
+## API isn't versioned alongside the schema, so there's nothing to duplicate per version.
+## errorcodes.html is standalone like forside.html (doesn't extend base.html) - it has no
+## g.version of its own, so it can't build version-dependent nav links like the other pages.)
+
+
+@app.route('/errorcodes/')
+def errorcodes():
+    numeric_groups, named = get_errorcodes()
+    return render_template('errorcodes.html', numeric_groups=numeric_groups, named=named)
 
 
 ## OVERVIEW PAGES (list like)
@@ -522,6 +566,11 @@ freezer = Freezer(app)
 @freezer.register_generator
 def forside_urls():
     yield 'forside', {}
+
+
+@freezer.register_generator
+def errorcodes_urls():
+    yield 'errorcodes', {}
 
 
 @freezer.register_generator

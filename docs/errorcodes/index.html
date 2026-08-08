@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fejlkoder – featurekatalog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+</style>
+</head>
+<body>
+<div class="container py-5">
+<h1>Fejlkoder</h1>
+<p>LER's autoritative kilde for API-fejlkoder er endpointet <code>GET /api/errorcodes</code>,
+som returnerer alle fejlkoder og navngivne forretningsregler serveren kan returnere
+(hentet direkte fra LER, ikke fra dokumentation der kan halte bagefter – se
+<code>adr/901-ler-api-error-codes.md</code> i repoet).</p>
+<p>Denne side er ikke version-præfikset som resten af featurekatalog: fejlkoderne er
+fælles på tværs af LER's datamodel-versioner (2.0, 2.1, 2.2, …) – der er intet der
+tyder på at de nogensinde varierer med datamodellen. De kan til gengæld tænkes at
+variere på tværs af API-integrationsversion (V1/V2/V3 af de enkelte service-endpoints)
+– det er ikke undersøgt endnu, og listen herunder er ikke opdelt efter det.</p>
+<p>Listen falder i to grupper, der opfører sig forskelligt i et API-svar:</p>
+<ul>
+  <li><strong>Nummererede fejlkoder</strong> (<code>XX-XXX</code>) – står direkte i
+  <code>Error.ErrorCode</code> i JSON-svaret. Grupperet efter integration/service herunder.</li>
+  <li><strong>Navngivne forretningsregler</strong> – <em>ikke</em> selvstændige
+  <code>ErrorCode</code>-værdier. De fremgår kun som fritekst i
+  <code>Error.PrettyErrorMessage</code> (typisk <code>&lt;RegelNavn uden "Rule"&gt;: &lt;besked&gt;</code>),
+  mens <code>ErrorCode</code> forbliver den generiske overordnede kode for den service der afviste.</li>
+</ul>
+
+<h2 class="h4 mt-4">Nummererede fejlkoder</h2>
+<h3 class="h6 mt-3">00-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>00-100</code></td>
+    <td>Der skete en uventet fejl.</td>
+  </tr>
+  <tr>
+    <td><code>00-110</code></td>
+    <td>API kunne ikke forbinde til LER kernen.</td>
+  </tr>
+  <tr>
+    <td><code>00-200</code></td>
+    <td>Den benyttede konto har ikke adgang til den efterspurgte ressource.</td>
+  </tr>
+  <tr>
+    <td><code>00-210</code></td>
+    <td>Den benyttede konto har ikke en aktiv tjenesteaftale med den efterspurgte tjenesteaftager.</td>
+  </tr>
+  <tr>
+    <td><code>00-220</code></td>
+    <td>Den benyttede konto er ikke oprettet i LER. Sørg for at oprette kontoen ved at logge ind i LERs brugergrænseflade, inden du benytter LERs service API.</td>
+  </tr>
+  <tr>
+    <td><code>00-230</code></td>
+    <td>Det benyttede certifikat svarer ikke til det/de certifikater der er registreret som tilladte for den givne konto.</td>
+  </tr>
+  <tr>
+    <td><code>00-240</code></td>
+    <td>Den angivne konto er ikke tilsluttet LER 2.0. Tilslut kontoen til LER 2.0 i LERs kontoadministration.</td>
+  </tr>
+  <tr>
+    <td><code>00-250</code></td>
+    <td>Den angivne konto er ikke tilsluttet Samføring 2.1. Tilslut kontoen til Samføring 2.1 i LERs kontoadministration.</td>
+  </tr>
+  <tr>
+    <td><code>00-260</code></td>
+    <td>Det angivne CVR-nummer er tomt.</td>
+  </tr>
+  <tr>
+    <td><code>00-261</code></td>
+    <td>Det angivne CVR-nummer er ugyldigt.</td>
+  </tr>
+  <tr>
+    <td><code>00-262</code></td>
+    <td>Det angivne thumbprint er ugyldigt.</td>
+  </tr>
+  <tr>
+    <td><code>00-270</code></td>
+    <td>Det benyttede certifikat er blevet tilbagekaldt.</td>
+  </tr>
+  <tr>
+    <td><code>00-280</code></td>
+    <td>Det benyttede certifikat kunne ikke verificeres. Det skyldes sandsynligvis at LER ikke kender til den udstedende &#39;Certificate Authority&#39;.</td>
+  </tr>
+  <tr>
+    <td><code>00-300</code></td>
+    <td>Det indsendte data er ikke validt.</td>
+  </tr>
+  <tr>
+    <td><code>00-310</code></td>
+    <td>Brug af LER webservices til samføring er slået fra.</td>
+  </tr>
+  <tr>
+    <td><code>00-300</code></td>
+    <td>Headeren &#34;Subject&#34; var forventet i requesten men var ikke fundet</td>
+  </tr>
+  <tr>
+    <td><code>00-300</code></td>
+    <td>Headeren &#34;Thumbprint&#34; var forventet i requesten men var ikke fundet</td>
+  </tr>
+  <tr>
+    <td><code>00-391</code></td>
+    <td>Den indsendte GML skal indeholde enten et kontaktperson eller kontaktadresse element.</td>
+  </tr>
+  <tr>
+    <td><code>00-400</code></td>
+    <td>Den indsendte kontaktperson email overstiger længdebegrænsningen på 50 tegn.</td>
+  </tr>
+  <tr>
+    <td><code>00-410</code></td>
+    <td>Den indsendte kontaktadresse email overstiger længdebegrænsningen på 50 tegn.</td>
+  </tr>
+  <tr>
+    <td><code>00-530</code></td>
+    <td>Der er opstået en timeout, foretag venligst graveforespørgslen med samme requestId igen.</td>
+  </tr>
+  <tr>
+    <td><code>00-540</code></td>
+    <td>Kontoen har overskredet grænsen for samtidige forespørgsler. Prøv igen senere.</td>
+  </tr>
+</table>
+</div>
+<h3 class="h6 mt-3">13-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>13-100</code></td>
+    <td>Der skete en uventet fejl. Prøv igen.</td>
+  </tr>
+  <tr>
+    <td><code>13-300</code></td>
+    <td>Den indsendte GML fil er ikke valid.</td>
+  </tr>
+  <tr>
+    <td><code>13-310</code></td>
+    <td>Forkert brug af IsOpdatering.</td>
+  </tr>
+</table>
+</div>
+<h3 class="h6 mt-3">16-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>16-400</code></td>
+    <td>Den efterspurgte ledningspakke findes ikke.</td>
+  </tr>
+  <tr>
+    <td><code>16-410</code></td>
+    <td>Den efterspurgte ledningspakke er arkiveret.</td>
+  </tr>
+</table>
+</div>
+<h3 class="h6 mt-3">18-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>18-300</code></td>
+    <td>Det medsendte data er ikke validt.</td>
+  </tr>
+</table>
+</div>
+<h3 class="h6 mt-3">19-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>19-100</code></td>
+    <td>Kontoen er blokeret for betaling med kreditkort og kan derfor ikke oprette graveforespørgsler via web API.</td>
+  </tr>
+  <tr>
+    <td><code>19-300</code></td>
+    <td>Den medsendte GML er ikke valid.</td>
+  </tr>
+  <tr>
+    <td><code>19-310</code></td>
+    <td>Beskrivelsen af graveforespørgslen/samføringssøgningen må højest være 100 tegn.</td>
+  </tr>
+  <tr>
+    <td><code>19-320</code></td>
+    <td>Format på graveperiodens startdato er invalidt. Validt format er &#39;åååå-mm-dd&#39;.</td>
+  </tr>
+  <tr>
+    <td><code>19-330</code></td>
+    <td>Format på graveperiodens slutdato er invalidt. Validt format er &#39;åååå-mm-dd&#39;.</td>
+  </tr>
+  <tr>
+    <td><code>19-340</code></td>
+    <td>Graveperiodens startdato er for langt tilbage i tiden.</td>
+  </tr>
+  <tr>
+    <td><code>19-350</code></td>
+    <td>Graveperiodens slutdato er for langt tilbage i tiden.</td>
+  </tr>
+  <tr>
+    <td><code>19-360</code></td>
+    <td>Graveperiodens slutdato må ikke være mindre en startdato.</td>
+  </tr>
+  <tr>
+    <td><code>19-370</code></td>
+    <td>Det indsendte geometriske data er ugyldigt.</td>
+  </tr>
+  <tr>
+    <td><code>19-375</code></td>
+    <td>Det indsendte geometriske data er ikke et polygon.</td>
+  </tr>
+  <tr>
+    <td><code>19-380</code></td>
+    <td>Der er ikke indsendt geometrisk data, WKT-listen er tom.</td>
+  </tr>
+  <tr>
+    <td><code>19-385</code></td>
+    <td>Den indsendte geometri indeholder ugyldige elemeter.</td>
+  </tr>
+  <tr>
+    <td><code>19-390</code></td>
+    <td>En eller flere indsendte geometrier overlapper ikke.</td>
+  </tr>
+  <tr>
+    <td><code>19-391</code></td>
+    <td>Sammensmeltning af geometrier resulterede i et ugyldigt polygon, kontrollér det indsendte.</td>
+  </tr>
+  <tr>
+    <td><code>19-392</code></td>
+    <td>Sammensmeltning af geometrier resulterede i et multipolygon, som ikke er tilladt i LER. Kontrollér der indsendte.</td>
+  </tr>
+  <tr>
+    <td><code>19-393</code></td>
+    <td>Der er indsendt flere geometrier end tilladt.</td>
+  </tr>
+  <tr>
+    <td><code>19-395</code></td>
+    <td>Den indsendte geometri er ugyldig, da det indeholder et multipolygon.</td>
+  </tr>
+  <tr>
+    <td><code>19-400</code></td>
+    <td>Der skal angives mindst én forsyningsart.</td>
+  </tr>
+  <tr>
+    <td><code>19-410</code></td>
+    <td>Den/de indsendte forsyningsarter er ikke valide.</td>
+  </tr>
+  <tr>
+    <td><code>19-420</code></td>
+    <td>Der skal angives et formål.</td>
+  </tr>
+  <tr>
+    <td><code>19-430</code></td>
+    <td>Det indsendte formål er ikke validt.</td>
+  </tr>
+  <tr>
+    <td><code>19-440</code></td>
+    <td>Der er for mange indsendte formål.</td>
+  </tr>
+  <tr>
+    <td><code>19-465</code></td>
+    <td>For mange indsendte papirformater.</td>
+  </tr>
+  <tr>
+    <td><code>19-470</code></td>
+    <td>Der skal tilføjes en bemærkning til graveforespørgslen. Noden bemaerkning findes ikke.</td>
+  </tr>
+  <tr>
+    <td><code>19-480</code></td>
+    <td>Den indsendte bemærkning er ikke korrekt.</td>
+  </tr>
+  <tr>
+    <td><code>19-490</code></td>
+    <td>Der skal angives en kontaktperson eller en adresse.</td>
+  </tr>
+  <tr>
+    <td><code>19-500</code></td>
+    <td>Der skal angives en email.</td>
+  </tr>
+  <tr>
+    <td><code>19-510</code></td>
+    <td>Den indsendte kontaktperson er ikke korrekt.</td>
+  </tr>
+  <tr>
+    <td><code>19-520</code></td>
+    <td>Den indsendte kontaktadresse er ikke korrekt.</td>
+  </tr>
+  <tr>
+    <td><code>19-530</code></td>
+    <td>ordrenummer_ikke_angivet skal sættes og angive, om graveforespørgslen skal oprettes med eller uden ordrenummer.</td>
+  </tr>
+  <tr>
+    <td><code>19-540</code></td>
+    <td>Hvis ordrenummer specificeres i graveforespørgslen, skal ordrenummer_ikke_angivet angives som false.</td>
+  </tr>
+  <tr>
+    <td><code>19-550</code></td>
+    <td>Hvis ordrenummmer ikke specificeres i graveforespørgslen, skal ordrenummer_ikke_angivet angives som true.</td>
+  </tr>
+  <tr>
+    <td><code>19-560</code></td>
+    <td>Ordrenummeret må ikke være end 12 karaktere langt.</td>
+  </tr>
+</table>
+</div>
+<h3 class="h6 mt-3">24-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>24-400</code></td>
+    <td>Der findes ingen graveforespørgselskvittering for den angivne graveforespørgsel endnu. Prøv igen senere.</td>
+  </tr>
+  <tr>
+    <td><code>24-410</code></td>
+    <td>Der findes ingen samføringssøgningskvittering for den angivne samføringssøgning endnu. Prøv igen senere.</td>
+  </tr>
+</table>
+</div>
+<h3 class="h6 mt-3">26-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>26-500</code></td>
+    <td>Den angivne ledningspakke er allerede parkeret som modtaget.</td>
+  </tr>
+</table>
+</div>
+<h3 class="h6 mt-3">27-xxx</h3>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:10%; white-space:nowrap;">Kode</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>27-300</code></td>
+    <td>Den medsendte GML er ikke valid.</td>
+  </tr>
+  <tr>
+    <td><code>27-310</code></td>
+    <td>Interesseområdet er ikke tilsluttet LER 2.0.</td>
+  </tr>
+  <tr>
+    <td><code>27-320</code></td>
+    <td>Den indsendte kontaktadresse findes ikke.</td>
+  </tr>
+  <tr>
+    <td><code>27-321</code></td>
+    <td>Der er angivet en kontaktperson eller en kontaktadresse, men emailen er tom.</td>
+  </tr>
+  <tr>
+    <td><code>27-330</code></td>
+    <td>Den indsendte kontaktperson findes ikke.</td>
+  </tr>
+  <tr>
+    <td><code>27-340</code></td>
+    <td>Den indsendte GML skal indeholde elementet bemaerkning</td>
+  </tr>
+  <tr>
+    <td><code>27-350</code></td>
+    <td>Den indsendte bemærkning overstiger den maksimale længde på 4000 tegn.</td>
+  </tr>
+  <tr>
+    <td><code>27-360</code></td>
+    <td>En eller flere objekter i WKTList er ugyldige.</td>
+  </tr>
+  <tr>
+    <td><code>27-370</code></td>
+    <td>WKTList indeholder elementer der ikke er polygoner.</td>
+  </tr>
+  <tr>
+    <td><code>27-380</code></td>
+    <td>Den indsendte forsyningsart findes ikke.</td>
+  </tr>
+  <tr>
+    <td><code>27-381</code></td>
+    <td>Der er en fejl i angivelsen af forsyningsart_id og forsyningsart_andet.</td>
+  </tr>
+  <tr>
+    <td><code>27-382</code></td>
+    <td>Der er ikke angivet forsyningsart_id i den indsendte GML. Der skal angives mindst én forsyningsart.</td>
+  </tr>
+  <tr>
+    <td><code>27-383</code></td>
+    <td>Den indsendte GML skal indeholde elementet forsyningsart_andet når forsyningsart_id indeholder ID 99.</td>
+  </tr>
+  <tr>
+    <td><code>27-384</code></td>
+    <td>Den indsendte tekst i forsyningsart_andet overstiger den maksimale længde på 50 tegn.</td>
+  </tr>
+  <tr>
+    <td><code>27-390</code></td>
+    <td>GML filen har både en kontaktperson og kontaktadresse. Dette er ikke tilladt.</td>
+  </tr>
+  <tr>
+    <td><code>27-400</code></td>
+    <td>Interesseområdet findes ikke.</td>
+  </tr>
+  <tr>
+    <td><code>27-410</code></td>
+    <td>Uautoriseret adgang.</td>
+  </tr>
+  <tr>
+    <td><code>27-420</code></td>
+    <td>Ingen ændringer fundet. Indberetningen blev ikke opdateret.</td>
+  </tr>
+  <tr>
+    <td><code>27-430</code></td>
+    <td>Den indsendte GML skal indeholde enten et ler2signed eller ler20signed element.</td>
+  </tr>
+  <tr>
+    <td><code>27-431</code></td>
+    <td>Den indsendte GML indeholder både elementet ler2signed og ler20signed. Der må kun angives én af disse elementer.</td>
+  </tr>
+  <tr>
+    <td><code>27-432</code></td>
+    <td>Den angivne værdi for ler2signed/ler20signed er ikke en af de tilladte værdier.</td>
+  </tr>
+  <tr>
+    <td><code>27-440</code></td>
+    <td>Den indsendte GML skal indeholde elementet polygonProperty.</td>
+  </tr>
+  <tr>
+    <td><code>27-441</code></td>
+    <td>Elementet polygonProperty indeholder ikke et Polygon, Surface eller MultiSurface element.</td>
+  </tr>
+  <tr>
+    <td><code>27-900</code></td>
+    <td>Forbindelsen til Dataforsyningen fejlede. Prøv igen senere.</td>
+  </tr>
+  <tr>
+    <td><code>27-999</code></td>
+    <td>Kritisk fejl. Systemet annulleret handlingen.</td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Navngivne forretningsregler</h2>
+<p>71 regler i alt.</p>
+<div class="table-responsive">
+<table class="table table-striped table-bordered align-top">
+  <tr>
+    <th style="width:25%;">Regel</th>
+    <th>Besked</th>
+  </tr>
+  <tr>
+    <td><code>AfloebBroendformTilladelse</code></td>
+    <td>BroendformTilladelse: Brøndformen må kun være angivet, hvis typen er brønd</td>
+  </tr>
+  <tr>
+    <td><code>AfloebBunddiameterbreddeMaaleenhedsRestriktionRule</code></td>
+    <td>BunddiameterbreddeMaaleenhedsRestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>AfloebBundlaengdeMaaleenhedsRestriktionRule</code></td>
+    <td>BundlaengdeMaaleenhedsRestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>AfloebBundlaengdeTilladelse</code></td>
+    <td>BundlaengdeTilladelse: Bundlængden må kun være angivet, hvis alle følgende betingelser er sande: typen er brønd og brøndformkoden er kvadratisk eller rektangulær</td>
+  </tr>
+  <tr>
+    <td><code>AnborstedTilladelseRule</code></td>
+    <td>AnborstedTilladelse: Anborstedet må kun være angivet, hvis typen er tilslutningspunkt</td>
+  </tr>
+  <tr>
+    <td><code>Check3DGeometryRule</code></td>
+    <td>Check3DGeometry: Geometrier er ikke angivet i 3 dimensioner</td>
+  </tr>
+  <tr>
+    <td><code>ElkomponentRelativNiveauTilladelseRule</code></td>
+    <td>RelativNiveauTilladelse: Det relative niveau må kun være angivet, hvis typen er rørblok</td>
+  </tr>
+  <tr>
+    <td><code>EtableringsTidsPunktRule</code></td>
+    <td>EtableringstidspunktRule</td>
+  </tr>
+  <tr>
+    <td><code>EtableringsTidsPunktRule_DateValueIsNotValid</code></td>
+    <td>EtableringstidspunktRule value is not valid dateFormat</td>
+  </tr>
+  <tr>
+    <td><code>EtableringsTidsPunktRule_NotValid_IndeterminatePositionValue</code></td>
+    <td>EtableringstidspunktRule indeterminatePosition value is not null or before</td>
+  </tr>
+  <tr>
+    <td><code>EtableringsTidsPunktRule_ValueIsHigherThanConfiguration_IndeterminatePositionIsNotNull</code></td>
+    <td>EtableringstidspunktRule value is higher than configuration and indeterminatePosition is not null</td>
+  </tr>
+  <tr>
+    <td><code>EtableringsTidsPunktRule_ValueIsNullOrEmpty</code></td>
+    <td>EtableringstidspunktRule dateString value is null or empty</td>
+  </tr>
+  <tr>
+    <td><code>EtableringsTidsPunktRule_ValueIsYearFormat_MatchConfiguration_IndeterminatePositionIsNull</code></td>
+    <td>EtableringstidspunktRule value is year format, matching configuration and indeterminatePosition is null</td>
+  </tr>
+  <tr>
+    <td><code>EtableringsTidsPunktRule_calendarEraNameAttributeNotNull</code></td>
+    <td>EtableringstidspunktRule calendarEraName is not null</td>
+  </tr>
+  <tr>
+    <td><code>ExpectedNumericValue</code></td>
+    <td>Værdi skal være et tal, hvis der er angivet et kommatal skal man benytte punktum til decimaler.</td>
+  </tr>
+  <tr>
+    <td><code>FareklasseMegetFarligRestriktion</code></td>
+    <td>FareklasseMegetFarligRestriktion: Fareklassen må ikke være meget farlig</td>
+  </tr>
+  <tr>
+    <td><code>FareklasseRestriktionRule</code></td>
+    <td>FareklasseRestriktion: Fareklassen må ikke være meget farlig</td>
+  </tr>
+  <tr>
+    <td><code>ForsyningsartRestriktionRule</code></td>
+    <td>ForsyningsartRestriktion: Forsyningsarten må ikke være en af de prædefinerede værdier fra kodelisten Forsyningsart</td>
+  </tr>
+  <tr>
+    <td><code>GeometriVertikaleKoordinaterRestriktionRule</code></td>
+    <td>GeometriVertikaleKoordinaterRestriktion: En vertikal koordinat i geometrien må ikke have ukendt-værdien på -99, hvis rørledningen er nedgravet eller anbragt efter skæringsdatoen, driftsstatussen ikke er &#39;under etablering&#39; og ejerskabsforholdet er &#39;ejet af udleverende ledningsejer&#39;</td>
+  </tr>
+  <tr>
+    <td><code>GfForventetAfleveringstidspunktRule</code></td>
+    <td>ForventetAfleveringstidspunkt: Det forventede afleveringstidspunkt må ikke være angivet, hvis typen af graveforespørgselssvaret ikke er &#34;udtaget til manuel behandling&#34;. Det forventede afleveringstidspunkt må godt være angivet hvis typen af graveforespørgselssvaret er &#34;udtaget til manuel behandling&#34;</td>
+  </tr>
+  <tr>
+    <td><code>GfTypeSupplerendeInfoBetingelseRule</code></td>
+    <td>TypeSupplerendeInfoBetingelse: Supplerende information om typen af graveforespørgsselsvaret skal være angivet, hvis typen af graveforespørgsselsvaret er &#34;ledningsoplysninger udleveres ikke&#34;. Supplerende information om typen af graveforespørgsselsvaret må godt være angivet hvis typen af graveforespørgsselsvaret ikke er &#34;ledningsoplysninger udleveres ikke&#34;</td>
+  </tr>
+  <tr>
+    <td><code>GmlContentEmptyRule</code></td>
+    <td>graveforespørgselssvar: svaret skal ikke indeholde ledningsoplysninger</td>
+  </tr>
+  <tr>
+    <td><code>GmlContentNonEmptyRule</code></td>
+    <td>graveforespørgselssvar: ledningsoplysninger mangler</td>
+  </tr>
+  <tr>
+    <td><code>GmlContentRule</code></td>
+    <td>graveforespørgselssvar: attributten type må ikke være tom</td>
+  </tr>
+  <tr>
+    <td><code>HrefHashtagRule</code></td>
+    <td>Id for værdi til xlink:href attribut skal være foranstillet med et &#39;#&#39; og værdi til xsi:nil skal være true, hvis der ikke er nogen xlink:href -værdi. F.eks. &lt;indeholdtLedning xsi:nil = &#34;true&#34;/&gt;.
+IndeholdtLedning- og bilag -elementerne må ikke være tomme.</td>
+  </tr>
+  <tr>
+    <td><code>IRFileExtensionRestriktionRuleFormatNotEqualToFileExtension</code></td>
+    <td>Det angivne format i ler:format stemmer ikke overens med den angivne filendelse i ler:sti.</td>
+  </tr>
+  <tr>
+    <td><code>IRFileExtensionRestriktionRuleNoFile</code></td>
+    <td>Der findes ikke nogen fil</td>
+  </tr>
+  <tr>
+    <td><code>IRFormatRestriktionRule</code></td>
+    <td>FormatRestriktion: type eller format er ikke valid</td>
+  </tr>
+  <tr>
+    <td><code>IdRestriktion</code></td>
+    <td>idRestriktion: id&#39;et skal være en UUID, som defineret i [ITU-T X.667]</td>
+  </tr>
+  <tr>
+    <td><code>IndholdGM_ObjectSRIdRestriktionRule</code></td>
+    <td>IndholdGM_ObjectSRIdRestriktion: En featuretype indeholdt i et graveforespørgselssvar skal anvende det sammensatte koordinatreferencesystem med URI http://www.opengis.net/def/crs/EPSG/0/7416 som koordinatreferencesystemet for attributter der har GM_Object eller en af dets subtyper som typer</td>
+  </tr>
+  <tr>
+    <td><code>IndholdKoteSRIDrestriktion</code></td>
+    <td>IndholdKoteSRIDrestriktion: En featuretype indeholdt i et graveforespørgselssvar skal anvende det vertikale koordinatreferencesystemet med URI http://www.opengis.net/def/crs/EPSG/0/5799 som koordinatreferencesystemet for attributter der repræsenterer en kote</td>
+  </tr>
+  <tr>
+    <td><code>IndholdNilReasonRestriktion</code></td>
+    <td>IndholdNilReasonRestriktion: En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, skal have &#34;unknown&#34; som værdi for XML-attributten med navn &#34;nilReason&#34; hvis egenskaben er void og XML-attributten med navn &#34;nilReason&#34; er angivet. En egenskab af en featuretype indeholdt i graveforespørgselssvaret, indkodet som GML, behøver ikke at have en XML-attribut med navn &#34;nilReason&#34; hvis egenskaben er void</td>
+  </tr>
+  <tr>
+    <td><code>KontaktProfilMailadresseBetingelseRule</code></td>
+    <td>MailadresseBetingelseRule: Mailadressen skal være angivet, hvis ikke telefonnummeret er angivet</td>
+  </tr>
+  <tr>
+    <td><code>KontaktProfilTelefonnummerBetingelseRule</code></td>
+    <td>TelefonnummerBetingelse: Telefonnummeret skal være angivet, hvis ikke mailadressen er angivet</td>
+  </tr>
+  <tr>
+    <td><code>LedningDriftsstatusVoidrestriktionRuleNotValid</code></td>
+    <td>LedningDriftsstatusVoidrestriktion: Driftsstatussen må ikke være void, hvis ledningen er anbragt efter skæringsdatoen</td>
+  </tr>
+  <tr>
+    <td><code>LedningFareklasseVoidrestriktionRule</code></td>
+    <td>FareklasseVoidrestriktion: Fareklassen må ikke være void, hvis ledningen er anbragt efter skæringsdatoen</td>
+  </tr>
+  <tr>
+    <td><code>LedningGeometriBetingelseRule</code></td>
+    <td>GeometriBetingelse: Geometrien skal være angivet, hvis alle følgende betingelser er sande: ledningen er ikke indeholdt i et ledningstracé og ledningen er ikke indeholdt i en anden ledning</td>
+  </tr>
+  <tr>
+    <td><code>LedningNoejagtighedsklasseBetingelseRule</code></td>
+    <td>NojagtighedsklasseBetingelse: Nøjagtighedsklassen skal være angivet</td>
+  </tr>
+  <tr>
+    <td><code>LedningNoejagtighedsklasseVertikalBetingelseRule</code></td>
+    <td>NojagtighedsklasseVertikalBetingelse: NøjagtighedsklasseVertikal skal være angivet</td>
+  </tr>
+  <tr>
+    <td><code>LedningNoejagtighedsklasseVertikalVoidRestriktionRule</code></td>
+    <td>NojagtighedsklasseVertikalVoidRestriktion: NøjagtighedsklasseVertikal må ikke være void, hvis ledning/trace er anbragt efter skæringsdatoen og og ejerskabsforholdet er &#39;ejet af udleverende ledningsejer&#39;</td>
+  </tr>
+  <tr>
+    <td><code>LedningNoejagtighedsklasseVoidRestriktionRule</code></td>
+    <td>NojagtighedsklasseVoidRestriktion: Nøjagtighedsklassen må ikke være void, hvis ledning/trace er anbragt efter skæringsdatoen og og ejerskabsforholdet er &#39;ejet af udleverende ledningsejer&#39;</td>
+  </tr>
+  <tr>
+    <td><code>LedningTraceBreddeMaaleenhedsRuleNotValid</code></td>
+    <td>BreddeMaleenhedsrestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>LedningTraceVejledendeDybdeVoidRestriktion</code></td>
+    <td>VejledendeDybdeVoidRestriktion: Der skal angives en vejledende dybde, når etableringstidspunktet er efter skæringsdato, der angives ukendte vertikale koordinater(-99), når driftsstatussen er &#39;under etablering&#39; og ejerskabsforholdet er &#39;ejet er udleveret ledningsejer&#39;</td>
+  </tr>
+  <tr>
+    <td><code>LedningUdvendigDiameterMaleenhedsRestriktionRule</code></td>
+    <td>UdvendigDiameterMaleenhedsRestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>ManglendeGmlIdHenvisningRule</code></td>
+    <td>ManglendeGmlIdHenvisning: Det gml:id som xlink:href attributten henviser til findes ikke</td>
+  </tr>
+  <tr>
+    <td><code>RorledningUdvendigBreddeBetingelseRule</code></td>
+    <td>UdvendigBreddeBetingelse: Den udvendige bredde skal være angivet, hvis ledningen er anbragt efter skæringsdatoen, tværsnitsformen ikke er cirkulær. Den udvendige bredde må ikke være angivet hvis tværsnitsformen er cirkulær</td>
+  </tr>
+  <tr>
+    <td><code>RorledningUdvendigBreddeMaleenhedsRestriktionRule</code></td>
+    <td>UdvendigBreddeMaleenhedsRestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>RorledningUdvendigHojdeMaleenhedsrestriktionRule</code></td>
+    <td>UdvendigHøjdeMaleenhedsrestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>SimpleFeatureRule</code></td>
+    <td>graveforespørgselssvar: ledningsoplysninger geometri opfylder ikke GML Simple Feature Profile</td>
+  </tr>
+  <tr>
+    <td><code>SpaendingsniveauMaleenhedsRestriktionRule</code></td>
+    <td>SpaendingsniveauMaleenhedsRestriktion: Enhed skal være &#39;kV&#39;</td>
+  </tr>
+  <tr>
+    <td><code>StutskoteTilladelseRule</code></td>
+    <td>StutskoteTilladelse: Stutskoten må kun være angivet, hvis typen er en af følgende: tapsted, ventil</td>
+  </tr>
+  <tr>
+    <td><code>SupportedGeometryRule</code></td>
+    <td>graveforespørgselssvar: geometri type er ikke understøttet</td>
+  </tr>
+  <tr>
+    <td><code>TapstedstypeTilladelseRule</code></td>
+    <td>TapstedstypeTilladelse: Tapstedstypen må kun være angivet, hvis typen er tapsted</td>
+  </tr>
+  <tr>
+    <td><code>TermiskTemperaturMaaleenhedsRestriktion</code></td>
+    <td>TemperaturMaaleenhedsRestriktion: Enhed skal være &#39;Cel&#39;</td>
+  </tr>
+  <tr>
+    <td><code>TrykMaaleenhedsRestriktionRule</code></td>
+    <td>TrykMaaleenhedsRestriktion: Enhed skal være &#39;bar&#39;</td>
+  </tr>
+  <tr>
+    <td><code>TvaersnitsformRestriktionEfterSkaeringsDato</code></td>
+    <td>Ukendt tværsnitsform: Når tværsnitsformen angives som ukendt (void) skal der enten indsendes en udvendigDiameter eller både udvendigBredde og udvendigHøjde</td>
+  </tr>
+  <tr>
+    <td><code>TvaersnitsformRestriktionFoerSkaeringsDato</code></td>
+    <td>Ukendt tværsnitsform: Når tværsnitsformen angives som ukendt (void) kan der indsendes enten udvendigDiameter eller en kombination af udvendigBredde og/eller udvendigHøjde</td>
+  </tr>
+  <tr>
+    <td><code>UdvendigBreddeMaaleenhedsRestriktionRule</code></td>
+    <td>UdvendigBreddeMaaleenhedsRestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>UdvendigBreddeVoidRestriktionRule</code></td>
+    <td>UdvendigBreddeVoidrestriktion: Den udvendige bredde må ikke være void, hvis ledningen er anbragt efter skæringsdatoen, driftsstatussen ikke er &#39;under etablering&#39; og ejerskabsforholdet er &#39;ejet af udleverende ledningsejer&#39;</td>
+  </tr>
+  <tr>
+    <td><code>UdvendigDiameterBetingelseRule</code></td>
+    <td>UdvendigDiameterBetingelse: Den udvendige diameter skal være angivet, hvis ledningen er anbragt efter skæringsdatoen og tværsnitsformen er cirkulær. Den udvendige diameter må ikke være angivet, hvis tværsnitsformen ikke er cirkulær</td>
+  </tr>
+  <tr>
+    <td><code>UdvendigDiameterBetingelseRuleElTeleEllerAnden</code></td>
+    <td>UdvendigDiameterBetingelse: Den udvendige diameter skal være angivet, hvis etableringstidspunktet er efter skæringsdatoen.</td>
+  </tr>
+  <tr>
+    <td><code>UdvendigDiameterVoidRestriktionRule</code></td>
+    <td>UdvendigDiameterVoidRestriktion: Den udvendige diameter må ikke være void, hvis ledningen er anbragt efter skæringsdatoen, driftsstatussen ikke er &#39;under etablering&#39; og ejerskabsforholdet er &#39;ejet af udleverende ledningsejer&#39; </td>
+  </tr>
+  <tr>
+    <td><code>UdvendigHoejdeMaaleenhedsRestriktionRule</code></td>
+    <td>UdvendigHoejdeMaaleenhedsRestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+  <tr>
+    <td><code>UdvendigHojdeBetingelseRule</code></td>
+    <td>UdvendigHøjdeBetingelse: Den udvendige højde skal være angivet, hvis ledningen er anbragt efter skæringsdatoen og tværsnitsformen ikke er cirkulær. Den udvendige højde må ikke være angivet hvis tværsnitsformen er cirkulær</td>
+  </tr>
+  <tr>
+    <td><code>UdvendigHojdeVoidrestriktionRule</code></td>
+    <td>UdvendigHøjdeVoidrestriktion: Den udvendige højde må ikke være void, hvis ledningen er anbragt efter skæringsdatoen, driftsstatussen ikke er &#39;under etablering&#39; og ejerskabsforholdet er &#39;ejet af udleverende ledningsejer&#39;</td>
+  </tr>
+  <tr>
+    <td><code>UnexpectedError</code></td>
+    <td>Unexpected error</td>
+  </tr>
+  <tr>
+    <td><code>UtilityGeometryWithinDiggingAreaRule</code></td>
+    <td>graveforespørgselssvar: ledningsoplysninger ligger ikke i graveområdet</td>
+  </tr>
+  <tr>
+    <td><code>UtilityPackageAlreadyDelivered</code></td>
+    <td>Der er allerede indsendt ledningsoplysninger til denne graveforespørgsel</td>
+  </tr>
+  <tr>
+    <td><code>UtilityPackageErroneouslyMarkedAsUpdate</code></td>
+    <td>Der er ikke indsendt ledningsoplysninger til denne graveforespørgsel, men svaret er markeret som opdatering</td>
+  </tr>
+  <tr>
+    <td><code>VejledendeDybdeBetingelseRule</code></td>
+    <td>VejledendeDybdeBetingelse: Der skal angives en vejledende dybde, når etableringstidspunkt er efter skæringsdato, der angives ukendte vertikale koordinater (-99) og den primære forsyning er el eller telekommunikation</td>
+  </tr>
+  <tr>
+    <td><code>VejledendeDybdeMaaleenhedRestriktionRule</code></td>
+    <td>VejledendeDybdeMaaleenhedRestriktion: Enhed skal være &#39;mm&#39;</td>
+  </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

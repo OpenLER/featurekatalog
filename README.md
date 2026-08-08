@@ -99,3 +99,18 @@ Formålet er at give et maskinlæsbart udtræk af restriktionerne til brug i and
 repos/værktøjer (fx et der implementerer dem i Schematron) — uden fortolkning
 oveni (ingen koder, kategorisering e.l.). Kører uafhængigt af Flask-app'en og
 freeze-processen; deler kun `featurekatalog.py`-parseren.
+
+## Hent/opdater fejlkoder
+
+```bash
+export FEATUREKATALOG_CERT=/sti/til/cert-eller-fullchain.pem
+export FEATUREKATALOG_KEY=/sti/til/client.key
+python3 fetch_errorcodes.py
+```
+
+Henter LER's fulde liste over fejlkoder og navngivne forretningsregler fra
+`GET /api/errorcodes` på `services-extest.ler.dk` og skriver den til
+`errorcodes.json`, som vises på `/errorcodes/`-siden.
+
+`errorcodes.json` committes til repoet, ligesom kildefilerne under
+`versions/`.
