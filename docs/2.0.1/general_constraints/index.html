@@ -61,6 +61,30 @@ Men de sætter srsDimensions=3 og jeg har en meget svag erinding om, at den afvi
 
 <h2 class="h4 mt-4">G3 - XML kommentarer ikke tilladt</h2>
 <p>Så vidt jeg husker, så returnerer LER-server en (ubehjælpelig) fejl, hvis det xml man sender indeholder xml kommentarer.</p>
+
+<h2 class="h4 mt-4">G4 - Deklarér xmlns:xlink, selvom prefixet ikke bruges</h2>
+<p>Elementer som <code>ler:geometri</code> har typen <code>gml:GeometryPropertyType</code>, som via
+<code>gml:AssociationAttributeGroup</code> arver attributten <code>xlink:type</code> med
+<code>fixed="simple"</code>. Fordi attributten er "fixed" og ikke "required", er det helt lovligt
+ift. XSD-skemaet at udelade den i instansdokumentet - og dermed også lovligt slet ikke at
+deklarere <code>xmlns:xlink</code> på rodelementet, hvis prefixet aldrig bruges noget andet sted.</p>
+<p>LER's rigtige server accepterer det alligevel ikke. Sender man et dokument uden
+<code>xmlns:xlink</code>-deklaration, afviser den med fejlkode
+<a href="../../errorcodes/index.html">13-300</a> - én linje pr. berørt element, fx:</p>
+<pre><code>Default attribute 'http://www.w3.org/1999/xlink:type' for element
+'http://data.gov.dk/schemas/LER/2/gml:geometri' could not be applied as the attribute
+namespace is not mapped to a prefix in the instance document.</code></pre>
+<p>Dette er reproduceret: et dokument uden <code>xmlns:xlink</code> valideres som <code>valid: true</code>
+af <code>lerxml.validate_string()</code> (ren XSD-validering), men afvises af den rigtige
+<code>POST /api/v3/graveforespoergselSvar/{id}</code>. Formodet årsag (ikke verificeret mod LER's
+kildekode): fejlteksten er karakteristisk for .NET's <code>System.Xml.Schema</code>-valideringsstack,
+som ved materialisering af det "fixed" default-attribut forsøger at konstruere en
+navnerum-kvalificeret attribut-node for <code>xlink:type</code> - hvilket kræver et prefix bundet til
+xlink-namespacet i selve dokumentet, selvom attributten aldrig optræder eksplicit.</p>
+<p>Løsningen er at deklarere <code>xmlns:xlink="http://www.w3.org/1999/xlink"</code> på rodelementet,
+uanset om prefixet reelt bruges - en velkendt, harmløs praksis i GML-økosystemet netop for at
+undgå denne slags validator-kvababbelser. Uafklaret: om det kun gælder <code>geometri</code>, eller
+generelt alle <code>gml:*PropertyType</code>-elementer der arver <code>gml:AssociationAttributeGroup</code>.</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
