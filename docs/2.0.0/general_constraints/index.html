@@ -50,7 +50,7 @@
 
 <h2 class="h4 mt-4">G1 - Alle geometrier skal angives i 3 dimensioner, dog kan der bruges -99 for Z</h2>
 <p>Bekræftet ved faktiske sends mod LER's rigtige extest-API (ikke kun XSD-validering) - se
-eksperimenterne i <code>ler-api-experiments/xml/g1_dimensioner/</code>.</p>
+eksperimenterne i <code>ler-api-experiments/xml/G1/</code>.</p>
 <p>Det er aldrig tilladt kun at opgive to tal per vertex - heller ikke hvis man sætter
 <code>srsDimension="2"</code> eksplicit. Begge varianter afvises med identisk fejl fra en navngivet
 regel:</p>
@@ -66,11 +66,39 @@ skal <code>vejledendeDybde</code> angives, hvis etableringstidspunktet er efter 
 Z=-99 bruges. Udelades <code>vejledendeDybde</code> i den situation, afvises dokumentet - men af den
 regel (<code>VejledendeDybdeBetingelse</code>), ikke af Check3DGeometry.</p>
 
-<h2 class="h4 mt-4">G2 - Sæt srsDimension=3</h2>
-<p>Jeg har ikke testet, om LER-server rent faktisk kigge på det, og om det evt giver fejl.
-Men de sætter srsDimensions=3 og jeg har en meget svag erinding om, at den afviser, hvis man ikke sætter det.</p>
-<p>I alle deres eksempler har de eksplicit sat srsDimension=3.</p>
-<p>Kilde: <a href="https://ler.dk/Files/C0200_Vejledning_til_udfyldelse_af_GML_for_udveksling_af_ledningsoplysninger_v_1_23.pdf">C0200_Vejledning_til_udfyldelse_af_GML_for_udveksling_af_ledningsoplysninger_v_1_23.pdf</a></p>
+<h2 class="h4 mt-4">G2 - srsDimension=3 er ikke selv påkrævet, men forkert sat er fatalt</h2>
+<p>Testet ved faktiske sends mod LER's rigtige extest-API - se
+<code>ler-api-experiments/xml/G2/</code>. Den oprindelige antagelse ("skal
+eksplicit sætte <code>srsDimension="3"</code>, ellers afviser LER") holder ikke: en <code>gml:posList</code>
+med korrekt tre tal pr. vertex, men helt uden <code>srsDimension</code>-attribut, blev accepteret.</p>
+<p>Til gengæld er attributten ikke harmløs at sætte forkert. Sætter man
+<code>srsDimension="2"</code> - selvom der rent faktisk står 3 tal pr. vertex (reelt 3D-data) -
+afvises dokumentet alligevel, med samme <a href="../../errorcodes/index.html">13-300</a>-fejl som i
+G1 (<code>Check3DGeometry</code>). Omvendt afvises et dokument der erklærer <code>srsDimension="3"</code>
+men kun leverer 2 tal pr. vertex også - tal-antallet passer ikke til den erklærede dimension.</p>
+<p>Praktisk regel: lad <code>srsDimension</code> enten være udeladt eller korrekt sat til
+<code>"3"</code>, og lever altid tre tal pr. vertex. At sætte den til <code>"3"</code> er altså ikke i sig
+selv et krav, men nok den sikreste vane - en forkert værdi (fx kopieret fra en 2D-skabelon)
+udløser afvisning selv med korrekte 3D-koordinater. Alle LER's egne eksempler sætter da også
+eksplicit <code>srsDimension="3"</code>. Kilde:
+<a href="https://ler.dk/Files/C0200_Vejledning_til_udfyldelse_af_GML_for_udveksling_af_ledningsoplysninger_v_1_23.pdf">C0200_Vejledning_til_udfyldelse_af_GML_for_udveksling_af_ledningsoplysninger_v_1_23.pdf</a></p>
+<p><strong>srsDimension kan faktisk sættes to steder</strong> - både på selve geometri-elementet
+(fx <code>gml:LineString</code>, arver <code>gml:SRSReferenceGroup</code> fra <code>AbstractGeometryType</code>) og
+på <code>gml:posList</code> selv (som har sin egen <code>SRSReferenceGroup</code>). XSD'en tillader begge dele
+og har ingen regel for hvad der sker ved en konflikt - det er testet direkte (samme mappe,
+<code>ler-api-experiments/xml/G2/</code>):</p>
+<ul>
+<li>At sætte den samme, korrekte værdi begge steder er ikke en fejl - <code>LineString srsDimension="3"</code>
++ <code>posList srsDimension="3"</code> accepteres som normalt.</li>
+<li>Der er <strong>ingen "nederste vinder"-regel</strong>. Hverken geometri-elementet eller
+<code>posList</code> har forrang: <code>LineString="3"</code> + <code>posList="2"</code> afvises (den "nederste",
+mere specifikke værdi redder det ikke), og <code>LineString="2"</code> + <code>posList="3"</code> afvises også
+(en korrekt <code>posList</code>-værdi overstyrer ikke en forkert værdi længere oppe i træet).
+Selv <code>LineString="2"</code> helt uden nogen <code>srsDimension</code> på <code>posList</code> afvises - geometri-
+niveauets attribut læses og håndhæves selvstændigt.</li>
+</ul>
+<p>Konklusion: <strong>begge steder skal enten være <code>"3"</code> eller udeladt</strong> - en forkert værdi
+ét sted afviser dokumentet, uanset hvad der står (eller ikke står) det andet sted.</p>
 
 <h2 class="h4 mt-4">G3 - XML kommentarer ikke tilladt</h2>
 <p>Så vidt jeg husker, så returnerer LER-server en (ubehjælpelig) fejl, hvis det xml man sender indeholder xml kommentarer.</p>
