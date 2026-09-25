@@ -5,7 +5,7 @@ from pathlib import Path
 
 from xmlschema import XMLSchema
 from xmlschema.validators.wildcards import XsdAnyElement, XsdAnyAttribute
-from flask import Flask, abort, current_app, g, render_template
+from flask import Flask, abort, current_app, g, render_template, request
 from flask_frozen import Freezer
 from markupsafe import Markup, escape
 
@@ -441,6 +441,10 @@ def linkify_filter(value):
 @app.url_value_preprocessor
 def pull_version(endpoint, values):
     if values is not None and 'version' in values:
+        # /<version>/ matches any first segment, e.g. /restriktioner/ - 404 rather
+        # than letting an unknown version crash deeper down.
+        if values['version'] not in VERSIONS:
+            abort(404)
         g.version = values['version']
 
 
@@ -452,25 +456,69 @@ def add_version(endpoint, values):
         values['version'] = g.version
 
 
+## VERSION SWITCHER (navbar dropdown in base.html)
+
+# Pages that only exist in a version if their navn/slug does - used to decide
+# whether the switcher can link to the same page or must fall back to the index.
+_EXISTS_IN_VERSION = {
+    'featuretype_summary': lambda v, args: get_by_navn(v, args['navn']),
+    'docx_details': lambda v, args: get_by_navn(v, args['navn']),
+    'xsdelement_details': lambda v, args: get_xsdelement_detail_by_slug(v, args['slug']),
+    'xsdtype_details': lambda v, args: get_chain_by_slug(v, args['slug']),
+}
+
+
+@app.context_processor
+def inject_version_nav():
+    current = getattr(g, 'version', None)
+    # Unversioned pages (errorcodes) point the versioned nav links at the latest version.
+    nav_version = current or LATEST_VERSION
+    version_links = []
+    if current is not None:
+        endpoint = request.endpoint
+        args = dict(request.view_args or {})
+        exists = _EXISTS_IN_VERSION.get(endpoint)
+        for v in VERSIONS:
+            if exists is None or exists(v, args) is not None:
+                version_links.append((v, endpoint, {**args, 'version': v}))
+            else:
+                version_links.append((v, 'index', {'version': v}))
+    # Returned as (endpoint, args) rather than finished URLs: the template's url_for
+    # is Frozen-Flask's relative-URL version, flask.url_for here would be absolute.
+    return {
+        'nav_version': nav_version,
+        'version_links': version_links,
+        'latest_version': LATEST_VERSION,
+    }
+
+
 ## FORSIDE (unprefixed - the site's actual front page, lists the versions)
 
 
 @app.route('/')
 def forside():
-    return render_template('forside.html', versions=VERSIONS, latest_version=LATEST_VERSION)
+    return render_template('forside.html', versions=VERSIONS)
 
 
 ## FEJLKODER (unprefixed - identical across every LER/featurekatalog version, see
 ## adr/901-ler-api-error-codes.md. Unlike XSD/docx-derived content, LER's error codes
 ## API isn't versioned alongside the schema, so there's nothing to duplicate per version.
-## errorcodes.html is standalone like forside.html (doesn't extend base.html) - it has no
-## g.version of its own, so it can't build version-dependent nav links like the other pages.)
+## It has no g.version of its own; base.html's versioned nav links point at the latest.)
 
 
 @app.route('/errorcodes/')
 def errorcodes():
     numeric_groups, named = get_errorcodes()
     return render_template('errorcodes.html', numeric_groups=numeric_groups, named=named)
+
+
+## ANDRE KRAV (unprefixed - hand-written in general_constraints.html from tests against
+## LER's extest-API. G1-G4 concern GML/XML in general, not the versioned datamodel.)
+
+
+@app.route('/general_constraints/')
+def general_constraints():
+    return render_template('general_constraints.html')
 
 
 ## OVERVIEW PAGES (list like)
@@ -499,11 +547,6 @@ def featuretype_tree(version):
 @app.route('/<version>/restriktioner/')
 def restriktioner(version):
     return render_template('restriktioner.html', restriktioner=all_restriktioner(get_featuretyper(version)))
-
-
-@app.route('/<version>/general_constraints/')
-def general_constraints(version):
-    return render_template('general_constraints.html')
 
 
 ## SUMMARY PAGE (cross-source overview of a single feature type)
@@ -600,8 +643,7 @@ def restriktioner_urls():
 
 @freezer.register_generator
 def general_constraints_urls():
-    for version in VERSIONS:
-        yield 'general_constraints', {'version': version}
+    yield 'general_constraints', {}
 
 
 @freezer.register_generator

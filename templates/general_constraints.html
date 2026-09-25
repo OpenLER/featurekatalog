@@ -1,10 +1,13 @@
 {% extends "base.html" %}
-{% block title %}General constraints – LER-bogen{% endblock %}
+{% block title %}General constraints{% endblock %}
 {% block content %}
 <h1>General constraints</h1>
 <p>Udover XSD constraints og listen med constraints ("restriktioner") fra featurekatalog / XMI, så er der nogle få yderligere.</p>
 <p>Alle tre regler herunder kan faktisk også udtrykkes i schematron.</p>
 <p>Fejlkoderne har jeg kaldt: G1, G2, G3, G4.</p>
+<p>Denne side er ikke version-præfikset: reglerne handler om GML/XML generelt og håndhæves af
+LER-serveren uafhængigt af datamodel-versionen. De er dog kun testet mod den version, extest
+tog imod på testtidspunktet.</p>
 
 <h2 class="h4 mt-4">G1 - Alle geometrier skal angives i 3 dimensioner, dog kan der bruges -99 for Z</h2>
 <p>Bekræftet ved faktiske sends mod LER's rigtige extest-API (ikke kun XSD-validering) - se
@@ -18,7 +21,7 @@ Check3DGeometry: Geometrier er ikke angivet i 3 dimensioner at element: geometri
 af tal pr. vertex der afgør resultatet.</p>
 <p>Z=-99 accepteres som "ukendt"-værdi for Z, men det er ikke en undtagelse fra Check3DGeometry -
 det tæller stadig som 3 tal pr. vertex og godkendes af det check. Det er til gengæld betinget af
-en allerede dokumenteret restriktion (se <a href="{{ url_for('restriktioner') }}">Restriktioner</a>,
+en allerede dokumenteret restriktion (se <a href="{{ url_for('restriktioner', version=latest_version) }}">Restriktioner</a>,
 fx <code>vejledendeDybdeBetingelse</code> for Elledning): for Elledning/Telekommunikationsledning
 skal <code>vejledendeDybde</code> angives, hvis etableringstidspunktet er efter skæringsdatoen og
 Z=-99 bruges. Udelades <code>vejledendeDybde</code> i den situation, afvises dokumentet - men af den
