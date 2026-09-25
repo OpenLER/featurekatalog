@@ -11,6 +11,11 @@ som en del af en server-release: datamodel 2.1.0 kom med release 2.2.4, og datam
 rullet ud over release 2.2.8 (<code>nøjagtighedsklasseVertikal</code>) og 2.2.9
 (<code>udnyttelsesgrad</code>). Kolonnen "Datamodel" viser, hvilke releases der indførte en ny
 datamodel, ifølge release noten.</p>
+<p>Jeg har brugt AI til at generere en YAML-fil,
+<a href="https://github.com/OpenLER/lerbogen/blob/main/ler_releases.yml"><code>ler_releases.yml</code></a>,
+med alle releases ud fra de release notes (PDF), der findes på
+<a href="https://ler.dk/Portal/Subsides/P.7.Driftsinformation/P.7.1.Releasenoter.aspx">Driftsinformation → Releasenoter</a>
+på ler.dk. Tabellen herunder viser indholdet fra denne YAML-fil (dog uden at vise alt indholdet for hver release).</p>
 <p>Datoerne er de planlagte deploy-datoer fra hver release note. Hotfixes uden extest-dato blev
 lagt direkte i produktion.</p>
 
@@ -21,7 +26,7 @@ lagt direkte i produktion.</p>
     <th>extest</th>
     <th>prod</th>
     <th>Datamodel</th>
-    <th>Indhold</th>
+    <th>AI summary</th>
     <th class="text-nowrap">Release note</th>
   </tr>
   {% for r in releases %}
