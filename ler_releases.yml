@@ -1,0 +1,91 @@
+# LER-serverens releases, håndskrevet ud fra tidsplanen i hver release note
+# (Driftsinformation -> Releasenoter på ler.dk, hentet via ler-dk-crawler).
+# Datoerne er de planlagte deploy-datoer fra release noten. extest mangler for
+# de hotfixes, der kun blev lagt direkte i produktion. datamodel er sat på de
+# releases, der indførte en ny version af datamodellen (featurekataloget/XSD),
+# ifølge release noten. summary er et kort resumé af release noten.
+# Ældste først; nye releases tilføjes nederst.
+
+- release: 2.2.4
+  summary: "Ændringer fra bekendtgørelsen: medietype for gas, vejledende dybde kan være void. Breaking: skærpet validering af AndenLedning."
+  extest: 2024-12-18
+  prod: 2025-01-30
+  url: https://ler.dk/Files/Releasenote_2_2_4.pdf
+  datamodel: 2.1.0
+- release: 2.2.4 Hotfix 1
+  summary: "Rettede restriktioner for udvendig diameter, bredde og højde."
+  extest: 2025-02-25
+  prod: 2025-03-11
+  url: https://ler.dk/Files/Releasenote_2_2_4_Hotfix_1.pdf
+- release: 2.2.5
+  summary: "V2 af integration 13 og 16, ler2signed i integration 27, driftsinformation på LER.dk."
+  extest: 2025-04-29
+  prod: 2025-05-13
+  url: https://ler.dk/Files/Releasenote_2_2_5.pdf
+- release: 2.2.5 Hotfix 1
+  summary: "Fejlrettelser i V2 af integration 13 og 16."
+  extest: 2025-05-20
+  prod: 2025-05-20
+  url: https://ler.dk/Files/Releasenote_2_2_5_Hotfix_1.pdf
+- release: 2.2.5 Hotfix 2
+  summary: "Fejlrettelser i integration 13."
+  extest: 2025-05-26
+  prod: 2025-05-26
+  url: https://ler.dk/Files/Releasenote_2_2_5_Hotfix_2.pdf
+- release: 2.2.6
+  summary: "Gensend statusmail. Rettelser i kortviser, integration 16 V2 og Swagger."
+  extest: 2025-06-10
+  prod: 2025-06-24
+  url: https://ler.dk/Files/Releasenote_2_2_6.pdf
+- release: 2.2.7
+  summary: "consolidated.gml får oprettelses- og ændringsdatoer."
+  extest: 2025-09-09
+  prod: 2025-09-23
+  url: https://ler.dk/Files/ReleaseNote_2_2_7.pdf
+- release: 2.2.7 Hotfix 1
+  summary: "Lås på consolidated.gml, så V1 og V2 af integration 13 ikke overskriver hinanden."
+  extest:
+  prod: 2025-10-08
+  url: https://ler.dk/Files/ReleaseNote_2_2_7_Hotfix_1.pdf
+- release: 2.2.8
+  summary: "Vertikal nøjagtighedsklasse og integration 13 V3. Breaking fra 01.01.2027: V1 og V2 lukkes."
+  extest: 2025-10-21
+  prod: 2025-12-10
+  url: https://ler.dk/Files/ReleaseNote_2_2_8.pdf
+  datamodel: 2.2.0
+- release: 2.2.9
+  summary: "GIA-forordningen: samføring som formål, ændrede samgravningsannoncer. Ny frivillig attribut udnyttelsesgrad."
+  extest: 2025-11-27
+  prod: 2025-12-10
+  url: https://ler.dk/Files/ReleaseNote_2_2_9.pdf
+  datamodel: 2.2.0
+- release: 2.2.9 Hotfix 1
+  summary: "Rettet fejl, hvor ledningsoplysninger i ledningspakken blev overskrevet."
+  extest:
+  prod: 2025-12-15
+  url: https://ler.dk/Files/Releasenote_2_2_9_Hotfix_1.pdf
+- release: 2.2.10
+  summary: "Masseindberetning af graveskader for flere CVR-numre. Breaking: ny CSV-fil."
+  extest: 2025-12-29
+  prod: 2026-01-15
+  url: https://ler.dk/Files/Releasenote_2_2_10.pdf
+- release: 2.2.10 Hotfix 1
+  summary: 'Validering af faktureringskonto ved oprettelse af graveforespørgsel. Rettet "sidste login".'
+  extest: 2026-01-27
+  prod: 2026-01-27
+  url: https://ler.dk/Files/Releasenote_2_2_10_Hotfix_1.pdf
+- release: 2.2.10 Hotfix 2
+  summary: "Rettet beregning af svarfrist (arbejdsdag 07-16 på hverdage)."
+  extest: 2026-02-02
+  prod: 2026-02-02
+  url: https://ler.dk/Files/Releasenote_2_2_10_Hotfix2.pdf
+- release: 2.2.11
+  summary: "Fejlrettelser, bl.a. i integration 27, GML-upload til samgravningsannoncer og Graveinfo."
+  extest: 2026-03-30
+  prod: 2026-04-14
+  url: https://ler.dk/Files/Releasenote_2_2_11.pdf
+- release: 2.2.12
+  summary: "Fejlrettelser. Skærpet validering i integration 27 (interesseområder), ny adressevælger, fejlkode 16-410 for arkiverede ledningspakker."
+  extest: 2026-06-30
+  prod: 2026-07-07
+  url: https://ler.dk/Files/ReleaseNote_2_2_12.pdf

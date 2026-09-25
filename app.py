@@ -3,6 +3,7 @@ import json
 import re
 from pathlib import Path
 
+import yaml
 from xmlschema import XMLSchema
 from xmlschema.validators.wildcards import XsdAnyElement, XsdAnyAttribute
 from flask import Flask, abort, current_app, g, render_template, request
@@ -16,6 +17,7 @@ from wrapper import SchemaEx
 ROOT = Path(__file__).parent
 VERSIONS_DIR = ROOT / 'versions'
 ERRORCODES_PATH = ROOT / 'errorcodes.json'
+LER_RELEASES_PATH = ROOT / 'ler_releases.yml'
 
 # Newest first - used as the display order on the version landing page.
 VERSIONS = {
@@ -521,6 +523,16 @@ def andre_krav():
     return render_template('andre_krav.html')
 
 
+## LER API-VERSIONER (unprefixed - the LER server's own release history, extest/prod
+## deploy dates hand-copied from each release note into ler_releases.yml)
+
+
+@app.route('/ler_api_versions/')
+def ler_api_versions():
+    releases = yaml.safe_load(LER_RELEASES_PATH.read_text())
+    return render_template('ler_api_versions.html', releases=releases)
+
+
 ## OVERVIEW PAGES (list like)
 
 
@@ -644,6 +656,11 @@ def restriktioner_urls():
 @freezer.register_generator
 def andre_krav_urls():
     yield 'andre_krav', {}
+
+
+@freezer.register_generator
+def ler_api_versions_urls():
+    yield 'ler_api_versions', {}
 
 
 @freezer.register_generator

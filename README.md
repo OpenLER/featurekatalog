@@ -26,7 +26,7 @@ Derfor parser LER-bogen docx og XSD. Det fungerer godt nok i praksis.
 
 ## Kilder
 
-Sitet samler fire slags information fra fire forskellige kilder:
+Sitet samler fem slags information fra fem forskellige kilder:
 
 | Information | Kilde | Hentes af |
 |---|---|---|
@@ -34,6 +34,7 @@ Sitet samler fire slags information fra fire forskellige kilder:
 | Attributter, restriktioner og associationsroller pr. featuretype | Featurekatalogets docx-fil | `featurekatalog.py` |
 | Andre krav (G1–G4), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/andre_krav.html` |
 | Fejlkoder og navngivne forretningsregler | LERs API (`/api/errorcodes`) | `fetch_errorcodes.py` |
+| LER-serverens releases med datoer for extest og prod | Release notes på ler.dk (Driftsinformation → Releasenoter) | Håndskrevet i `ler_releases.yml` |
 
 ## Parsing af data fra docx
 
