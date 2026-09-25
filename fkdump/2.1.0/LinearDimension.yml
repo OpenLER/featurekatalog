@@ -1,0 +1,29 @@
+navn: LinearDimension
+pakke: 'Datamodel: Dimensions'
+Definition: linear size of a feature of size or a linear distance between two features
+Anvendelsesnote: Er især tiltænkt målsætninger som ikke kan beregnes ud fra de medsendte geometrier.
+Kilde: '[ISO 129-1:2018, 3.2.4]'
+Type: Featuretype
+attributter:
+- Navn: dimensionLine
+  Definition: straight or curved line with terminators at each end or origin and terminator at each end, indicating the size of a feature or the extent of a feature or between two features, or between a feature and an extension line, or between two extension lines
+  Kilde: '[ISO 129-1:2018, 3.1.2]'
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: GM_Curve
+- Navn: dimensionalValue
+  Definition: nominal numerical value expressed in a specific unit relevant to a linear or angular dimension
+  Anvendelsesnote: Både værdien og enheden skal være til stede i data. I en visning kan man evt. vælge at udelade enheden.
+  Eksempel: 7.4 m
+  Kilde: '[ISO 129-1:2018, 3.2.2]'
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Measure
+restriktioner:
+- Navn: geometryDataTypeConstraint
+  Udtryk: |-
+    The dimension line shall use linear interpolation.
+    Note: In a GML encoding, this means that these geometries, which are curves, must have a geometry type that is one of the following [GML SF]:
+    * gml:LineString
+    * gml:Curve consisting of segments having type gml:LineStringSegment
+associationsroller: []

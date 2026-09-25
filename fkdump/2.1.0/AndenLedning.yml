@@ -1,0 +1,167 @@
+navn: AndenLedning
+pakke: 'Pakke: Andet'
+Foretrukken term: ledning med anden kendt forsyningsart
+Definition: ledning som hverken er en afløbsledning, elledning, gasledning, føringsrør, olieledning, termisk ledning, telekommunikationsledning eller vandledning og som har en kendt forsyningsart
+Anvendelsesnote: Hvis ledningens forsyningsart ikke er kendt, så skal LedningUkendtForsyningsart anvendes og ikke AndenLedning.
+Subtype af: Ledning
+Type: Featuretype
+attributter:
+- Navn: forsyningsart
+  Foretrukken term: forsyningsart
+  Definition: ledningens forsyningsart
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Forsyningsart (Kodeliste)
+  Værdier:
+  - værdi: afløb
+    definition: |-
+      bortledning af vand
+      opsamling og bortledning af spildevand, regnvand og drænvand
+  - værdi: el
+    definition: |-
+      elforsyning
+      produktion og distribution af elektricitet
+  - værdi: fjernvarme/fjernkøling
+    definition: |-
+      fjernvarme eller fjernkøling
+      produktion og distribution af varme eller kulde
+  - værdi: gas
+    definition: |-
+      gasforsyning
+      indvinding og distribution af gas
+  - værdi: olie
+    definition: |-
+      olieforsyning
+      indvinding og distribution af olie
+      Note: olie: tyktflydende væske, der ikke er blandbar med vand [DSD] Omfatter bl.a. mineralolie (også kaldt jordolie eller råolie) og vegetabilsk olie. Olie anvendes bl.a. som energikilde, til opvarmning, i kraftværker og som brændstof til biler, fly og skibe [baseret på DSD].
+  - værdi: telekommunikation
+    definition: |-
+      transmission, emission eller modtagelse af tegn, signaler, skrift, billeder og lyd eller intelligens af enhver art vha. tråd, radio, optiske eller andre elektromagnetiske systemer
+      Kilde: [IEV, ref 701-01-05]
+  - værdi: vand
+    definition: |-
+      vandforsyning
+      indvinding og distribution af vand
+      Kilde: [DSD]
+  Maksimumlængde: '50'
+- Navn: tværsnitsform
+  Foretrukken term: tværsnitsform af ledning
+  Definition: form af ledningen når den imaginært er gennemskåret på tværs
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Tværsnitsformtype (Kodeliste)
+  Værdier:
+  - værdi: brilleformet
+    definition: |-
+      (se billede på diagram)
+      Anvendelsesnote: Bruges bl.a. i el-branchen.
+      Kilde: LER-arbejdsgruppe for el
+  - værdi: cirkulær
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: kvadratisk
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: rektangulær
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: sektorformet
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: spidsbundet
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: trapezformet
+    definition: |-
+      (se billede på diagram)
+      Note: Kan være åbent eller lukket.
+      Kilde: DANVA
+  - værdi: trekantet
+    definition: |-
+      af form som en trekant
+      Kilde: [DDO]
+  - værdi: tunnelformet
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: ægformet
+    definition: |-
+      ægformet
+      oval
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: øjestensprofil
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  Maksimumlængde: '50'
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '50'
+- Navn: udvendigBredde
+  Foretrukken term: udvendig bredde
+  Definition: (se billede på diagram)
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: udvendigHøjde
+  Foretrukken term: udvendig højde
+  Definition: (se billede på diagram)
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Measure
+restriktioner:
+- Navn: forsyningsartRestriktion
+  Udtryk: |-
+    Forsyningsarten må ikke være en af de prædefinerede værdier fra kodelisten Forsyningsart.
+    Note: Hvis man har behov for at afgive oplysninger om en ledning som har en forsyningsart som er prædefineret i kodelisten Forsyningsart, så skal man i stedet for AndenLedning bruge den subklasse af Ledning som hører til den forsyningsart. Fx Telekommunikationsledning for forsyningsarten telekommunikation.
+- Navn: geometriVertikaleKoordinaterRestriktion
+  Udtryk: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- Navn: udvendigBreddeBetingelse
+  Udtryk: |-
+    Den udvendige bredde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige bredde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- Navn: udvendigBreddeMåleenhedsrestriktion
+  Udtryk: Måleenheden for den udvendige bredde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- Navn: udvendigBreddeVoidrestriktion
+  Udtryk: |-
+    Den udvendige bredde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- Navn: udvendigDiameterBetingelse
+  Udtryk: |-
+    Den udvendige diameter skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er cirkulær.
+    Den udvendige diameter må ikke være angivet hvis tværsnitsformen ikke er cirkulær.
+- Navn: udvendigHøjdeBetingelse
+  Udtryk: |-
+    Den udvendige højde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige højde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- Navn: udvendigHøjdeMåleenhedsrestriktion
+  Udtryk: Måleenheden for den udvendige højde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- Navn: udvendigHøjdeVoidrestriktion
+  Udtryk: |-
+    Den udvendige højde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+associationsroller: []

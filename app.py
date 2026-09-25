@@ -10,6 +10,7 @@ from flask_frozen import Freezer
 from markupsafe import Markup, escape
 
 from featurekatalog import all_restriktioner, parse_featurekatalog
+from fkdump import OUT_DIR as FKDUMP_DIR, main as write_all_fkdumps
 from wrapper import SchemaEx
 
 ROOT = Path(__file__).parent
@@ -638,5 +639,9 @@ if __name__ == '__main__':
         # Stop GitHub Pages from running the output through Jekyll.
         (Path(app.config['FREEZER_DESTINATION']) / '.nojekyll').touch()
         print(f'Frozen to {app.config["FREEZER_DESTINATION"]}')
+        # Fresh parse rather than _featuretyper: featuretype_list() adds
+        # xsd_elm (an xmlschema object) to the cached dicts.
+        write_all_fkdumps()
+        print(f'fkdump written to {FKDUMP_DIR}')
     else:
         app.run(debug=True)

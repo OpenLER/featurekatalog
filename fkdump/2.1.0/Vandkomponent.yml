@@ -1,0 +1,235 @@
+navn: Vandkomponent
+pakke: 'Pakke: Vand'
+Foretrukken term: vandkomponent
+Definition: komponent der har tilknytning til vandledninger
+Anvendelsesnote: geometrien vil typisk et punkt hvis typen er ventil, boring, magasin, tank, tapsted, tilslutningspunkt, og ellers vil den typisk være en multipolygon
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: anborsted
+  Foretrukken term: anborsted
+  Definition: relative sted på en ledning hvor en (stik-)ledning er tilsluttet
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Anborstedtype (Enumeration)
+  Værdier:
+  - værdi: bund
+    definition: |-
+      nederste del af noget
+      Kilde: baseret på [DDO]
+  - værdi: side
+    definition: |-
+      del af noget der ikke naturligt eller normalt vender fremad, bagud, opad eller nedad
+      Kilde: baseret på [DDO]
+  - værdi: top
+    definition: |-
+      øverste del af noget
+      Kilde: [DDO]
+  Maksimumlængde: '50'
+- Navn: bundkote
+  Foretrukken term: komponents bundkote
+  Accepterede termer: komponents minimumkote
+  Definition: koten af komponentens laveste punkt
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DirectPosition
+- Navn: stutskote
+  Foretrukken term: stutskote
+  Definition: kote til centrum af evt. stuts på tapsted
+  Note: Relevant for brandhaner o.lign.
+  Kilde: '[DANVA]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DirectPosition
+- Navn: tapstedstype
+  Foretrukken term: tapstedkode
+  Definition: kategori af tapsted
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Tapstedstype (Enumeration)
+  Værdier:
+  - værdi: brandhane
+    definition: |-
+      opstander tilsluttet vandledningsnet, som brandvæsenets materiel kan tilkobles
+      Note: Er ofte, men ikke nødvendigvis, rød.
+      Kilde: [DSD]
+  - værdi: drikkepost
+    definition: |-
+      offentlig tilgængelig drikkevandshane
+      Kilde: DANVA
+  - værdi: fyldningsstation
+    definition: |-
+      tapsted som bruges til fyldning af tankvogne
+      Note: Omfatter også salgsstander.
+      Kilde: [DANVA]
+  - værdi: prøvetagningshane
+    definition: |-
+      fast udtag til vandkvalitetsprøver
+      Kilde: DANVA
+  - værdi: skyllehane/hydrant
+    definition: |-
+      brandhane til særligt driftsformål
+      Note: Har tidligere været en brandhane, men er pga. ændret brandhanestrategi blevet ”til overs” -  overdrages derfor til Forsyningen, som bruger den til at skylle ledninger i forbindelse med ledningsarbejde.
+      Kilde: DANVA
+  - værdi: springvand
+    definition: |-
+      dekorativt anlæg med vand der sprøjter op i luften og lander i et bassin
+      Kilde: [DDO]
+  - værdi: spulehane
+    definition: |-
+      vandhane til spuling/renholdelse af f.eks. pladser hvor der sælges grøntsager
+      Kilde: DANVA
+  - værdi: toilet
+    definition: |-
+      rum eller mindre bygning udstyret med en eller flere kummer til opsamling og bortskaffelse af menneskers urin, afføring m.m.
+      Anvendelsesnote: Et tapsted af typen toilet kan indeholde flere fysiske toiletter/håndvaske koblet til den samme stikledning.
+      Kilde: baseret på [DDO]
+  - værdi: vandingshane
+    definition: |-
+      tapsted til at fylde tanke m.m.
+      Kilde: DANVA
+  Maksimumlængde: '50'
+- Navn: topkote
+  Foretrukken term: komponents topkote
+  Accepterede termer: komponents maksimumkote
+  Definition: koten af komponentens højeste punkt
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DirectPosition
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Vandkomponenttype (Kodeliste)
+  Værdier:
+  - værdi: bagstøbning
+    definition: |-
+      konstruktion der stabiliserer en ledning ved retningsskift
+      Kilde: DANVA
+  - værdi: bassin
+    definition: |-
+      konstruktion der tilbageholder vand med henblik på senere videreledning eller rensning
+      Kilde: [DANVA]
+  - værdi: beholderanlæg
+    definition: |-
+      konstruktion hvis primære funktion er at huse et reservoir
+      Note: Et reservoir er f.eks. et vandtårn eller en anden form for reservoir.
+      Kilde: [DANVA]
+  - værdi: boring
+    definition: |-
+      boring af hul i jorden, hvis formål f.eks. kan være produktion (indvinding) undersøgelse eller afværge af forurening
+      Kilde: [DANVA]
+  - værdi: boringsanlæg
+    definition: |-
+      boringsanlæg
+      råvandsstation
+      konstruktion hvis primærfunktion er at være en boring
+      Note: Kan være over- eller underjordisk og beskriver samlingen af komponenter i råvandsstationen.
+      Kilde: [DANVA]
+  - værdi: brøndkonstruktion
+    definition: |-
+      samlende konstruktion, hvor den primære funktion er en brønd / den er ikke en af de øvrige konstruktionstyper
+      Note: Giver adgang til ledningsnetværket med målere og evt. andre bestykninger og komponenter herpå.
+      Kilde: [DANVA]
+  - værdi: bundplade
+    definition: |-
+      støbt plade hvorpå en konstruktion står
+      Kilde: DANVA
+  - værdi: bøjning
+    definition: |-
+      komponent til retningsændring på en ledning
+      Kilde: DANVA
+  - værdi: dækplade
+    definition: |-
+      plade der beskytter en ledning for last ovenfra
+      Kilde: DANVA
+  - værdi: forankring
+    definition: |-
+      konstruktion der holder et anlæg på plads
+      Kilde: DANVA
+  - værdi: HEB-profil
+    definition: |-
+      H-formet stålprofil
+      Kilde: DANVA
+  - værdi: kombikomponent
+    definition: |-
+      præfabrikeret komponent bestående af kombination af f.eks. ventiler og T-stykker, der installeres som én enhed
+      Kilde: [DANVA]
+  - værdi: krybbestøbning
+    definition: |-
+      støbt bund hvorpå en ledning er bygget
+      Kilde: DANVA
+  - værdi: magasin
+    definition: |-
+      konstruktion der kan tilbageholde vand
+      Note: Knytter sig altid til et givent reservoir, hvilket betyder, at det er muligt at angive, hvor meget vand der kan tilbageholdes i magasinvolumenet inden det sendes videre i ledningsnettet. Har et variabelt volumen.
+      Kilde: DANVA
+  - værdi: omstøbning
+    definition: |-
+      konstruktion der har til formål at tætne eller styrke et anlæg
+      Kilde: DANVA
+  - værdi: opdriftsikring
+    definition: |-
+      ankre der sikrer en luftfyldt ledning mod at ”flyde op”
+      Kilde: DANVA
+  - værdi: pælefundering
+    definition: |-
+      pæle der sikrer ledning mod sætning
+      Kilde: DANVA
+  - værdi: pressevæg
+    definition: |-
+      konstruktion benyttes ved tunnelering eller gennempresning af store ledninger
+      Kilde: DANVA
+  - værdi: pumpestation
+    definition: |-
+      anlæg hvis primære funktion er at løfte eller trykke vandet videre i ledningssystemet
+      Note: Består typisk af en til flere pumpesteder, samt magasin, pumpesump og nød-overløb.
+      Kilde: [DANVA]
+  - værdi: sekantpæle
+    definition: |-
+      pæl støbt ved at bore et hul og fylde det med beton
+      Note: Benyttes ofte ved store byggegrubber.
+      Kilde: DANVA
+  - værdi: spunsvæg
+    definition: |-
+      væg af profiler
+      Kilde: DANVA
+  - værdi: tank
+    definition: |-
+      reservoir hvor opmagasineringsevnen er mindre væsentlig end funktionen
+      Note: Ofte en (standard-)beholder. Har et fast volumen.
+      Kilde: [DANVA]
+  - værdi: tapsted
+    definition: |-
+      tapsted direkte fra forsyningens ledningsnet, som ikke er en almindelig forbrugsmåler
+      Kilde: [DANVA]
+  - værdi: tilslutningspunkt
+    definition: |-
+      ikke-brydende tilslutning af (stik-)ledning til en anden ledning
+      Kilde: [DANVA]
+  - værdi: tunnel
+    definition: |-
+      boret, gravet eller på anden måde tildannet passage der fører under eller gennem noget
+      Kilde: [DDO]
+  - værdi: vandværk
+    definition: |-
+      vandproduktionssted med behandlings- og leveringsanlæg
+      Kilde: [DANVA]
+  - værdi: ventil
+    definition: |-
+      ventiler med afspærringsformål o.lign., som ikke er retningsbestemte
+      Kilde: [DANVA]
+  - værdi: ventilbygværk
+    definition: |-
+      konstruktion, hvis primære formål er at huse ventiler
+      Kilde: [DANVA]
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: anborstedTilladelse
+  Udtryk: Anborstedet må kun være angivet hvis typen er tilslutningspunkt.
+- Navn: stutskoteTilladelse
+  Udtryk: 'Stutskoten må kun være angivet hvis typen er en af følgende: tapsted, ventil.'
+- Navn: tapstedstypeTilladelse
+  Udtryk: Tapstedstypen må kun være angivet hvis typen er tapsted.
+associationsroller: []

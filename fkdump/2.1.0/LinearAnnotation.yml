@@ -1,0 +1,33 @@
+navn: LinearAnnotation
+pakke: 'Datamodel: Annotations'
+Definition: linear marking on illustrative material for the purpose of clarification
+Note: '[OGC 14-002] is mainly based on the use case of having to highlight some element in a georeferenced image or in a map. The "label" element will usually be a text or an image. But in other use cases, there is a need to have linear annotations. A second deviation of [OGC 14-002] is that, in the case that a linear annotation serves as a connector between a text annotation and a feature, it may be important to have a geometrically precise description of the connector (as opposed to have a client draw the connector based on the position of a label and another feature).'
+Kilde: based on [ISO 19117:2012, 4.1]
+Type: Featuretype
+attributter:
+- Navn: geometry
+  Definition: location
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: GM_Curve
+- Navn: type
+  Definition: category
+  Note: The arrow is on the last point of the geometry when type is one directional arrow.
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: LinearAnnotationType (Enumeration)
+  Værdier:
+  - værdi: line
+    definition: primitive geometry consisting of straight lines without arrowheads
+  - værdi: one directional arrow
+    definition: primitive geometry consisting of straight lines with an arrowhead in one end point
+  - værdi: two directional arrow
+    definition: primitive geometry consisting of straight lines with an arrowhead in each end point
+restriktioner:
+- Navn: geometryDataTypeConstraint
+  Udtryk: |-
+    The geometry shall use linear interpolation.
+    Note: In a GML encoding, this means that the geometry, which is a curve, must have a geometry type that is one of the following [GML SF]:
+    * gml:LineString
+    * gml:Curve consisting of segments having type gml:LineStringSegment
+associationsroller: []

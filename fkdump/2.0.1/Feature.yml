@@ -1,0 +1,11 @@
+navn: Feature
+pakke: 'Datamodel: Annotations'
+Definition: abstraction of real world phenomena
+Kilde: '[ISO 19101-1:2014, 4.1.11]'
+Type: Featuretype
+Abstrakt: ja
+Modelleringsnote: The class "Feature" is modelled in this application schema, in order to be able to model an association from TextAnnotation to Feature, an association that shall be implemented by reference.
+GML-note: The class "Feature" shall not be be encoded in the GML application schema, as the value of the property annotatedFeature will be an instance of a feature type modelled in another apllication schema.
+attributter: []
+restriktioner: []
+associationsroller: []

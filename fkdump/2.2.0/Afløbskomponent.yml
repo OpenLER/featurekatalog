@@ -1,0 +1,273 @@
+navn: Afløbskomponent
+pakke: 'Pakke: Afløb og vejafvanding'
+Foretrukken term: afløbskomponent
+Definition: komponent der har tilknytning til afløbsledninger
+Anvendelsesnote: 'Geometrien vil typisk være et punkt for følgende typer: tank, magasin, sandfang, udskiller, brønd, og vil ellers typisk være en polygon.'
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: brøndform
+  Foretrukken term: brøndformkode
+  Definition: form af brønden
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Brøndformtype (Enumeration)
+  Værdier:
+  - værdi: cirkulær
+    definition: |-
+      med form som en ring eller cirkel; rund
+      Kilde: [DDO]
+  - værdi: kvadratisk
+    definition: |-
+      af form som et kvadrat
+      Kilde: [DDO]
+  - værdi: rektangulær
+    definition: |-
+      af form som et rektangel
+      Kilde: [DDO]
+  Maksimumlængde: '50'
+- Navn: bunddiameterbredde
+  Foretrukken term: bunddiameterbredde
+  Definition: diameter eller bredde, handelsmål
+  Kilde: '[DANVA]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: bundkote
+  Foretrukken term: komponents bundkote
+  Accepterede termer: komponents minimumkote
+  Definition: koten af komponentens laveste punkt
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DirectPosition
+- Navn: bundlængde
+  Foretrukken term: bundlængde
+  Definition: længde af brøndbund målt i afløbslednings længderetning
+  Note: Indvendigt mål.
+  Kilde: '[DANVA]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: medietype
+  Definition: medie som løber i den afløbsledning som komponenten er knyttet til
+  Kilde: baseret på [DANVA]
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Medietype (Enumeration)
+  Værdier:
+  - værdi: drænvand
+    definition: 'Kilde: [DANVA]'
+  - værdi: fællesvand
+    definition: |-
+      vand fra fælleskloakerede områder
+      Note: Blandet spildevand og regnvand (incl. dræn).
+      Kilde: [DANVA]
+  - værdi: industri/procesvand
+    definition: |-
+      spildevand og procesvand fra industri med særlige hensyn
+      Kilde: [DANVA]
+  - værdi: intet medie
+    definition: 'Kilde: [DANVA]'
+  - værdi: perkolat
+    definition: |-
+      opsamlet drænvand fra lossepladser og deponier
+      Kilde: [DANVA]
+  - værdi: regnvand
+    definition: 'Kilde: [DANVA]'
+  - værdi: spildevand
+    definition: |-
+      råt og renset spildevand
+      Kilde: [DANVA]
+  - værdi: vand uden rensekrav
+    definition: 'Kilde: [DANVA]'
+- Navn: topkote
+  Foretrukken term: komponents topkote
+  Accepterede termer: komponents maksimumkote
+  Definition: koten af komponentens højeste punkt
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DirectPosition
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Afløbskomponenttype (Kodeliste)
+  Værdier:
+  - værdi: bagstøbning
+    definition: |-
+      konstruktion der stabiliserer en ledning ved retningsskift
+      Kilde: DANVA
+  - værdi: bassin
+    definition: |-
+      konstruktion der tilbageholder vand med henblik på senere videreledning eller rensning
+      Kilde: [DANVA]
+  - værdi: brønd
+    definition: |-
+      standard brønd i afløbsnettet, typisk med bund og opføring
+      Kilde: [DANVA]
+  - værdi: brøndbygværk
+    definition: |-
+      samlende konstruktion hvor den primære funktion er en brønd
+      Kilde: [DANVA]
+  - værdi: bundplade
+    definition: |-
+      støbt plade hvorpå en konstruktion står
+      Kilde: DANVA
+  - værdi: dækplade
+    definition: |-
+      plade der beskytter en ledning for last ovenfra
+      Kilde: DANVA
+  - værdi: dæksel
+    definition: |-
+      fladt låg der dækker en åbning til et rum eller i en beholder
+      Kilde: [DDO]
+  - værdi: etagebrønd
+    definition: |-
+      brønd hvor der er adgang både til spildevand og regnvand
+      Kilde: DANVA
+  - værdi: forankring
+    definition: |-
+      konstruktion der holder et anlæg på plads
+      Kilde: DANVA
+  - værdi: HEB-profil
+    definition: |-
+      H-formet stålprofil
+      Kilde: DANVA
+  - værdi: krybbestøbning
+    definition: |-
+      støbt bund hvorpå en ledning er bygget
+      Kilde: DANVA
+  - værdi: ledningskanal
+    definition: |-
+      kanal hvori der er placeret ledninger
+      Kilde: DANVA
+  - værdi: magasin
+    definition: |-
+      konstruktion der kan tilbageholde vand
+      Note: Knytter sig altid til et givent reservoir, hvilket betyder, at det er muligt at angive, hvor meget vand der kan tilbageholdes i magasinvolumenet inden det sendes videre i ledningsnettet. Har et variabelt volumen.
+      Kilde: DANVA
+  - værdi: nedsivningsanlæg
+    definition: |-
+      samlet konstruktion til nedsivning af vand i jorden eller andet medie henblik på forsinkelse eller rensning og bortskaffelse
+      Note: Nedsivet vand opsamles evt. med opsamling i et dræn. Nedsivningsanlægget består afhængig af medietype og størrelse af en bundfældning, en regulering (evt. pumpested) eller et reguleringsbygværk, et nedsivningsmagasin og evt. et udløb. Inkluderer funktioner som f.eks. sivebrønd, sivedræn, faskine o.lign.
+      Kilde: [DANVA]
+  - værdi: omstøbning
+    definition: |-
+      konstruktion der har til formål at tætne eller styrke et anlæg
+      Kilde: DANVA
+  - værdi: opdriftsikring
+    definition: |-
+      ankre der sikrer en luftfyldt ledning mod at ”flyde op”
+      Kilde: DANVA
+  - værdi: overløbsbygværk
+    definition: |-
+      konstruktion der, afhængig af størrelse, indeholder et eller flere indløbspunkter, et overløbsmagasin, én eller flere overløbskanter, et aflastningsmagasin og et eller flere udløb
+      Note: Overløbsfunktionen bruges til at aflaste systemet, når kapaciteten i ledningerne overstiges.
+      Kilde: [DANVA]
+  - værdi: permeabel belægning
+    definition: |-
+      belægning der er egnet til færdsel, som regnvand kan trænge igennem
+      Note: En permeabel belægning muliggør nedsivning af regnvand til undergrunden.
+      Kilde: DANVA
+  - værdi: pressevæg
+    definition: |-
+      konstruktion benyttes ved tunnelering eller gennempresning af store ledninger
+      Kilde: DANVA
+  - værdi: pumpestation
+    definition: |-
+      anlæg, hvis primære funktion er at løfte eller trykke vandet videre i ledningssystemet
+      Note: Består typisk af en til flere pumpesteder, samt magasin, pumpesump og nød-overløb.
+      Kilde: [DANVA]
+  - værdi: pælefundering
+    definition: |-
+      pæle der sikrer ledning mod sætning
+      Kilde: DANVA
+  - værdi: regnbed
+    definition: |-
+      lavning i terrænet der er designet til at modtage, opstuve og infiltrere afstrømmende regn, og samtidig anlagt som et særligt bed
+      Kilde: DANVA
+  - værdi: reguleringsbygværk
+    definition: |-
+      bygværk der samler funktioner, der styrer strømning i en ledning
+      Note: Strømning styres f.eks. med højvandsklap, kontraventil, vandbremser m.m.
+      Kilde: [DANVA]
+  - værdi: renseanlæg
+    definition: |-
+      anlæg der renser spildevand/regnvand, inden det ledes til recipient
+      Note: Der kan være tale om mekanisk, biologisk og/eller eventuelt kemisk rensning.
+      Kilde: [DANVA]
+  - værdi: rist
+    definition: |-
+      firkantet, ofte kvadratisk ramme med tværgående parallelle stænger af metal eller træ - anvendes fx som en afspærring for noget samtidig med at væske, røg eller andet kan passere
+      Kilde: [DDO]
+  - værdi: samlekonstruktion
+    definition: |-
+      konstruktion der typisk samler flere andre konstruktioner til en samlet driftsenhed med en overordnet funktion
+      Note: Det kan f.eks. være et klimasikrings- eller et LAR-anlæg.
+      Kilde: [DANVA]
+  - værdi: sandfang
+    definition: |-
+      anordning der sikrer bundfældning af sedimenterbare partikler
+      Kilde: [DANVA]
+  - værdi: sekantpæle
+    definition: |-
+      pæl støbt ved at bore et hul og fylde det med beton
+      Note: Benyttes ofte ved store byggegrubber.
+      Kilde: DANVA
+  - værdi: spunsvæg
+    definition: |-
+      væg af profiler
+      Kilde: DANVA
+  - værdi: tank
+    definition: |-
+      reservoir hvor opmagasineringsevnen er mindre væsentlig end funktionen
+      Note: Ofte en (standard-)beholder. Har et fast volumen.
+      Kilde: [DANVA]
+  - værdi: tryktårn
+    definition: |-
+      bygværk hvor der opnås en trykforøgelse ved at pumpe vand op i et kammer over terræn, hvorfra vandet kan løbe videre via gravitation
+      Note: Trykket er typisk lavere end i en traditionel trykledning. Endvidere er der mulighed for tilbageløb/overløb.
+      Kilde: [DANVA]
+  - værdi: tunnel
+    definition: |-
+      boret, gravet eller på anden måde tildannet passage der fører under eller gennem noget
+      Kilde: [DDO]
+  - værdi: udløbsbygværk
+    definition: |-
+      samlet konstruktion omkring et udløb til recipient
+      Kilde: [DANVA]
+  - værdi: udskiller
+    definition: |-
+      reservoir der fjerner stoffer fra vandet
+      Note: Stoffer i vandet er f.eks. olie, benzin eller fedt. Udskilleren lagrer det udskilte materiale ved sedimentation til forskel fra en separator, der sender det videre i spildevandssystemet.
+      Kilde: [DANVA]
+  - værdi: udskillerbygværk
+    definition: |-
+      konstruktion omfattende en udskillerfunktion, tilslutninger evt. overløbskanter mv
+      Kilde: [DANVA]
+  - værdi: wadi
+    definition: |-
+      rende i terrænet der leder vand til nedsivning eller fordampning
+      Note: Formålet er at kunne bortlede, opmagasinere og nedsive vandet i samme element.
+      Kilde: DANVA
+  Maksimumlængde: '50'
+- Navn: udnyttelsesgrad
+  Definition: forhold mellem den udnyttede kapacitet og den tilgængelige kapacitet
+  Anvendelsesnote: Udnyttelsesgraden udtrykkes som et decimaltal mellem 0 og 1 og med op til to decimaler.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Decimal
+restriktioner:
+- Navn: brøndformTilladelse
+  Udtryk: Brøndformen må kun være angivet hvis typen er brønd.
+- Navn: bunddiameterbreddeMåleenhedsrestriktion
+  Udtryk: Måleenheden for bunddiameterbredden skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- Navn: bundlængdeMåleenhedsrestriktion
+  Udtryk: Måleenheden for bundlængden skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- Navn: bundlængdeTilladelse
+  Udtryk: |-
+    Bundlængden må kun være angivet hvis alle følgende betingelser er sande:
+    * typen er brønd
+    * brøndformkoden er kvadratisk eller rektangulær
+associationsroller: []

@@ -1,0 +1,17 @@
+navn: Vandledning
+pakke: 'Pakke: Vand'
+Foretrukken term: vandledning
+Definition: ledning der fører vand frem
+Subtype af: Rørledning
+Type: Featuretype
+attributter: []
+restriktioner:
+- Navn: fareklasseRestriktion
+  Udtryk: Fareklassen må ikke være meget farlig.
+- Navn: geometriVertikaleKoordinaterRestriktion
+  Udtryk: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+associationsroller: []

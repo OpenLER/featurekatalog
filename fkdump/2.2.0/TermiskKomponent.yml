@@ -1,0 +1,117 @@
+navn: TermiskKomponent
+pakke: 'Pakke: Fjernvarme og Fjernkøling'
+Foretrukken term: termisk komponent
+Definition: komponent der har tilknytning til termiske ledninger
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Termiskkomponenttype (Kodeliste)
+  Værdier:
+  - værdi: afgrening
+    definition: |-
+      punkt hvor en ledning er påsat en anden, mindre ledning
+      Kilde: Dansk Fjernvarme
+  - værdi: alarmudtag
+    definition: |-
+      termisk komponent med tilslutning til et kommunikationsledning
+      Kilde: Dansk Fjernvarme
+  - værdi: anodebed
+    definition: |-
+      anlæg med en fysisk udbredelse til brug for katodisk beskyttelse af stålledninger
+      Kilde: HOFOR
+  - værdi: beskyttelsesplade
+    definition: |-
+      beskyttelsesplade
+      dækplade
+      plade der beskytter en ledning for last ovenfra
+      Kilde: HOFOR
+  - værdi: betonkanal
+    definition: støbt kanal, hvori de er placeret ledninger
+  - værdi: brønd
+    definition: |-
+      adgang til ventiler
+      Note: Vil typisk være af beton eller plast.
+      Kilde: Dansk Fjernvarme
+  - værdi: bukserør
+    definition: |-
+      overgang mellem enkeltrør og dobbeltrør
+      Note: Bukserøret forbinder enkeltrør med dobbeltrør. For enkeltrør er fremløbet og returledningen ført i separate isoleringskapper, ved dobbeltrør er både frem og retur ført i samme isoleringskappe.
+      Kilde: Dansk Fjernvarme
+  - værdi: bygværk
+    definition: |-
+      bygningskonstruktion
+      Note: Elementer af et bygværk kan være placeret over og under jorden.
+      Anvendelsesnote: Bygværket anvendes i driften af et fjernvarmenet. Et bygværk er typisk indtegnet som en polygon.
+      Kilde: Kredsløb A/S
+  - værdi: bøjning
+    definition: |-
+      komponent til retningsændring på en ledning
+      Anvendelsesnote: Anvendes ved vertikalt retningsskift.
+      Kilde: DANVA
+  - værdi: dæksel
+    definition: |-
+      fladt låg der dækker en åbning til et rum eller i en beholder
+      Kilde: HOFOR
+  - værdi: fastspænding
+    definition: |-
+      komponent der optager kræfter/spændinger i en ledning
+      Note: Kan evt. være en konstruktion.
+      Kilde: Dansk Fjernvarme
+  - værdi: fundament
+    definition: |-
+      bærende underlag til en konstruktion
+      Note: Anvendes til f.eks. mast, vindmølle, bygning m.m.
+      Kilde: HOFOR
+  - værdi: kompensator
+    definition: |-
+      komponent på en transmissionsledning der optager længdeudvidelser
+      Note: Kan evt. være en konstruktion.
+      Kilde: Dansk Fjernvarme
+  - værdi: muffe
+    definition: |-
+      samling af kappe på to rør
+      Note: Er typisk af PE materiale som røret og samles ved svejsning.
+      Kilde: Dansk Fjernvarme
+  - værdi: pælefundering
+    definition: |-
+      pæle der sikrer ledning mod sætning
+      Kilde: HOFOR
+  - værdi: reduktion
+    definition: |-
+      dimensionsændring på ledning
+      Note: Ændring af ledningens omfang/tykkelse.
+      Kilde: Kredsløb A/S
+  - værdi: skab
+    definition: |-
+      skab til tekniske installationer
+      Note: Typisk i forbindelse med et alarmsystem eller ved de enkelte forbrugere.
+      Kilde: Dansk Fjernvarme
+  - værdi: spunsvæg
+    definition: |-
+      spunsvæg
+      spuns
+      væg af profiler
+      Kilde: Kredsløb A/S
+  - værdi: tunnel
+    definition: |-
+      boret, gravet eller på anden måde tildannet passage der fører under eller gennem noget
+      Kilde: HOFOR
+  - værdi: ventil
+    definition: |-
+      komponent der sidder på en ledning og bruges til aflukning og evt. aftapning
+      Anvendelsesnote: En ventil sidder ikke i et brønd eller skab.
+      Kilde: Dansk Fjernvarme
+  Maksimumlængde: '50'
+- Navn: udnyttelsesgrad
+  Definition: forhold mellem den udnyttede kapacitet og den tilgængelige kapacitet
+  Anvendelsesnote: Udnyttelsesgraden udtrykkes som et decimaltal mellem 0 og 1 og med op til to decimaler.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Decimal
+restriktioner: []
+associationsroller: []

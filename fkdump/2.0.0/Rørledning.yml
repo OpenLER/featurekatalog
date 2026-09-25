@@ -1,0 +1,113 @@
+navn: Rørledning
+pakke: 'Pakke: Fælles'
+Foretrukken term: rørledning
+Definition: ledning som består af en yderskal og et eller flere tomrum indeni
+Subtype af: Ledning
+Supertype til: |-
+  Afløbsledning
+  Føringsrør
+  Gasledning
+  Olieledning
+  TermiskLedning
+  Vandledning
+Type: Featuretype
+Abstrakt: ja
+attributter:
+- Navn: tværsnitsform
+  Foretrukken term: tværsnitsform af ledning
+  Definition: form af ledningen når den imaginært er gennemskåret på tværs
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Tværsnitsformtype (Kodeliste)
+  Værdier:
+  - værdi: brilleformet
+    definition: |-
+      (se billede på diagram)
+      Anvendelsesnote: Bruges bl.a. i el-branchen.
+      Kilde: LER-arbejdsgruppe for el
+  - værdi: cirkulær
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: kvadratisk
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: rektangulær
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: sektorformet
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: spidsbundet
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: trapezformet
+    definition: |-
+      (se billede på diagram)
+      Note: Kan være åbent eller lukket.
+      Kilde: DANVA
+  - værdi: trekantet
+    definition: |-
+      af form som en trekant
+      Kilde: [DDO]
+  - værdi: tunnelformet
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: ægformet
+    definition: |-
+      ægformet
+      oval
+      (se billede på diagram)
+      Kilde: DANVA
+  - værdi: øjestensprofil
+    definition: |-
+      (se billede på diagram)
+      Kilde: DANVA
+  Maksimumlængde: '50'
+- Navn: udvendigBredde
+  Foretrukken term: udvendig bredde
+  Definition: (se billede på diagram)
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: udvendigHøjde
+  Foretrukken term: udvendig højde
+  Definition: (se billede på diagram)
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Measure
+restriktioner:
+- Navn: geometriVertikaleKoordinaterRestriktion
+  Udtryk: En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis etableringstidspunktet er efter skæringsdatoen.
+- Navn: udvendigBreddeBetingelse
+  Udtryk: |-
+    Den udvendige bredde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige bredde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- Navn: udvendigBreddeMåleenhedsrestriktion
+  Udtryk: Måleenheden for den udvendige bredde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- Navn: udvendigBreddeVoidrestriktion
+  Udtryk: Den udvendige bredde må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+- Navn: udvendigDiameterBetingelse
+  Udtryk: |-
+    Den udvendige diameter skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen
+    * tværsnitsformen er cirkulær.
+    Den udvendige diameter må ikke være angivet hvis tværsnitsformen ikke er cirkulær.
+- Navn: udvendigHøjdeBetingelse
+  Udtryk: |-
+    Den udvendige højde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen
+    * tværsnitsformen er ikke cirkulær.
+    Den udvendige højde må ikke være angivet hvis tværsnitsformen er cirkulær.
+- Navn: udvendigHøjdeMåleenhedsrestriktion
+  Udtryk: Måleenheden for den udvendige højde skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+- Navn: udvendigHøjdeVoidrestriktion
+  Udtryk: Den udvendige højde må ikke være void hvis etableringstidspunktet er efter skæringsdatoen.
+associationsroller: []

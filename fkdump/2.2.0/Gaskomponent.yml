@@ -1,0 +1,131 @@
+navn: Gaskomponent
+pakke: 'Pakke: Gas'
+Foretrukken term: gaskomponent
+Definition: komponent der har tilknytning til gasledninger
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: topkote
+  Foretrukken term: komponents topkote
+  Accepterede termer: komponents maksimumkote
+  Definition: koten af komponentens højeste punkt
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DirectPosition
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Gaskomponenttype (Kodeliste)
+  Værdier:
+  - værdi: afmærkningsstander
+    definition: |-
+      stander har til formål at vise det omtrentlige trace for farlige ledninger
+      Note: Afmærkningsstander dækker også over måle- og mærkepæl.
+      Anvendelsesnote: Afmærkningsstandere bruges ifm. påvisning af ledninger.
+      Kilde: Dansk Gas Forening
+  - værdi: anboring
+    definition: |-
+      komponent der bruges til at koble en stikledning på en distributionsledning
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: anodebed
+    definition: |-
+      anlæg med en fysisk udbredelse til brug for katodisk beskyttelse af stålledninger
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: anodebed - transmission
+    definition: |-
+      større anlæg med en fysisk udbredelse til brug for katodisk beskyttelse af stålledninger
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: beskyttelsesplade
+    definition: |-
+      beskyttelsesplade
+      dækplade
+      plade der beskytter en ledning for last ovenfra
+      Kilde: HOFOR
+  - værdi: boring
+    definition: |-
+      boring
+      indvindingsboring
+      indvinding af gas fra gamle affaldsdepoter
+      Kilde: Kredsløb A/S
+  - værdi: gasbehandlingsanlæg
+    definition: |-
+      anlæg hvor der sker en behandling af gas
+      Kilde: HOFOR
+  - værdi: isolerende kobling
+    definition: |-
+      komponent der kan adskille to net af stålrør, så de bliver elektrisk isolerede
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: jordhane
+    definition: |-
+      lille ventil der anvendes på et stikrør
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: jordspyd
+    definition: |-
+      komponent der bruges til at jorde en stålledning eller et ktb-anlæg
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: materialeskift
+    definition: |-
+      komponent der udgør en tæt samling mellem en stålledning og en plastledning
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: MR-skab
+    definition: |-
+      måler- og regulatorskab der står ude ved kunderne
+      Note: Den står over jorden.
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: MR-station
+    definition: |-
+      komponent der regulerer trykket op eller ned mellem noget infrastruktur (i en bygning over jorden)
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: målepunkt på stålrør
+    definition: |-
+      sted hvor noget kan måles
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: punkt på rør
+    definition: |-
+      målepunkt med X,Y og Z-koordinat
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: reduktion
+    definition: |-
+      komponent der udgør en tæt samling mellem 2 rør med forskellig diameter
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: slutmuffe
+    definition: |-
+      tæt samling for enden af en rørledning
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: tee
+    definition: |-
+      komponent der samler 3 rør med den samme dimension
+      Note: Svejses uden på de rør, der samles.
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: tunnel
+    definition: |-
+      boret, gravet eller på anden måde tildannet passage der fører under eller gennem noget
+      Kilde: HOFOR
+  - værdi: udluftningsventil
+    definition: |-
+      ventil der giver mulighed for at lufte luftet i røret ud
+      Note: Når ny infrastruktur bygges skal luften i røret "luftes ud" - for at ledningen kan blive fyldt med gas.
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: vandsamler
+    definition: |-
+      komponent der rager ud fra en gasledning
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: ventil
+    definition: |-
+      komponent hvor man kan åbne og lukke for gas efter behov
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: ventilbrønd
+    definition: |-
+      brøndkonstruktion til at få adgang til at betjene en ventil
+      Kilde: LER-arbejdsgruppe for gas
+  Maksimumlængde: '50'
+- Navn: udnyttelsesgrad
+  Definition: forhold mellem den udnyttede kapacitet og den tilgængelige kapacitet
+  Anvendelsesnote: Udnyttelsesgraden udtrykkes som et decimaltal mellem 0 og 1 og med op til to decimaler.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Decimal
+restriktioner: []
+associationsroller: []

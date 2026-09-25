@@ -1,0 +1,51 @@
+navn: Gasledning
+pakke: 'Pakke: Gas'
+Foretrukken term: gasledning
+Definition: ledning hvori gas føres frem
+Subtype af: Rørledning
+Type: Featuretype
+attributter:
+- Navn: tryk
+  Foretrukken term: tryk
+  Definition: overtryk i forhold til atmosfæren
+  Anvendelsesnote: 'Jo større tryk, jo større sikkerhedsrisiko for mennesker og/eller miljø ved skade på ledning. Værdien af trykket vil være en af følgende: 275, 80, 50, 40, 37.9, 37, 20, 19, 7, 4, 2.5, 0.1, 0.026, 0'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Gasledningstype (Kodeliste)
+  Værdier:
+  - værdi: distributionsledning
+    definition: |-
+      ledning der følger vejnettet
+      Note: Udgør gassens hoved- og biveje.
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: fordelingsledning
+    definition: |-
+      ledning der fordeler gas videre ud fra en transmissionsledning
+      Note: Udgør gassens motortrafikveje.
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: stikledning
+    definition: |-
+      sidste del af et forsyningsnet, som tilslutter en eller flere brugere af en bestemt forsyning til det pågældende net
+      Kilde: [LER-loven]
+  - værdi: transmissionsledning
+    definition: |-
+      overordnet infrastruktur
+      Note: Udgør gassens motorveje.
+      Kilde: LER-arbejdsgruppe for gas
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: fareklasseRestriktion
+  Udtryk: |-
+    Fareklassen skal være meget farlig hvis gasledningen har et tryk på 19 bar eller mere.
+    Fareklassen må ikke være meget farlig hvis gasledningen har et tryk på mindre end 19 bar.
+- Navn: geometriVertikaleKoordinaterRestriktion
+  Udtryk: En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis etableringstidspunktet er efter skæringsdatoen.
+- Navn: trykMåleenhedsrestriktion
+  Udtryk: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].
+associationsroller: []

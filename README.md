@@ -45,7 +45,21 @@ disse data tilbage til kildefilen (f.eks. XMI).
 
 Flask-visningen bruger alle disse data.
 
-Noget af det eksporteres også til filer: restriktionerne. Det er de eneste
+### fkdump
+
+**fkdump** er resultatet af `parse_featurekatalog()`, gemt som én YAML-fil pr.
+featuretype pr. version i `fkdump/<version>/<featuretype>.yml`. Det indeholder
+alt, hvad der udtrykker form og krav, men ikke layout og formatering, og der
+er ingen fortolkning oveni. Formålet er, at man (og AI) kan læse og
+sammenligne datamodellen på tværs af versioner, f.eks. med
+`diff -r fkdump/2.1.0 fkdump/2.2.0`.
+
+fkdump skrives af `python3 app.py freeze` og kan også skrives alene med
+`python3 fkdump.py`.
+
+### constraints
+
+Restriktionerne eksporteres også for sig. Det er de eneste
 valideringsregler i docx, som ikke allerede er udtrykt i de officielle
 XSD-filer. De eksporteres uden fortolkning oveni (ingen koder, kategorisering
 e.l.) til `constraints/<version>/<featuretype>.yml`.

@@ -1,0 +1,149 @@
+navn: Informationsressource
+pakke: 'Pakke: Fælles'
+Foretrukken term: informationsressource
+Definition: ressource som indeholder information
+Note: |-
+  ressource: noget, der kan identificeres [RFC 3986]
+  information: viden der gives videre i en bestemt sammenhæng [DDO]
+Anvendelsesnote: Understøtter udveksling af nødvendige ledningsoplysninger når disse skal sendes med som bilag i et graveforespørgselssvar. Der kan fx være tale om en snittegning, borerapport eller en publikation.
+Type: Featuretype
+Oprindelsesnote: '"Information resource" er en almindelig anvendt term på engelsk. Forskellige definitioner eksisterer, f.eks. "asset, record, document, or item in physical or digital form that contributes to human knowledge" [ISO 5127:2017], "any collection of concepts expressed in a form that can be communicated to others" [Hay] og "a piece of information, such an employee record, a customer list, or a financial report, that is valuable to a company or organization" [CBED]. [ISO 690] indeholder ingen definition men giver en ikke-udtømmende liste over hvad en informationsressource kan være: "[...] including but not limited to monographs, serials, contributions, patents, cartographic materials, electronic information resources (including computer software and databases), music, recorded sound, prints, photographs, graphic and audiovisual works, and moving images [...]". Begrebet anvendes også i flere standarder fra ISO 19100-serien (geografisk information), f.eks. i [ISO 19115-1:2014].'
+Modelleringsnote: De fleste egenskaber af en informationsressource er beskrevet i [MTDT], som er en beskrivelse på dansk af Dublin Core Metadata Initiative [DCMI], en metadatastandard for beskrivelse af ressourcer.
+GML-note: De fleste egenskaber af en informationsressource der stammer fra Dublin Core-standarden indkodes ved hjælp af Dublin Core XML-skemaet, tilgængeligt på http://dublincore.org/schemas/xmls/qdc/2008/02/11/dcterms.xsd.
+attributter:
+- Navn: dato
+  Foretrukken term: ressourcedato
+  Definition: dato for oprettelse eller tilgængeliggørelse af ressourcen
+  Eksempel: 2017, 2017-01, 2017-01-01
+  Kilde: '[DCMI], [MTDT]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: TM_CalDate
+  Modelleringsnote: Datatypen skal kunne rumme både (1) en bestemt dag i en bestemt måned og et bestemt år og (2) en bestemt måned i et bestemt år og (3) et år. Derfor valget for datatypen TM_CalDate fra ISO 19108, som repræsenterer en tidsmæssig position inden for en tidsregning. Date-datatypen fra ISO 19103 kan ikke anvendes her da den repræsenterer en bestemt dag i en bestemt måned og et bestemt år.
+  GML-note: Indkodes som dcterms:date.
+- Navn: forfatter
+  Foretrukken term: ressourceforfatter
+  Definition: person eller organisation der primært er ansvarlig for det intellektuelle indhold i ressourcen
+  Eksempel: Energinet
+  Kilde: '[DCMI], [MTDT]'
+  Voidable: nej
+  Multiplicitet: 0..*
+  Type: CharacterString
+  Maksimumlængde: '100'
+  GML-note: Indkodes som dcterms:creator.
+- Navn: format
+  Foretrukken term: ressourceformat
+  Definition: ressourcens dataformat
+  Note: Anvendes til at identificere software, eventuelt hardware, som måtte være nødvendigt for at fremvise eller håndtere ressourcen.
+  Kilde: '[DCMI], [MTDT]'
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: MediaType
+  Maksimumlængde: '7'
+  GML-note: Indkodes ikke som dcterms:format men følger de almindelige UML-til-GML-regler.
+- Navn: geometri
+  Foretrukken term: geometri
+  Definition: geografisk placering
+  Anvendelsesnote: Tillader, at bestemte informationsressourcer, fx snittegninger, kan visualiseres på et kort uden at være tilknyttet et andet geografisk objekt.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: GM_Object
+- Navn: id
+  Foretrukken term: identifikator
+  Accepterede termer: id, identifikation, nummer
+  Definition: sproglig uafhængig rækkefølge af tegn der er egnet til unikt og permanent at identificere det som det er knyttet til
+  Anvendelsesnote: En publikation kan have et ISBN-nummer, en rapport kan have et rapportnummer, osv.
+  Kilde: '[ISO 19135-1:2015, par. 4.1.5]'
+  Voidable: nej
+  Multiplicitet: 0..*
+  Type: CharacterString
+  Maksimumlængde: '36'
+  Oprindelsesnote: Svarer til ”identifikator” som beskrevet i [MTDT]. Definitionen fra [ISO 19135-1:2015] vurderes til at være mere præcist og anvendes også andre steder i denne datamodel, så af hensyn til ensartetheden indenfor denne datamodel bruges definitionen fra [ISO 19135-1:2015].
+  GML-note: Indkodes som dcterms:identifier.
+- Navn: sti
+  Foretrukken term: ressourcestinavn
+  Definition: navn der entydigt angiver hvor i et filsystem et eksemplar af ressourcen befinder sig
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: URI
+- Navn: titel
+  Foretrukken term: ressourcetitel
+  Definition: navnet på ressourcen
+  Note: Som regel givet af forfatter eller udgiver. Som en del af titlen angives evt. udgave.
+  Eksempel: Pas på gasledningerne!
+  Kilde: '[DCMI], [MTDT]'
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: CharacterString
+  Maksimumlængde: '100'
+  GML-note: Indkodes som dcterms:title.
+- Navn: type
+  Foretrukken term: ressourcetype
+  Definition: ressourcens indhold
+  Note: anvendes til at beskrive ressourcens generelle indholdsmæssige karakteristika
+  Eksempel: følgeskrivelse, borerapport, snittegning, vejledning, gravevejledning, publikation, regelsæt
+  Kilde: '[DCMI], [MTDT]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '50'
+  Modelleringsnote: Modelleres som CharacterString da det p.t. ikke ser ud til at være muligt, at definere et passende udfaldsrum.
+  GML-note: Indkodes ikke som dcterms:type men følger de almindelige UML-til-GML-regler.
+- Navn: udgiver
+  Foretrukken term: ressourceudgiver
+  Definition: enhed der er ansvarlig for at stille ressourcen til rådighed i dens aktuelle form
+  Note: Det kan være et forlag, et universitetsinstitut, et firma, en forening eller en offentlig institution.
+  Eksempel: Dansk Gasteknisk Center a/s
+  Kilde: '[DCMI], [MTDT]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '100'
+  GML-note: Indkodes som dcterms:publisher.
+restriktioner:
+- Navn: formatRestriktion
+  Udtryk: |-
+    Formatværdien skal være en af følgende: CSV, DGN, DOC, DOCX, DWF, DWG, DXF, IFC-SPF, IFC-XML, JPEG, PDF, SAT, SHP, SKP, TAB, TIFF, XLS, XLSX.
+    Formattypen skal være text/csv hvis formatværdien er CSV.
+    Formattypen skal være application/octet-stream hvis formatværdien er DGN.
+    Formattypen skal være application/msword hvis formatværdien er DOC.
+    Formattypen skal være application/vnd.openxmlformats-officedocument.wordprocessingml.document hvis formatværdien er DOCX.
+    Formattypen skal være model/vnd.dwf hvis formatværdien er DWF.
+    Formattypen skal være image/vnd.dwg hvis formatværdien er DWG.
+    Formattypen skal være image/vnd.dxf hvis formatværdien er DXF.
+    Formattypen skal være application/x-step hvis formatværdien er IFC-SPF.
+    Formattypen skal være application/xml hvis formatværdien er IFC-XML.
+    Formattypen skal være image/jpeg hvis formatværdien er JPEG.
+    Formattypen skal være application/pdf hvis formatværdien er PDF.
+    Formattypen skal være application/octet-stream hvis formatværdien er SAT.
+    Formattypen skal være application/x-shapefile hvis formatværdien er SHP.
+    Formattypen skal være application/octet-stream hvis formatværdien er SKP.
+    Formattypen skal være application/x-tab hvis formatværdien er TAB.
+    Formattypen skal være image/tiff hvis formatværdien er TIFF.
+    Formattypen skal være application/vnd.ms-excel hvis formatværdien er XLS.
+    Formattypen skal være application/vnd.openxmlformats-officedocument.spreadsheetml.sheet hvis formatværdien er XLSX.
+    Note 1: Formatværdien er Informationsressource.format.value, se også MediaType.
+    Note 2: Formattypen er Informationsressource.format.type, se også MediaType.
+    Note 3: Følgende filformater er optaget på IANAs liste over mediatyper [IANA]: CSV, DOC, DOCX, DWF, DWG, DXF, JPEG, PDF, TIFF, XLS, XLSX.
+    Note 4: Følgende filformater er optaget i INSPIREs register over mediatyper [INSPIRE]: SHP, TAB.
+    Note 5: Følgende filformater er specificeret i [buildingSMART]: IFC-SPF, IFC-XML.
+    Note 6: Ovenstående følger regler beskrevet i [RFC 2046] og [RFC 4288].
+- Navn: geometriDatatyperestriktion
+  Udtryk: |-
+    Geometrien skal have en af følgende typer: GM_Point, GM_MultiPoint, GM_Curve, GM_MultiCurve, GM_Surface eller GM_MultiSurface.
+    Geometrien skal anvende lineær interpolation hvis dens type er GM_Curve eller GM_MultiCurve.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:LineString
+    * gml:Curve som består af segmenter af typen gml:LineStringSegment
+    Note 2: En kurve kan være enkeltstående eller kan indgå i en flade, som del af en grænse.
+    Geometrien skal anvende 2-dimensionel interpolation (på engelsk: "planar interpolation") hvis dens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:Polygon
+    * gml:Surface som består af dele af typen gml:PolygonPatch
+    Geometriens grænser skal anvende lineær interpolation hvis geometriens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at en grænse af en flade eller en multiflade skal have en af følgende geometrityper [GML SF]:
+    * gml:LinearRing
+    * gml:Ring som består af kurver der anvender lineær interpolation (se ovenfor)
+- Navn: stiRestriktion
+  Udtryk: Stien skal være en relativ sti.
+associationsroller: []

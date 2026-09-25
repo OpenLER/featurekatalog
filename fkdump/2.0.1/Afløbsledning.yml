@@ -1,0 +1,66 @@
+navn: Afløbsledning
+pakke: 'Pakke: Afløb og vejafvanding'
+Foretrukken term: afløbsledning
+Definition: ledning der leder afløbsvand væk
+Subtype af: Rørledning
+Type: Featuretype
+attributter:
+- Navn: harFod
+  Foretrukken term: har fod
+  Definition: (se billede på diagram)
+  Note: Anvendes på store rør for at give dem en flade at hvile på.
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Boolean
+- Navn: ledningstransporttype
+  Foretrukken term: ledningstransportkode
+  Definition: kategori af ledningstransport
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Ledningstransporttype (Enumeration)
+  Værdier:
+  - værdi: gravitation
+    definition: transportform hvor mediet i en ledning løber videre af sig selv ved hjælp af tyngdekraften
+  - værdi: tryk
+    definition: transportform hvor mediet i en ledning pumpes videre
+  - værdi: vakuum
+    definition: transportform hvor mediet i en ledning suges videre ved hjælp af undertryk i ledningen
+  Maksimumlængde: '50'
+- Navn: medietype
+  Definition: medie som løber i afløbsledningen
+  Kilde: baseret på [DANVA]
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Medietype (Enumeration)
+  Værdier:
+  - værdi: drænvand
+    definition: 'Kilde: [DANVA]'
+  - værdi: fællesvand
+    definition: |-
+      vand fra fælleskloakerede områder
+      Note: Blandet spildevand og regnvand (incl. dræn).
+      Kilde: [DANVA]
+  - værdi: industri/procesvand
+    definition: |-
+      spildevand og procesvand fra industri med særlige hensyn
+      Kilde: [DANVA]
+  - værdi: intet medie
+    definition: 'Kilde: [DANVA]'
+  - værdi: perkolat
+    definition: |-
+      opsamlet drænvand fra lossepladser og deponier
+      Kilde: [DANVA]
+  - værdi: regnvand
+    definition: 'Kilde: [DANVA]'
+  - værdi: spildevand
+    definition: |-
+      råt og renset spildevand
+      Kilde: [DANVA]
+  - værdi: vand uden rensekrav
+    definition: 'Kilde: [DANVA]'
+restriktioner:
+- Navn: fareklasseRestriktion
+  Udtryk: Fareklassen må ikke være meget farlig.
+- Navn: geometriVertikaleKoordinaterRestriktion
+  Udtryk: En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis etableringstidspunktet er efter skæringsdatoen.
+associationsroller: []

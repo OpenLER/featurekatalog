@@ -1,0 +1,38 @@
+navn: Kontaktprofil
+pakke: 'Pakke: Fælles'
+Foretrukken term: kontaktprofil
+Definition: profil som udgøres af en samling af kontaktoplysninger
+Type: Featuretype
+attributter:
+- Navn: mailadresse
+  Foretrukken term: mailadresse
+  Definition: tegnfølge der angiver adressen på personens elektroniske postkasse, som er tilsluttet internettet
+  Kilde: '[DDO]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '254'
+  Modelleringsnote: Maksimumlængden er baseret på oplysningerne i [EID 1690].
+- Navn: navn
+  Foretrukken term: navn
+  Definition: det eller de ord som man bruger for at udpege én enkelt person, lokalitet, genstand eller ét enkelt dyr el.lign.
+  Anvendelsesnote: Navnet på en person, postkasse, afdeling el.lign.
+  Kilde: '[DDO]'
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: CharacterString
+  Maksimumlængde: '100'
+- Navn: telefonnummer
+  Foretrukken term: telefonnummer
+  Definition: nummer som er tilknyttet en bestemt telefonforbindelse
+  Kilde: '[DDO]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '15'
+restriktioner:
+- Navn: mailadresseBetingelse
+  Udtryk: Mailadressen skal være angivet hvis ikke telefonnummeret er angivet.
+- Navn: telefonnummerBetingelse
+  Udtryk: Telefonnummeret skal være angivet hvis ikke mailadressen er angivet.
+associationsroller: []

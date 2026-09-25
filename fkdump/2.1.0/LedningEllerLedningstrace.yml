@@ -1,0 +1,201 @@
+navn: LedningEllerLedningstrace
+pakke: 'Pakke: Fælles'
+Foretrukken term: ledning eller ledningstrace
+Definition: ledning eller ledningstrace
+Supertype til: |-
+  Ledning
+  Ledningstrace
+Type: Featuretype
+Abstrakt: ja
+Modelleringsnote: LedningEllerLedningstrace er introduceret for at samle egenskaber og krav til udlevering af disse egenskaber som er fælles for ledningstrace og ledning, se også [LBK LER].  Et alternativ kunne have været, at modellere og specificere disse egenskaber to gange, på både Ledningstrace og Ledning. Et andet alternativ kunne have været, at modellere en anden (abstrakt) klasse som superklasse for både Ledning, Ledningstrace og Ledningskomponent. Den endelige løsning blev valgt for at skabe tættere sammenhæng mellem [LBK LER] og datamodellen.
+attributter:
+- Navn: driftsstatus
+  Foretrukken term: driftsstatus
+  Definition: status i relation til drift
+  Anvendelsesnote: Bruges om status i relation til ledningens eller ledningstraceets driftslivscyklus.
+  Kilde: LER-forretning
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Driftsstatus (Enumeration)
+  Værdier:
+  - værdi: under etablering
+    definition: |-
+      driftsstatus der angiver at noget er planlagt eller under etablering
+      Anvendelsesnote: Bruges om komponenter der er planlagt, er ved at blive nedgravet eller anbragt eller lige er blevet nedgravet eller anbragt. Angivelsen af placeringen på disse vil ofte være usikker. Der skal graves med udgangspunkt i at komponenten er der.
+      Kilde: LER-forretning
+  - værdi: i drift
+    definition: |-
+      i drift
+      i brug
+      driftsstatus der angiver at noget er i drift
+      Anvendelsesnote: Bruges om komponenter der er i drift - eller er midlertidigt ude af drift.
+      Kilde: LER-forretning
+  - værdi: permanent ude af drift
+    definition: |-
+      driftsstatus der angiver at noget er taget ud af drift permanent
+      Anvendelsesnote: Bruges om komponenter der er permanent ude af drift og som derfor kan fjernes efter aftale med ledningsejer.
+      Kilde: LER-forretning
+  Maksimumlængde: '50'
+- Navn: ejerskabsforhold
+  Foretrukken term: ejerskabsforhold til ledning eller ledningstrace
+  Definition: forhold vedrørende ejendomsretten til ledningen eller ledningstraceet
+  Kilde: baseret på [DDO]
+  Voidable: nej
+  Multiplicitet: 0..1
+  Initial værdi: ejet af udleverende ledningsejer
+  Type: Ejerskabsforholdtype (Enumeration)
+  Værdier:
+  - værdi: ejet af anden ledningsejer
+    definition: |-
+      ejet af en anden ledningsejer end den der udleverer ledningsoplysninger
+      Anvendelsesnote: Se §12 i [LER-loven]
+  - værdi: ejet af udleverende ledningsejer
+    definition: |-
+      ejet af den ledningsejer der udleverer ledningsoplysninger
+      Anvendelsesnote: Se §12 i [LER-loven]
+  - værdi: uden ejer
+    definition: |-
+      ejet af et selskab som er lukket, og hvor ejerskabet ikke er overdraget til en anden ledningsejer, eller ejet af en ukendt ledningejer
+      Anvendelsesnote: Se §12 i [LER-loven]
+      Juridisk kilde: baseret på §12 i [LER-loven]
+- Navn: etableringstidspunkt
+  Foretrukken term: etableringstidspunkt
+  Definition: tidsangivelse der angiver hvornår etablering er færdig
+  Note: Et anlæg anses som etableret, når det har en form, hvor det kan benyttes til dets primære formål.
+  Anvendelsesnote: Tidsangivelsen kan være en bestemt dato, en bestemt måned, et bestemt år. Angivelsen kan også være ”ukendt, dog med sikkerhed før en given dato”.
+  Eksempel: april 2020, før d. 1. juli 2023, 2. juli 2023, 2024
+  Juridisk kilde: '[LER-bekendtgørelsen]'
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: TM_Position (Uniondatatype)
+- Navn: fareklasse
+  Foretrukken term: fareklasse ved ledningsskade
+  Accepterede termer: fareklasse
+  Definition: kategori der angiver sikkerhedsrisiko for mennesker og/eller miljø ved skade på ledning
+  Anvendelsesnote: 'Fareklassen på en elledning angives typisk som meget farlig hvis elledningen har et spændingsniveau på 10kV eller mere.  Fareklassen på en gasledning angives typisk som meget farlig hvis gasledningen har et tryk på 19 bar eller mere.  Fareklassen på en termisk ledning angives typisk som meget farlig hvis en eller flere af følgende betingelser er sande: * den termiske ledning har en temperatur på mere end 130 °C * den termiske ledning har et tryk på 10 bar eller mere'
+  Juridisk kilde: '[LER-bekendtgørelsen]'
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Fareklasse (Enumeration)
+  Værdier:
+  - værdi: ikke farlig
+    definition: |-
+      fareklasse ved ledningsskade der angiver ingen sikkerhedsrisiko
+      Note: Anvendes ved ledningsskade, der ikke udgør en sikkerhedsrisiko for mennesker eller miljø.
+      Kilde: LER-forretning
+  - værdi: farlig
+    definition: |-
+      fareklasse ved ledningsskade der angiver sikkerhedsrisiko
+      Note: Anvendes ved ledningsskade, der udgør en sikkerhedsrisiko, som dog ikke kan medføre dødelig skade på eller invalidering af mennesker eller kritisk miljøskade.
+      Kilde: LER-forretning
+  - værdi: meget farlig
+    definition: |-
+      fareklasse ved ledningsskade der angiver kritisk sikkerhedsrisiko
+      Note: Anvendes ved ledningsskade, der potentielt kan medføre dødelig skade på eller invalidering af mennesker eller kritisk miljøskade.
+      Kilde: LER-forretning
+  Maksimumlængde: '50'
+- Navn: id
+  Foretrukken term: identifikator
+  Accepterede termer: id, identifikation, nummer
+  Definition: sproglig uafhængig rækkefølge af tegn der er egnet til unikt og permanent at identificere det som det er knyttet til
+  Kilde: '[ISO 19135-1:2015, par. 4.1.5]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '36'
+- Navn: indtegningsmetode
+  Foretrukken term: indtegningsmetode
+  Definition: måden et objekts geometri repræsenteres på, afhængig af formålet med en visualisering
+  Voidable: nej
+  Multiplicitet: 0..1
+  Initial værdi: nøjagtigt
+  Type: Indtegningsmetodetype (Enumeration)
+  Værdier:
+  - værdi: forskudt
+    definition: |-
+      forskudt indtegningsmetode
+      indtegningsmetode hvor angivelsen af et objekts placering afviger fra dets placering i virkeligheden med en på forhånd fastlagt afstand
+      Note: Bruges fx når forskellige ledninger og ledningstraceer skal visualiseres samtidigt og man vil gerne vil kunne se alle ledninger og ledningstraceer ved siden af hinanden når de i virkeligheden ligger samme sted. Typisk vælges 20 cm som afstand, men på landet bruges der op til 1 m. Udbredt indtegningsmetode i elsektoren.
+  - værdi: nøjagtigt
+    definition: |-
+      nøjagtig indtegningsmetode
+      indtegningsmetode hvor angivelsen af et objekts placering er nøjagtig
+  - værdi: skematisk
+    definition: |-
+      skematisk indtegningsmetode
+      indtegningsmetode hvor angivelsen af et objekts placering er skematisk
+      Note: skematisk = udtrykt ved hjælp af et skema, diagram el.lign [DDO]. Anvendes typisk for stikledninger.
+  Maksimumlængde: '50'
+- Navn: nøjagtighedsklasse
+  Foretrukken term: nøjagtighedsklasse for stedbestemmelse
+  Definition: kategori for nøjagtighed af angivelsen af et objekts placering i et koordinatreferencesystem
+  Note: Stedbestemmelsen omfatter både horisontal og vertikal dimension.
+  Juridisk kilde: '[LER-bekendtgørelsen]'
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Nøjagtighedsklasse (Enumeration)
+  Værdier:
+  - værdi: <= 0.25 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 0,25 m
+      Kilde: LER-forretning
+  - værdi: <= 0.50 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 0,50 m
+      Kilde: LER-forretning
+  - værdi: <= 1.00 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 1,00 m
+      Kilde: LER-forretning
+  - værdi: <= 2.00 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 2,00 m
+      Kilde: LER-forretning
+  - værdi: '> 2.00 m'
+    definition: |-
+      stedbestemmelsen kan afvige med mere end 2,00 m
+      Kilde: LER-forretning
+  Maksimumlængde: '50'
+- Navn: registreringFra
+  Definition: tidspunkt hvor registrering er foretaget
+  Anvendelsesnote: Anvendes til at oplyse om tidspunktet hvor en ny tilstand af ledningen eller ledningstraceet blev registreret i ledningsejers system. Gennem LER udveksles kun nugældende data og derfor svarer dette tidspunkt i LER til den seneste opdateringsdato. Opdateringen, der førte til den nye tilstand, kan være ændring af den geografiske placering og/eller andre egenskaber.
+  Eksempel: 5. februar 2017 kl. 14:10:22
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DateTime
+  Modelleringsnote: Betydning, navngivning og datatype er i overensstemmelse med [GD].
+- Navn: sikkerhedshensyn
+  Foretrukken term: sikkerhedshensyn ved gravearbejde
+  Accepterede termer: sikkerhedshensyn
+  Definition: forholdsregler under gravearbejde i nærheden af ledning
+  Note: Giver ledningsejeren mulighed for at angive sikkerhedshensyn, der skal tages ved arbejdet nær en given ledning.
+  Kilde: LER-forretning
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '500'
+- Navn: vejledendeDybde
+  Foretrukken term: vejledende dybde i forhold til terræn ved etablering
+  Definition: lodret afstand til terræn, som noget forventeligt blev placeret i, da det blev etableret
+  Note: Værdien er vejledende, da der ikke er tale om en indmålt værdi, og da der over tid kan ske ændring af terræn og placering af genstanden.
+  Anvendelsesnote: Dybden angives for overkant af ledning eller ledningstrace.
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Measure
+restriktioner:
+- Navn: vejledendeDybdeMåleenhedsrestriktion
+  Udtryk: Måleenheden for den vejledende dybde i forhold til terræn ved etablering skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+associationsroller:
+- Navn: bilag
+  Foretrukken term: bilag til ledning eller ledningstrace
+  Definition: informationsressource som vedlægges ledningen eller ledningstraceet
+  Voidable: nej
+  Multiplicitet: 0..*
+  Type: Informationsressource (Featuretype)
+- Navn: kontaktprofilTilTekniskeSpørgsmål
+  Foretrukken term: kontaktprofil til tekniske spørgsmål
+  Definition: kontaktprofil der giver adgang til kontaktoplysninger på nogen man kan kontakte for at få svar på tekniske spørgsmål
+  Anvendelsesnote: Vil typisk kun være til stede hvis ejerskabsforholdet er "ejet af anden ledningsejer". Vil typisk ikke være til stede hvis ejerskabsforholdet er "ejet af udleverende ledningsejer", da kontaktprofilen til tekniske spørgsmål så kan findes på selve graveforespørgselssvaret.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Kontaktprofil (Featuretype)

@@ -1,0 +1,51 @@
+navn: Telekommunikationsledning
+pakke: 'Pakke: Telekommunikation'
+Foretrukken term: telekommunikationsledning
+Definition: ledning til telekommunikation
+Subtype af: Ledning
+Type: Featuretype
+attributter:
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Telekommunikationsledningstype (Kodeliste)
+  Værdier:
+  - værdi: coaxkabel
+    definition: |-
+      coaxkabel
+      koaksialkabel
+      kabel med en ledende, isoleret kerne omgivet af en rørformet leder af fx kobbertrådsnet
+      Note: Anvendes typisk i antenneanlæg.
+      Kilde: [DDO]
+  - værdi: fiberkabel
+    definition: |-
+      fiberkabel
+      lyslederkabel, optisk kabel
+      samling af flere end et fiber eller fiberbundter samlet i en beskyttelseskappe, som beskytter fibrene mod mekanisk slid eller miljøpåvirkninger
+      Note: Anvendes til opbygning af fibernetværk.
+  - værdi: kobberkabel
+    definition: |-
+      kabel med leder af kobbertråd
+      Note: Anvendes typisk i telefonnetværk.
+      Kilde: [DDO]
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: fareklasseRestriktion
+  Udtryk: Fareklassen må ikke være meget farlig.
+- Navn: udvendigDiameterBetingelse
+  Udtryk: Den udvendige diameter skal være angivet hvis  etableringstidspunktet er efter skæringsdatoen.
+- Navn: vejledendeDybdeBetingelse
+  Udtryk: |-
+    Den vejledende dybde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99.
+- Navn: vejledendeDybdeVoidrestriktion
+  Udtryk: |-
+    Den vejledende dybde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering;
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99.
+associationsroller: []

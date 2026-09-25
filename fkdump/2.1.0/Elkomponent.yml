@@ -1,0 +1,143 @@
+navn: Elkomponent
+pakke: 'Pakke: El'
+Foretrukken term: elkomponent
+Definition: komponent der har tilknytning til elledninger
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: relativNiveau
+  Foretrukken term: relativ niveau for blok
+  Definition: (se billede på diagram)
+  Note: Der forekommer i praksis ikke mere end tre niveauer på blokke.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: RelativNiveauType (Enumeration)
+  Værdier:
+  - værdi: bund
+    definition: |-
+      (se billede på diagram)
+      Note: Bruges sammen med midt hvis der er to blokke.
+  - værdi: midt
+    definition: |-
+      (se billede på diagram)
+      Note: Bruges sammen med bund hvis der er to blokke.
+  - værdi: top
+    definition: |-
+      (se billede på diagram)
+      Note: Bruges ikke hvis der er to blokke.
+  Maksimumlængde: '50'
+- Navn: spændingsniveau
+  Foretrukken term: driftsspændingsniveau
+  Definition: spændingsniveau komponenten drives ved
+  Anvendelsesnote: Spændingsniveau siger noget om hvor forsigtig man skal være i nærheden af komponenten.
+  Eksempel: 0,4kV, 10kV, 30kV, 50kV, 132kV, 400kV
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Elkomponenttype (Kodeliste)
+  Værdier:
+  - værdi: belysningsarmatur
+    definition: |-
+      lampe til gadebelysning
+      Kilde: Dansk Energi
+  - værdi: højspændingsmast
+    definition: |-
+      mast der benyttes til ledninger med en spænding over 700V
+      Kilde: Dansk Energi
+  - værdi: jernplade
+    definition: |-
+      jernplade der er lagt ned over et nedgravet elanlæg for at beskytte det
+      Note: Jernpladen ligger lidt over elanlægget men er stadig gravet ned.
+      Kilde: Dansk Energi
+  - værdi: kabelbrønd
+    definition: |-
+      brønd til samling af elkabler
+      Kilde: DANVA
+  - værdi: kabelskab
+    definition: |-
+      skab der kun benyttes til at samle forsyningskabler
+      Kilde: Dansk Energi
+  - værdi: kommunikationsmuffe
+    definition: |-
+      muffe der benyttes til at samle to kommunikationskabler, som benyttes i elforsyningen
+      Kilde: Dansk Energi
+  - værdi: kvejl
+    definition: ekstralængde ledning som er lagt op i en cirkulær eller næsten cirkulær bunke
+  - værdi: lavspændingsmast
+    definition: |-
+      mast der benyttes til 0,4kV ledninger
+      Kilde: Dansk Energi
+  - værdi: målerskab
+    definition: |-
+      skab som indeholder en måler
+      Kilde: Dansk Energi
+  - værdi: mastefundament uden mast
+    definition: |-
+      betonfundament der har været brugt til elmaster, som ikke er blevet fjernet ved nedtagning af mast
+      Kilde: Dansk Energi
+  - værdi: muffe
+    definition: |-
+      muffe der benyttes til at samle to kabler på en måde, så den ikke kan åbnes igen
+      Kilde: Dansk Energi
+  - værdi: muffegrube
+    definition: |-
+      område hvor der er etableret højspændingsmuffer
+      Kilde: Dansk Energi
+  - værdi: rørblok
+    definition: |-
+      flere rør der er støbt sammen til en blok
+      Kilde: Dansk Energi
+  - værdi: sensor
+    definition: |-
+      anordning der observerer og måler en fysisk egenskab ved et naturligt fænomen eller en menneskeskabt proces og omdanner denne måling til et signal
+      Kilde: [ISO 23093-1:2022, par. 3.2.17]
+  - værdi: signalmast med galge
+    definition: |-
+      mast der bærer synlige signaler med galge
+      Note: Signalmast inklusiv fundament.
+      Anvendelsesnote: Anvendes til signallanterner og andet signalmateriel. Galgen betyder at masten har et mere omfangsrigt fundament.
+  - værdi: signalmast uden galge
+    definition: |-
+      mast der bærer synlige signaler uden galge
+      Note: Signalmast inklusiv fundament.
+      Anvendelsesnote: Anvendes til signallanterner og andet signalmateriel. Galgen betyder at masten har et mere omfangsrigt fundament
+  - værdi: spole
+    definition: |-
+      induktionsspole til detektering af trafik
+      Note: Spoler bruges til eksempelvis signalanlæg og trafiktællinger.
+      Anvendelsesnote: Spolerne er skåret ned i belægning.
+  - værdi: station
+    definition: |-
+      hus/kasse hvori der er anbragt en transformer og et koblingsanlæg
+      Kilde: Dansk Energi
+  - værdi: T-muffe
+    definition: |-
+      muffe hvor tre kabler samles
+      Kilde: Dansk Energi
+  - værdi: tændskab/gadelys
+    definition: |-
+      skab som benyttes til gadelys
+      Kilde: Dansk Energi
+  - værdi: teknikskab
+    definition: |-
+      skab som benyttes til diverse tekniske komponenter
+      Kilde: Dansk Energi
+  - værdi: trykskab
+    definition: |-
+      skab som benyttes sammen med olieholdige kabler
+      Note: Her kan man fx efterfylde olie på kablet.
+      Kilde: Dansk Energi
+  - værdi: vindmølle
+    definition: kraftværk som omdanner vindenergi til elektricitet
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: relativNiveauTilladelse
+  Udtryk: Det relative niveau må kun være angivet hvis typen er rørblok.
+- Navn: spændingsniveauMåleenhedsrestriktion
+  Udtryk: Måleenheden for spændingsniveauet skal være kilovolt. Kilovolt skal angives med symbolet kV [UCUM].
+associationsroller: []

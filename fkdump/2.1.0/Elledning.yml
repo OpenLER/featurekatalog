@@ -1,0 +1,99 @@
+navn: Elledning
+pakke: 'Pakke: El'
+Foretrukken term: elledning
+Definition: ledning til elforsyning
+Anvendelsesnote: En enkel instans af denne klasse kan dække over mere end 1 fysisk kabel. Se kabeltype.
+Subtype af: Ledning
+Type: Featuretype
+attributter:
+- Navn: afdækning
+  Foretrukken term: afdækning
+  Definition: det at dække noget til for at beskytte det
+  Anvendelsesnote: Når man graver kabler ned, lægger man typisk noget over kablet for at beskytte det.
+  Eksempel: mursten, halve flange rør, markeringsbånd
+  Kilde: '[DDO]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '50'
+- Navn: antalKabler
+  Foretrukken term: antal kabler
+  Definition: mængde af kabler
+  Anvendelsesnote: Selv om der kan være tegnet en linje som symboliserer en forbindelse kan forbindelsen være lagt ned som flere enkeltlederkabler. En streg kan altså fx betyde en, tre eller seks fysiske kabler.
+  Eksempel: 1, 3, 6, 9
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Integer
+- Navn: kabeltype
+  Foretrukken term: kabeltype
+  Definition: siger noget om hvilken type kabel det er
+  Anvendelsesnote: Oplysningen hjælper graveaktøren til at fastslå, om det rigtige kabel er fundet.
+  Eksempel: elektrodekabel, fladkabel, oliekabel, PEX-kabel, 3X240m2 PEX, 3X400m2 Fladkabel, 3x150m2 APB
+  Kilde: Dansk Energi
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '50'
+  Modelleringsnote: Der findes mange forskellige kabeltyper, når man ser tilbage fra år 1900 og til nu, det er derfor ikke muligt at lave et udfaldsrum (Dansk Energi).
+- Navn: spændingsniveau
+  Foretrukken term: driftsspændingsniveau
+  Definition: spændingsniveau ledningen drives ved
+  Anvendelsesnote: Spændingsniveau siger noget om hvor forsigtig man skal være i nærheden af komponenten.
+  Eksempel: 0,4kV, 10kV, 30kV, 50kV, 132kV, 400kV
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Elledningstype (Kodeliste)
+  Værdier:
+  - værdi: beskyttelsesleder
+    definition: |-
+      leder tilvejebragt med henblik på sikkerhed, for eksempel beskyttelse mod elektriske stød
+      Kilde: [IEV, ref 195-02-09]
+  - værdi: forsyningskabel
+    definition: |-
+      kabel der ejes af elforsyningen og benyttes til at forsyne flere kunder
+      Kilde: Dansk Energi
+  - værdi: KB-kabel
+    definition: |-
+      del af anlæg til katodisk beskyttelse
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: luftledning
+    definition: |-
+      enkeltlederledning der er anbragt på master
+      Kilde: Dansk Energi
+  - værdi: signalkabel
+    definition: |-
+      kabel anvendt til signalanlæg
+      Note: Signalkabler omfatter elkabler og kabler til detektering.
+  - værdi: stikkabel
+    definition: |-
+      kabel der går fra forsyningsnettet og ind til installationen
+      Kilde: Dansk Energi
+  - værdi: vejbelysningskabel
+    definition: |-
+      kabel der benyttes til vejbelysning
+      Kilde: Dansk Energi
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: spændingsniveauMåleenhedsrestriktion
+  Udtryk: Måleenheden for spændingsniveauet skal være kilovolt. Kilovolt skal angives med symbolet kV [UCUM].
+- Navn: udvendigDiameterBetingelse
+  Udtryk: Den udvendige diameter skal være angivet hvis etableringstidspunktet er efter skæringsdatoen.
+- Navn: vejledendeDybdeBetingelse
+  Udtryk: |-
+    Den vejledende dybde skal være angivet hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99.
+- Navn: vejledendeDybdeVoidrestriktion
+  Udtryk: |-
+    Den vejledende dybde må ikke være void hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering;
+    * de vertikale koordinater i geometrien er ukendt-værdien på -99.
+associationsroller: []

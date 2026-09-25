@@ -1,0 +1,83 @@
+navn: Gasledning
+pakke: 'Pakke: Gas'
+Foretrukken term: gasledning
+Definition: ledning hvori gas føres frem
+Subtype af: Rørledning
+Type: Featuretype
+attributter:
+- Navn: medietype
+  Definition: medie som er i gasledningen
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Gasledningsmedietype (Kodeliste)
+  Værdier:
+  - værdi: brint
+    definition: |-
+      brint
+      hydrogen
+      H2
+      Anvendelsesnote: Brint frigiver alene vand ved afbrænding. Brint fremstilles ved elektrolyse, og kan brugs til forædling af andre gasser.
+  - værdi: CO2
+    definition: |-
+      kuldioxid
+      kultveilte
+      CO2
+      Anvendelsesnote: Kuldioxid kan bl.a. udvindes fra atmosfæren og opsamles ifm. afbrænding af organiske materialer.
+  - værdi: LNG/LBG
+    definition: |-
+      LNG/LBG
+      flydende metangas
+      flydende naturgas (LNG) eller bionaturgas (LBG)
+      Note: Både flydende LNG og LBG er metanbaserede (CH4).
+      Anvendelsesnote: Alle varianter af flydende metan (CH4) er omfattet, herunder flydende bionaturgas.
+  - værdi: naturgas
+    definition: |-
+      naturgas
+      NG
+      kompleks gasformig blanding af kulbrinter, primært metan, men omfatter generelt også ethan, propan og højere kulbrinter samt nogle ikke-brændbare gasser som nitrogen og kuldioxid
+      Anvendelsesnote: Naturgas omfatter bl.a. opgraderet biogas og syntetisk naturgas.
+      Kilde: [ISO 14532:2014, par. 2.1.1.1]
+- Navn: tryk
+  Foretrukken term: tryk
+  Definition: overtryk i forhold til atmosfæren
+  Anvendelsesnote: 'Jo større tryk, jo større sikkerhedsrisiko for mennesker og/eller miljø ved skade på ledning. Værdien af trykket vil være en af følgende: 275, 80, 50, 40, 37.9, 37, 20, 19, 7, 4, 2.5, 0.1, 0.026, 0'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Gasledningstype (Kodeliste)
+  Værdier:
+  - værdi: distributionsledning
+    definition: |-
+      ledning der følger vejnettet
+      Note: Udgør gassens hoved- og biveje.
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: fordelingsledning
+    definition: |-
+      ledning der fordeler gas videre ud fra en transmissionsledning
+      Note: Udgør gassens motortrafikveje.
+      Kilde: LER-arbejdsgruppe for gas
+  - værdi: stikledning
+    definition: |-
+      sidste del af et forsyningsnet, som tilslutter en eller flere brugere af en bestemt forsyning til det pågældende net
+      Juridisk kilde: [LER-loven]
+  - værdi: transmissionsledning
+    definition: |-
+      overordnet infrastruktur
+      Note: Udgør gassens motorveje.
+      Kilde: LER-arbejdsgruppe for gas
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: geometriVertikaleKoordinaterRestriktion
+  Udtryk: |-
+    En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis alle følgende betingelser er sande:
+    * etableringstidspunktet er efter skæringsdatoen;
+    * ejerskabsforholdet er ejet af udleverende ledningsejer;
+    * driftsstatussen er ikke under etablering.
+- Navn: trykMåleenhedsrestriktion
+  Udtryk: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].
+associationsroller: []

@@ -1,0 +1,270 @@
+navn: Ledningskomponent
+pakke: 'Pakke: Fælles'
+Foretrukken term: komponent
+Frarådede termer: ledningskomponent
+Definition: element som hverken er en ledning eller et ledningstrace
+Note: Omfatter også bygningsværker.
+Eksempel: stophane, brønd, skab, ventil, afgrening, vandværk, bassin
+Juridisk kilde: '[LER-bekendtgørelsen]'
+Supertype til: |-
+  Afløbskomponent
+  AndenKomponent
+  Elkomponent
+  Gaskomponent
+  Oliekomponent
+  Telekommunikationskomponent
+  TermiskKomponent
+  Vandkomponent
+Type: Featuretype
+Abstrakt: ja
+attributter:
+- Navn: driftsstatus
+  Foretrukken term: driftsstatus
+  Definition: status i relation til drift
+  Anvendelsesnote: Bruges om status i relation til komponentens driftslivscyklus.
+  Kilde: LER-forretning
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Driftsstatus (Enumeration)
+  Værdier:
+  - værdi: under etablering
+    definition: |-
+      driftsstatus der angiver at noget er planlagt eller under etablering
+      Anvendelsesnote: Bruges om komponenter der er planlagt, er ved at blive nedgravet eller anbragt eller lige er blevet nedgravet eller anbragt. Angivelsen af placeringen på disse vil ofte være usikker. Der skal graves med udgangspunkt i at komponenten er der.
+      Kilde: LER-forretning
+  - værdi: i drift
+    definition: |-
+      i drift
+      i brug
+      driftsstatus der angiver at noget er i drift
+      Anvendelsesnote: Bruges om komponenter der er i drift - eller er midlertidigt ude af drift.
+      Kilde: LER-forretning
+  - værdi: permanent ude af drift
+    definition: |-
+      driftsstatus der angiver at noget er taget ud af drift permanent
+      Anvendelsesnote: Bruges om komponenter der er permanent ude af drift og som derfor kan fjernes efter aftale med ledningsejer.
+      Kilde: LER-forretning
+  Maksimumlængde: '50'
+- Navn: ejerskabsforhold
+  Foretrukken term: ejerskabsforhold til komponent
+  Definition: forhold vedrørende ejendomsretten til komponenten
+  Kilde: baseret på [DDO]
+  Voidable: nej
+  Multiplicitet: 0..1
+  Initial værdi: ejet af udleverende ledningsejer
+  Type: Ejerskabsforholdtype (Enumeration)
+  Værdier:
+  - værdi: ejet af anden ledningsejer
+    definition: |-
+      ejet af en anden ledningsejer end den der udleverer ledningsoplysninger
+      Anvendelsesnote: Se §12 i [LER-loven]
+  - værdi: ejet af udleverende ledningsejer
+    definition: |-
+      ejet af den ledningsejer der udleverer ledningsoplysninger
+      Anvendelsesnote: Se §12 i [LER-loven]
+  - værdi: uden ejer
+    definition: |-
+      ejet af et selskab som er lukket, og hvor ejerskabet ikke er overdraget til en anden ledningsejer, eller ejet af en ukendt ledningejer
+      Anvendelsesnote: Se §12 i [LER-loven]
+      Juridisk kilde: baseret på §12 i [LER-loven]
+- Navn: etableringstidspunkt
+  Foretrukken term: etableringstidspunkt
+  Definition: tidsangivelse der angiver hvornår etablering er færdig
+  Note: Et anlæg anses som etableret, når det har en form, hvor det kan benyttes til dets primære formål.
+  Anvendelsesnote: Tidsangivelsen kan være en bestemt dato, en bestemt måned, et bestemt år. Angivelsen kan også være ”ukendt, dog med sikkerhed før en given dato”.
+  Eksempel: april 2020, før d. 1. juli 2023, 2. juli 2023, 2024
+  Juridisk kilde: '[LER-bekendtgørelsen]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: TM_Position (Uniondatatype)
+- Navn: fareklasse
+  Foretrukken term: fareklasse ved ledningsskade
+  Accepterede termer: fareklasse
+  Definition: kategori der angiver sikkerhedsrisiko for mennesker og/eller miljø ved skade på komponent
+  Kilde: LER-forretning
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Fareklasse (Enumeration)
+  Værdier:
+  - værdi: ikke farlig
+    definition: |-
+      fareklasse ved ledningsskade der angiver ingen sikkerhedsrisiko
+      Note: Anvendes ved ledningsskade, der ikke udgør en sikkerhedsrisiko for mennesker eller miljø.
+      Kilde: LER-forretning
+  - værdi: farlig
+    definition: |-
+      fareklasse ved ledningsskade der angiver sikkerhedsrisiko
+      Note: Anvendes ved ledningsskade, der udgør en sikkerhedsrisiko, som dog ikke kan medføre dødelig skade på eller invalidering af mennesker eller kritisk miljøskade.
+      Kilde: LER-forretning
+  - værdi: meget farlig
+    definition: |-
+      fareklasse ved ledningsskade der angiver kritisk sikkerhedsrisiko
+      Note: Anvendes ved ledningsskade, der potentielt kan medføre dødelig skade på eller invalidering af mennesker eller kritisk miljøskade.
+      Kilde: LER-forretning
+  Maksimumlængde: '50'
+- Navn: geometri
+  Foretrukken term: geometri
+  Definition: geografisk placering
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: GM_Object
+- Navn: id
+  Foretrukken term: identifikator
+  Accepterede termer: id, identifikation, nummer
+  Definition: sproglig uafhængig rækkefølge af tegn der er egnet til unikt og permanent at identificere det som det er knyttet til
+  Kilde: '[ISO 19135-1:2015, par. 4.1.5]'
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '36'
+- Navn: materiale
+  Foretrukken term: materiale af komponent
+  Definition: stof brugt til fremstilling af komponent
+  Eksempel: beton, jern
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '50'
+- Navn: niveau
+  Foretrukken term: niveau
+  Definition: placering i forhold til terræn
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Niveautype (Enumeration)
+  Værdier:
+  - værdi: delvist under terræn
+    definition: |-
+      delvist under et landområdes jordoverflade
+      Kilde: baseret på [DDO]
+  - værdi: over terræn
+    definition: |-
+      over et landområdes jordoverflade
+      Kilde: baseret på [DDO]
+  - værdi: under terræn
+    definition: |-
+      under et landområdes jordoverflade
+      Kilde: baseret på [DDO]
+  Maksimumlængde: '50'
+- Navn: nøjagtighedsklasse
+  Foretrukken term: nøjagtighedsklasse for den horisontale placering
+  Definition: kategori for nøjagtighed af angivelsen af et objekts horisontale placering i et koordinatreferencesystem
+  Juridisk kilde: '[LER-bekendtgørelsen]'
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Nøjagtighedsklasse (Enumeration)
+  Værdier:
+  - værdi: <= 0.25 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 0,25 m
+      Kilde: LER-forretning
+  - værdi: <= 0.50 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 0,50 m
+      Kilde: LER-forretning
+  - værdi: <= 1.00 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 1,00 m
+      Kilde: LER-forretning
+  - værdi: <= 2.00 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 2,00 m
+      Kilde: LER-forretning
+  - værdi: '> 2.00 m'
+    definition: |-
+      stedbestemmelsen kan afvige med mere end 2,00 m
+      Kilde: LER-forretning
+  Maksimumlængde: '50'
+- Navn: nøjagtighedsklasseVertikal
+  Foretrukken term: nøjagtighedsklasse for den vertikale placering
+  Definition: kategori for nøjagtighed af angivelsen af et objekts vertikale placering i et koordinatreferencesystem
+  Juridisk kilde: '[LER-bekendtgørelsen]'
+  Voidable: ja
+  Multiplicitet: 0..1
+  Type: Nøjagtighedsklasse (Enumeration)
+  Værdier:
+  - værdi: <= 0.25 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 0,25 m
+      Kilde: LER-forretning
+  - værdi: <= 0.50 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 0,50 m
+      Kilde: LER-forretning
+  - værdi: <= 1.00 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 1,00 m
+      Kilde: LER-forretning
+  - værdi: <= 2.00 m
+    definition: |-
+      stedbestemmelsen kan afvige med op til 2,00 m
+      Kilde: LER-forretning
+  - værdi: '> 2.00 m'
+    definition: |-
+      stedbestemmelsen kan afvige med mere end 2,00 m
+      Kilde: LER-forretning
+  Maksimumlængde: '50'
+- Navn: registreringFra
+  Definition: tidspunkt hvor registrering er foretaget
+  Anvendelsesnote: Anvendes til at oplyse om tidspunktet hvor en ny tilstand af komponenten blev registreret i ledningsejers system. Gennem LER udveksles kun nugældende data og derfor svarer dette tidspunkt i LER til den seneste opdateringsdato. Opdateringen, der førte til den nye tilstand, kan være ændring af den geografiske placering og/eller andre egenskaber.
+  Eksempel: 5. februar 2017 kl. 14:10:22
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: DateTime
+  Modelleringsnote: Betydning, navngivning og datatype er i overensstemmelse med [GD].
+- Navn: sikkerhedshensyn
+  Foretrukken term: sikkerhedshensyn ved gravearbejde
+  Accepterede termer: sikkerhedshensyn
+  Definition: forholdsregler under gravearbejde i nærheden af komponent
+  Note: Giver ledningsejeren mulighed for at angive sikkerhedshensyn, der skal tages ved arbejdet nær en given komponent.
+  Kilde: LER-forretning
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '500'
+- Navn: vejledendeDybde
+  Foretrukken term: vejledende dybde i forhold til terræn ved etablering
+  Definition: lodret afstand til terræn, som noget forventeligt blev placeret i, da det blev etableret
+  Note: Værdien er vejledende, da der ikke er tale om en indmålt værdi, og da der over tid kan ske ændring af terræn og placering af genstanden.
+  Anvendelsesnote: Dybden angives for overkant af komponent.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+restriktioner:
+- Navn: geometriDatatyperestriktion
+  Udtryk: |-
+    Geometrien skal have en af følgende typer: GM_Point, GM_MultiPoint, GM_Curve, GM_MultiCurve, GM_Surface eller GM_MultiSurface.
+    Geometrien skal anvende lineær interpolation hvis dens type er GM_Curve eller GM_MultiCurve.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:LineString
+    * gml:Curve som består af segmenter af typen gml:LineStringSegment
+    Note 2: En kurve kan være enkeltstående eller kan indgå i en flade, som del af en grænse.
+    Geometrien skal anvende 2-dimensionel interpolation (på engelsk: "planar interpolation") hvis dens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at geometritypen skal være en af følgende [GML SF]:
+    * gml:Polygon
+    * gml:Surface som består af dele af typen gml:PolygonPatch
+    Geometriens grænser skal anvende lineær interpolation hvis geometriens type er GM_Surface eller GM_MultiSurface.
+    Note: I en GML-indkodning betyder det, at en grænse af en flade eller en multiflade skal have en af følgende geometrityper [GML SF]:
+    * gml:LinearRing
+    * gml:Ring som består af kurver der anvender lineær interpolation (se ovenfor)
+- Navn: vejledendeDybdeMåleenhedsrestriktion
+  Udtryk: Måleenheden for den vejledende dybde i forhold til terræn ved etablering skal være millimeter. Millimeter skal angives med symbolet mm [UCUM].
+associationsroller:
+- Navn: bilag
+  Foretrukken term: bilag til komponent
+  Definition: informationsressource som vedlægges komponenten
+  Voidable: nej
+  Multiplicitet: 0..*
+  Type: Informationsressource (Featuretype)
+- Navn: kontaktprofilTilTekniskeSpørgsmål
+  Foretrukken term: kontaktprofil til tekniske spørgsmål
+  Definition: kontaktprofil der giver adgang til kontaktoplysninger på nogen man kan kontakte for at få svar på tekniske spørgsmål
+  Anvendelsesnote: Vil typisk kun være til stede hvis ejerskabsforholdet er "ejet af anden ledningsejer". Vil typisk ikke være til stede hvis ejerskabsforholdet er "ejet af udleverende ledningsejer", da kontaktprofilen til tekniske spørgsmål så kan findes på selve graveforespørgselssvaret.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Kontaktprofil (Featuretype)
+- Navn: tilknyttetLedning
+  Foretrukken term: tilknyttet ledning
+  Definition: ledning som komponenten er knyttet til
+  Voidable: nej
+  Multiplicitet: 0..*
+  Type: Ledning (Featuretype)

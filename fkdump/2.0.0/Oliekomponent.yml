@@ -1,0 +1,17 @@
+navn: Oliekomponent
+pakke: 'Pakke: Olie'
+Foretrukken term: oliekomponent
+Definition: komponent der har tilknytning til olieledninger
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Eksempel: muffe, skab
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: CharacterString
+  Maksimumlængde: '50'
+restriktioner: []
+associationsroller: []

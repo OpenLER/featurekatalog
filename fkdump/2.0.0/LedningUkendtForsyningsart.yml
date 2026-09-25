@@ -1,0 +1,17 @@
+navn: LedningUkendtForsyningsart
+pakke: 'Pakke: Fælles'
+Foretrukken term: ledning med ukendt forsyningsart
+Definition: ledning hvis forsyningsart ikke kendes
+Anvendelsesnote: Anvendes typisk for gamle ledninger, som ledningsejer ikke ved hvad er, og for gamle ledninger, hvis ejerskab ikke er kendt. Hvis ledningens forsyningsart er kendt (f.eks. el) - så skal det tilsvarende featuretype anvendes (f.eks. Elledning), ikke LedningUkendtForsyningsart.
+Subtype af: Ledning
+Type: Featuretype
+attributter:
+- Navn: supplerendeInfo
+  Foretrukken term: supplerende information om ledning
+  Definition: ekstra viden om ledning
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '500'
+restriktioner: []
+associationsroller: []

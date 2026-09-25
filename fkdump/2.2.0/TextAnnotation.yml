@@ -1,0 +1,33 @@
+navn: TextAnnotation
+pakke: 'Datamodel: Annotations'
+Definition: textual marking on illustrative material for the purpose of clarification
+Kilde: based on [ISO 19117:2012, 4.1]
+Type: Featuretype
+attributter:
+- Navn: geometry
+  Definition: location
+  Anvendelsesnote: Teksten skal centreres i forhold til dette punkt.
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: GM_Point
+- Navn: text
+  Definition: data intended with language to convey a meaning and whose interpretation is essentially based upon the reader's knowledge of some natural language or artificial language
+  Kilde: '[ISO 5127:2017, 3.2.1.05]'
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: CharacterString
+  Maksimumlængde: '50'
+restriktioner: []
+associationsroller:
+- Navn: annotatedFeature
+  Definition: feature that is the target of the annotation
+  Anvendelsesnote: Dette feature skal være et objekt som blev sendt med i et graveforespørgselssvar.
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Feature (Featuretype)
+- Navn: connector
+  Definition: line feature which shows the connection between a feature and a text regarding that feature
+  Note: In the technical product documentation domain, a connector would be the equivalent of a leader line or the aggregation of a leader line [ISO 128-22:1999, 3.1] and a reference line [ISO 128-22:1999, 3.2].
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: LinearAnnotation (Featuretype)

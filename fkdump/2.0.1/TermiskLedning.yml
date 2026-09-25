@@ -1,0 +1,114 @@
+navn: TermiskLedning
+pakke: 'Pakke: Fjernvarme og Fjernkøling'
+Foretrukken term: termisk ledning
+Definition: ledning hvorigennem varme eller kulde føres
+Subtype af: Rørledning
+Type: Featuretype
+attributter:
+- Navn: indhold
+  Foretrukken term: indhold af ledning
+  Definition: det som ledes af ledningen
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Termiskledningsindholdstype (Enumeration)
+  Værdier:
+  - værdi: damp
+    definition: |-
+      varmt vand på dampform
+      Note: Højt tryk og temperatur over ca. 130 grader celsius.
+      Kilde: Dansk Fjernvarme
+  - værdi: glykol
+    definition: |-
+      organisk forbindelse af typen divalent alkohol
+      Anvendelsesnote: Nogle selskaber leverer køl med glykol.
+      Kilde: [DDO]
+  - værdi: koldt vand
+    definition: |-
+      vand til fjernkøling
+      Note: Typisk med temperatur under 20 grader celsius.
+      Kilde: Dansk Fjernvarme
+  - værdi: sprit
+    definition: |-
+      væske med højt indhold af alkohol
+      Anvendelsesnote: Der findes varmepumper der er forbundet med en fælles brine der indeholder sprit.
+      Kilde: [DDO]
+  - værdi: varmt vand
+    definition: |-
+      fjernvarmevand
+      Note: Typisk med temperatur mellem 20 og 120 grader celsius.
+      Kilde: Dansk Fjernvarme
+  Maksimumlængde: '50'
+- Navn: konstruktion
+  Foretrukken term: konstruktion af termisk ledning
+  Definition: måde en termisk ledning er sammensat eller opbygget på
+  Kilde: baseret på [DDO]
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Termiskledningkonstruktiontype (Enumeration)
+  Værdier:
+  - værdi: kanal
+    definition: |-
+      betonkanal
+      Note: Oprindelige ledninger blev nedlagt i betonkanaler med isoleringsmateriale.
+      Kilde: Dansk Fjernvarme
+  - værdi: præisoleret
+    definition: |-
+      fjernvarmerør med isolering
+      Note: Stål- eller PEX-rør med opskummet isolering i en kappe af PE-materiale.
+      Kilde: Dansk Fjernvarme
+  Maksimumlængde: '50'
+- Navn: temperatur
+  Foretrukken term: temperatur
+  Definition: temperatur af den termiske lednings indhold
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: tryk
+  Foretrukken term: tryk
+  Definition: overtryk i forhold til atmosfæren
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: ja
+  Multiplicitet: '1'
+  Type: Termiskledningstype (Enumeration)
+  Værdier:
+  - værdi: produktionsledning
+    definition: |-
+      ledning mellem produktionsenheder
+      Note: F.eks. internt på værket mellem kedel og akummuleringstank eller ved et solvarmeanlæg.
+      Kilde: Dansk Fjernvarme
+  - værdi: transmissionsledning
+    definition: |-
+      ledning til transport af vand eller damp
+      Note: Store isolerede ledningsanlæg til transport af store damp eller vandmængder uden tilsluttede forbrugere.
+      Kilde: Dansk Fjernvarme
+  - værdi: distributionsledning
+    definition: |-
+      ledninger i gade og fortov til fremføring af fjernvarmevand
+      Note: Isolerede ledningsanlæg til transport af behandlet køle eller varmt vand.
+      Kilde: Dansk Fjernvarme
+  - værdi: stikledning
+    definition: |-
+      sidste del af et forsyningsnet, som tilslutter en eller flere brugere af en bestemt forsyning til det pågældende net
+      Kilde: [LER-loven]
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: fareklasseRestriktion
+  Udtryk: |-
+    Fareklassen skal være meget farlig hvis en eller flere af følgende betingelser er sande:
+    * den termiske ledning har en temperatur på mere end 130 °C
+    * den termiske ledning har et tryk på 10 bar eller mere
+    Fareklassen må ikke være meget farlig hvis alle følgende betingelser er sande:
+    * den termiske ledning har en temperatur på 130 °C eller mindre
+    * den termiske ledning har et tryk på mindre end 10 bar
+- Navn: geometriVertikaleKoordinaterRestriktion
+  Udtryk: En vertikal koordinat i geometrien må ikke være ukendt-værdien på -99 hvis etableringstidspunktet er efter skæringsdatoen.
+- Navn: temperaturMåleenhedsrestriktion
+  Udtryk: Måleenheden for temperaturen skal være grader celsius. Grader celsius skal angives med symbolet Cel [UCUM].
+- Navn: trykMåleenhedsrestriktion
+  Udtryk: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].
+associationsroller: []

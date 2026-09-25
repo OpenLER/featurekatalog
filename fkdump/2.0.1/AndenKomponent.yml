@@ -1,0 +1,59 @@
+navn: AndenKomponent
+pakke: 'Pakke: Andet'
+Foretrukken term: anden komponent
+Definition: komponent som hverken er en afløbskomponent, elkomponent, gaskomponent, føringsrør, oliekomponent, termisk komponent, telekommunikationskomponent eller vandkomponent
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: forsyningsart
+  Foretrukken term: forsyningsart
+  Definition: komponentens forsyningsart
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Forsyningsart (Kodeliste)
+  Værdier:
+  - værdi: afløb
+    definition: |-
+      bortledning af vand
+      opsamling og bortledning af spildevand, regnvand og drænvand
+  - værdi: el
+    definition: |-
+      elforsyning
+      produktion og distribution af elektricitet
+  - værdi: fjernvarme/fjernkøling
+    definition: |-
+      fjernvarme eller fjernkøling
+      produktion og distribution af varme eller kulde
+  - værdi: gas
+    definition: |-
+      gasforsyning
+      indvinding og distribution af gas
+  - værdi: olie
+    definition: |-
+      olieforsyning
+      indvinding og distribution af olie
+      Note: olie: tyktflydende væske, der ikke er blandbar med vand [DSD] Omfatter bl.a. mineralolie (også kaldt jordolie eller råolie) og vegetabilsk olie. Olie anvendes bl.a. som energikilde, til opvarmning, i kraftværker og som brændstof til biler, fly og skibe [baseret på DSD].
+  - værdi: telekommunikation
+    definition: |-
+      transmission, emission eller modtagelse af tegn, signaler, skrift, billeder og lyd eller intelligens af enhver art vha. tråd, radio, optiske eller andre elektromagnetiske systemer
+      Kilde: [IEV, ref 701-01-05]
+  - værdi: vand
+    definition: |-
+      vandforsyning
+      indvinding og distribution af vand
+      Kilde: [DSD]
+  Maksimumlængde: '50'
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Eksempel: muffe, skab
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: CharacterString
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: forsyningsartRestriktion
+  Udtryk: |-
+    Forsyningsarten må ikke være en af de prædefinerede værdier fra kodelisten Forsyningsart.
+    Note: Hvis man har behov for at afgive oplysninger om en ledningskomponent som har en forsyningsart som er prædefineret i kodelisten Forsyningsart, så skal man i stedet for AndenKomponent bruge den subklasse af Ledningskomponent som hører til den forsyningsart. Fx Telekommunikationskomponent for forsyningsarten telekommunikation.
+associationsroller: []

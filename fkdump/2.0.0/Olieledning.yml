@@ -1,0 +1,26 @@
+navn: Olieledning
+pakke: 'Pakke: Olie'
+Foretrukken term: olieledning
+Definition: ledning hvori olie føres frem
+Subtype af: Rørledning
+Type: Featuretype
+attributter:
+- Navn: tryk
+  Foretrukken term: tryk
+  Definition: overtryk i forhold til atmosfæren
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: Measure
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: 0..1
+  Type: CharacterString
+  Maksimumlængde: '50'
+restriktioner:
+- Navn: fareklasseRestriktion
+  Udtryk: Fareklassen må ikke være meget farlig.
+- Navn: trykMåleenhedsrestriktion
+  Udtryk: Måleenheden for trykket skal være bar. Bar skal angives med symbolet bar [UCUM].
+associationsroller: []

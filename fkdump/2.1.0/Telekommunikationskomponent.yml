@@ -1,0 +1,46 @@
+navn: Telekommunikationskomponent
+pakke: 'Pakke: Telekommunikation'
+Foretrukken term: telekommunikationskomponent
+Definition: komponent der har tilknytning til telekommunikationsledninger
+Subtype af: Ledningskomponent
+Type: Featuretype
+attributter:
+- Navn: type
+  Foretrukken term: type
+  Definition: kategori
+  Voidable: nej
+  Multiplicitet: '1'
+  Type: Telekommunikationskomponenttype (Kodeliste)
+  Værdier:
+  - værdi: accesspoint
+    definition: enhed der gør det muligt for trådløse enheder at oprette forbindelse til et kablet netværk
+  - værdi: brønd
+    definition: |-
+      rum i jord afgrænset af vægge, bund og låg
+      Note: Anvendes bl.a. til afslutning af føringsrør, træk af kabler i føringsrør og placering af spidsemuffer.
+      Kilde: LER-arbejdsgruppe for tele og data
+  - værdi: fordelerboks
+    definition: |-
+      fordelerboks
+      multiplekser
+      komponent der kombinerer flere inputsignaler til ét outputsignal
+  - værdi: kvejl
+    definition: |-
+      ekstralængde ledning som er lagt op i en cirkulær eller næsten cirkulær bunke
+      Kilde: LER-arbejdsgruppe for tele og data
+  - værdi: rørmuffe
+    definition: |-
+      muffe der anvendes til samling af to eller flere rør
+      Anvendelsesnote: Kan anvendes til at oplyse om rørmuffer, der har en usædvanlig udstrækning ift. en normal tracebredde. Langt de fleste rørmuffer har kun en marginalt større dimension ift. røret.
+      Kilde: LER-arbejdsgruppe for tele og data
+  - værdi: skab
+    definition: |-
+      komponent hvori kabler afsluttes i passivt og/eller aktivt udstyr
+      Kilde: LER-arbejdsgruppe for tele og data
+  - værdi: splidsemuffer i jord
+    definition: |-
+      muffer placeret direkte i jord der anvendes til at samle to eller flere kabler
+      Kilde: LER-arbejdsgruppe for tele og data
+  Maksimumlængde: '50'
+restriktioner: []
+associationsroller: []

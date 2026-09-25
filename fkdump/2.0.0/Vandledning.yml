@@ -1,0 +1,11 @@
+navn: Vandledning
+pakke: 'Pakke: Vand'
+Foretrukken term: vandledning
+Definition: ledning der fører vand frem
+Subtype af: Rørledning
+Type: Featuretype
+attributter: []
+restriktioner:
+- Navn: fareklasseRestriktion
+  Udtryk: Fareklassen må ikke være meget farlig.
+associationsroller: []
