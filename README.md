@@ -54,18 +54,10 @@ er ingen fortolkning oveni. Formålet er, at man (og AI) kan læse og
 sammenligne datamodellen på tværs af versioner, f.eks. med
 `diff -r fkdump/2.1.0 fkdump/2.2.0`.
 
-fkdump skrives af `python3 app.py freeze` og kan også skrives alene med
-`python3 fkdump.py`.
-
-### constraints
-
-Restriktionerne eksporteres også for sig. Det er de eneste
-valideringsregler i docx, som ikke allerede er udtrykt i de officielle
-XSD-filer. De eksporteres uden fortolkning oveni (ingen koder, kategorisering
-e.l.) til `constraints/<version>/<featuretype>.yml`.
-
-Disse filer har jeg brugt til at lave de tilsvarende XTA-filer i
-[ler-xml-validator](https://github.com/OpenLER/ler-xml-validator).
+Restriktionerne i fkdump er de eneste valideringsregler i docx, som ikke
+allerede er udtrykt i de officielle XSD-filer.
+[ler-xml-validator](https://github.com/OpenLER/ler-xml-validator) bygger sine
+XTA-filer ud fra dem.
 
 ## Arkitektur
 
@@ -116,21 +108,17 @@ git push
 Skriver statisk HTML til `docs/` (via Frozen-Flask, inkl. en `.nojekyll`-fil så
 GitHub ikke forsøger at Jekyll-processere sitet).
 
-## Generér restriktioner som YAML
+## Generér fkdump
 
 ```bash
-python3 build_constraint_yml.py
+python3 fkdump.py
 ```
 
-Skriver én YAML-fil pr. featuretype pr. version til `constraints/<version>/`
-(fx `constraints/2.2.0/Ledning.yml`), med de restriktioner featuretypen har fra
-den pågældende versions docx (`feature_type`, `name`, `expression`).
-Featuretyper uden restriktioner får ingen fil. Kører automatisk for alle
-versioner i `versions/`.
-
-Scriptet kører uafhængigt af Flask-app'en og freeze-processen og deler kun
-parseren i `featurekatalog.py`. Se "Parsing af data fra docx" for, hvorfor
-kun restriktionerne eksporteres.
+Skriver én YAML-fil pr. featuretype pr. version til `fkdump/<version>/`
+(f.eks. `fkdump/2.2.0/Elledning.yml`) for alle versioner i `versions/`.
+Versionens mappe tømmes først, så featuretyper, der er forsvundet fra docx,
+ikke ligger tilbage. `python3 app.py freeze` gør det samme automatisk, så
+scriptet er kun nødvendigt, hvis man vil opdatere fkdump uden at bygge sitet.
 
 ## Hent/opdater fejlkoder
 
