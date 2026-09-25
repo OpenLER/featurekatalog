@@ -23,12 +23,12 @@
   prod: 2025-05-13
   url: https://ler.dk/Files/Releasenote_2_2_5.pdf
 - release: 2.2.5 Hotfix 1
-  summary: "Fejlrettelser i V2 af integration 13 og 16."
+  summary: "Integration 16 V2 accepterer store og små bogstaver i URL-parametre. Integration 13 V1 svarer 409 Conflict, hvis ledningspakken ikke kan hentes."
   extest: 2025-05-20
   prod: 2025-05-20
   url: https://ler.dk/Files/Releasenote_2_2_5_Hotfix_1.pdf
 - release: 2.2.5 Hotfix 2
-  summary: "Fejlrettelser i integration 13."
+  summary: "Integration 13 V1: dobbelt validering fjernet for at forbedre performance."
   extest: 2025-05-26
   prod: 2025-05-26
   url: https://ler.dk/Files/Releasenote_2_2_5_Hotfix_2.pdf
@@ -60,7 +60,9 @@
   url: https://ler.dk/Files/ReleaseNote_2_2_9.pdf
   datamodel: 2.2.0
 - release: 2.2.9 Hotfix 1
-  summary: "Rettet fejl, hvor ledningsoplysninger i ledningspakken blev overskrevet."
+  # Release notens "Formål" er kopieret fra 2.2.7 Hotfix 1 og passer ikke til
+  # indholdet. Beskrivelsen her følger afsnittet "Fejl #1".
+  summary: "Rettet fejl fra 2.2.9, hvor private graveaktører ikke kunne oprette deres første graveforespørgsel."
   extest:
   prod: 2025-12-15
   url: https://ler.dk/Files/Releasenote_2_2_9_Hotfix_1.pdf
