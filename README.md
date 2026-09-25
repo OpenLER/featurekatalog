@@ -1,46 +1,47 @@
 # featurekatalog
 
-Jeg har tit haft brug for at tjekke, hvad der var tilladt ift LER,
-herunder hvornår hvilke attributter var påkrævede, og jeg syntes
-det var besværligt/trægt at læse den officielle LER-dokumentation.
+Et uofficielt opslagsværk over LERs datamodel, krav og fejlkoder:
+**https://openler.github.io/featurekatalog/**
 
-Jeg har samlet ovenstående information i en hjemmeside, i dette repo.
-Resultatet publiceres på:
-[https://lerinfo.github.io/featurekatalog/](https://lerinfo.github.io/featurekatalog/).
+Jeg har tit haft brug for at tjekke, hvad der er tilladt i LER, f.eks.
+hvornår hvilke attributter er påkrævede. Den officielle dokumentation er en
+lang docx-fil plus en række XSD-filer, og den er besværlig at slå op i.
 
-## Detaljer omkr udarbejdelsen af denne dokumentation
+Derfor har jeg samlet det hele på én hjemmeside, hvor man kan browse og
+finde de detaljer, man leder efter. Det er den hjemmeside, jeg ville ønske,
+at LER selv havde lavet: en lommebog til alle, der arbejder med LER, også
+dem, der vil bygge deres egen LER-klient.
 
-Al dokumentation genereres som statisk html. Disse html filer
-er autogeneret vha Flask og Frozen-Flask plus mine egne
-værktøjer (med hjælp fra Claude AI), der extracter info fra resourcer.
+## Hvorfor parse docx og ikke en kildefil?
 
-Der er tre typer af information/krav, fra tre forskellige kilder:
+Docx-filen med featurekataloget er tydeligvis maskingenereret ud fra en eller
+flere kildefiler, f.eks. en XMI-fil (UML-modellen). XSD-filerne er formentlig
+genereret af samme værktøj ud fra de samme kildefiler.
 
-## Komposition af data
+Det havde været mere elegant at parse kildefilen direkte. I maj 2026 skrev jeg
+til Klimadatastyrelsen (tidligere SDFE) og spurgte efter den, men fik svar om,
+at en sådan fil ikke findes, og at de kun har XSD- og docx-filerne.
 
-### XML Schema / XSD
+Derfor parser featurekatalog docx og XSD. Det fungerer godt nok i praksis.
 
-Information omkr struktur/komposition er extracted fra XSD-filer.
+## Kilder
 
-### Restriktioner, attributter, m.m. fra featurekatalog
+Sitet samler fire slags information fra fire forskellige kilder:
 
-I LER's featurekatalog docx angives for hver feature type diverse
-informationer i et bestemt format. Disse parses/extractes og vises
-også.
+| Information | Kilde | Hentes af |
+|---|---|---|
+| Struktur: elementer, typer og typehierarki | XSD-filerne | `wrapper.py` (`SchemaEx`) |
+| Attributter, restriktioner og associationsroller pr. featuretype | Featurekatalogets docx-fil | `featurekatalog.py` |
+| Andre krav (G1–G4), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/general_constraints.html` |
+| Fejlkoder og navngivne forretningsregler | LERs API (`/api/errorcodes`) | `fetch_errorcodes.py` |
 
-### Yderligere restriktioner
+## Arkitektur
 
-Der er andre krav, som enten slet ikke er dokumenteret eller som
-er dokumenteret på en måde, hvor de ikke kommer med i min
-parsing af ovennævnte docx.
+Al dokumentation genereres som statisk HTML. `app.py` fletter kilderne
+sammen i én Flask-app, og Frozen-Flask gemmer den som statiske filer i
+`docs/`, som GitHub Pages udgiver. Parserne er skrevet med hjælp fra Claude.
 
-- `featurekatalog.py` parser `ler_featurekatalog.docx` (attributter, restriktioner,
-  associationsroller pr. featuretype).
-- `wrapper.py` (`SchemaEx`) parser `<version>_ler.xsd` (og de importerede
-  Dimensions/Annotations-namespaces) for XSD-struktur (elementer, typehierarki).
-- `app.py` fletter de to og server dem som én sammenhængende Flask-app.
-
-### Flere versioner af datamodellen
+## Flere versioner af datamodellen
 
 Sitet dækker flere udgivne versioner af LER's datamodel, ikke kun den seneste.
 Kildefilerne (featurekatalog-docx + XSD'er) for hver version ligger under
