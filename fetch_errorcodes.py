@@ -8,8 +8,8 @@ dokumentation der kan halte bagefter (se adr/901-ler-api-error-codes.md).
 errorcodes.json committes til repoet (ligesom versions/-kildefilerne), så
 app.py/freeze ikke afhænger af en live forbindelse eller certifikat.
 
-Kræver klient-certifikat via miljøvariablerne FEATUREKATALOG_CERT (cert/fullchain)
-og FEATUREKATALOG_KEY (privat nøgle).
+Kræver klient-certifikat via miljøvariablerne LERBOGEN_CERT (cert/fullchain)
+og LERBOGEN_KEY (privat nøgle).
 
 Usage:
     python3 fetch_errorcodes.py
@@ -23,8 +23,8 @@ import requests
 LER_HOST = 'https://services-extest.ler.dk'
 OUT_PATH = Path(__file__).parent / 'errorcodes.json'
 
-CERT_FILE = os.environ['FEATUREKATALOG_CERT']
-KEY_FILE = os.environ['FEATUREKATALOG_KEY']
+CERT_FILE = os.environ['LERBOGEN_CERT']
+KEY_FILE = os.environ['LERBOGEN_KEY']
 
 
 def main():

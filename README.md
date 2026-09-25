@@ -1,7 +1,7 @@
-# featurekatalog
+# LER-bogen
 
 Et uofficielt opslagsværk over LERs datamodel, krav og fejlkoder:
-**https://openler.github.io/featurekatalog/**
+**https://openler.github.io/lerbogen/**
 
 Jeg har tit haft brug for at tjekke, hvad der er tilladt i LER, f.eks.
 hvornår hvilke attributter er påkrævede. Den officielle dokumentation er en
@@ -22,7 +22,7 @@ Det havde været mere elegant at parse kildefilen direkte. I maj 2026 skrev jeg
 til Klimadatastyrelsen (tidligere SDFE) og spurgte efter den, men fik svar om,
 at en sådan fil ikke findes, og at de kun har XSD- og docx-filerne.
 
-Derfor parser featurekatalog docx og XSD. Det fungerer godt nok i praksis.
+Derfor parser LER-bogen docx og XSD. Det fungerer godt nok i praksis.
 
 ## Kilder
 
@@ -123,8 +123,8 @@ scriptet er kun nødvendigt, hvis man vil opdatere fkdump uden at bygge sitet.
 ## Hent/opdater fejlkoder
 
 ```bash
-export FEATUREKATALOG_CERT=/sti/til/cert-eller-fullchain.pem
-export FEATUREKATALOG_KEY=/sti/til/client.key
+export LERBOGEN_CERT=/sti/til/cert-eller-fullchain.pem
+export LERBOGEN_KEY=/sti/til/client.key
 python3 fetch_errorcodes.py
 ```
 
