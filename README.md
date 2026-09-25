@@ -35,6 +35,24 @@ Sitet samler fire slags information fra fire forskellige kilder:
 | Andre krav (G1–G4), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/general_constraints.html` |
 | Fejlkoder og navngivne forretningsregler | LERs API (`/api/errorcodes`) | `fetch_errorcodes.py` |
 
+## Parsing af data fra docx
+
+Funktionen `parse_featurekatalog()` tager en docx-fil og returnerer en
+datastruktur, der kun består af lister og dicts og derfor er kompatibel med
+YAML og JSON. Datastrukturen indeholder (næsten) alt, hvad der er værd at
+udtrække. Jeg vil tro, at man med den rette viden ville kunne oversætte
+disse data tilbage til kildefilen (f.eks. XMI).
+
+Flask-visningen bruger alle disse data.
+
+Noget af det eksporteres også til filer: restriktionerne. Det er de eneste
+valideringsregler i docx, som ikke allerede er udtrykt i de officielle
+XSD-filer. De eksporteres uden fortolkning oveni (ingen koder, kategorisering
+e.l.) til `constraints/<version>/<featuretype>.yml`.
+
+Disse filer har jeg brugt til at lave de tilsvarende XTA-filer i
+[ler-xml-validator](https://github.com/OpenLER/ler-xml-validator).
+
 ## Arkitektur
 
 Al dokumentation genereres som statisk HTML. `app.py` fletter kilderne
@@ -96,10 +114,9 @@ den pågældende versions docx (`feature_type`, `name`, `expression`).
 Featuretyper uden restriktioner får ingen fil. Kører automatisk for alle
 versioner i `versions/`.
 
-Formålet er at give et maskinlæsbart udtræk af restriktionerne til brug i andre
-repos/værktøjer (fx et der implementerer dem i Schematron) — uden fortolkning
-oveni (ingen koder, kategorisering e.l.). Kører uafhængigt af Flask-app'en og
-freeze-processen; deler kun `featurekatalog.py`-parseren.
+Scriptet kører uafhængigt af Flask-app'en og freeze-processen og deler kun
+parseren i `featurekatalog.py`. Se "Parsing af data fra docx" for, hvorfor
+kun restriktionerne eksporteres.
 
 ## Hent/opdater fejlkoder
 
