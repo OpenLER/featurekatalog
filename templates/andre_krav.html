@@ -3,7 +3,6 @@
 {% block content %}
 <h1>Andre krav</h1>
 <p>Ud over XSD-skemaet og restriktionerne fra featurekataloget (se <a href="{{ url_for('restriktioner', version=latest_version) }}">Restriktioner</a>) stiller LER-serveren nogle få yderligere krav.</p>
-<p>Alle tre regler herunder kan faktisk også udtrykkes i schematron.</p>
 <p>Fejlkoderne har jeg kaldt: G1, G2, G3, G4.</p>
 <p>Denne side er ikke version-præfikset: reglerne handler om GML/XML generelt og håndhæves af
 LER-serveren uafhængigt af datamodel-versionen. De er dog kun testet mod den version, extest
@@ -61,8 +60,11 @@ niveauets attribut læses og håndhæves selvstændigt.</li>
 <p>Konklusion: <strong>begge steder skal enten være <code>"3"</code> eller udeladt</strong> - en forkert værdi
 ét sted afviser dokumentet, uanset hvad der står (eller ikke står) det andet sted.</p>
 
-<h2 class="h4 mt-4">G3 - XML kommentarer ikke tilladt</h2>
-<p>Så vidt jeg husker, så returnerer LER-server en (ubehjælpelig) fejl, hvis det xml man sender indeholder xml kommentarer.</p>
+<h2 class="h4 mt-4">G3 - Undgå XML-kommentarer</h2>
+<p>Jeg mindes at have oplevet, at LER-serveren returnerede en ubehjælpelig/misvisende fejl, når den XML, jeg
+sendte, indeholdt XML-kommentarer.</p>
+<p>I skrivende stund (september 2026) har jeg ikke kunnet reproducere problemet. Jeg lader alligevel
+G3 stå, indtil jeg er sikker på, at kommentarer ikke giver problemer.</p>
 
 <h2 class="h4 mt-4">G4 - Deklarér xmlns:xlink, selvom prefixet ikke bruges</h2>
 <p>Elementer som <code>ler:geometri</code> har typen <code>gml:GeometryPropertyType</code>, som via
