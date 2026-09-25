@@ -18,6 +18,7 @@ ROOT = Path(__file__).parent
 VERSIONS_DIR = ROOT / 'versions'
 ERRORCODES_PATH = ROOT / 'errorcodes.json'
 LER_RELEASES_PATH = ROOT / 'ler_releases.yml'
+LER_API_ENDPOINTS_PATH = ROOT / 'ler_api_endpoints.yml'
 
 # Newest first - used as the display order on the version landing page.
 VERSIONS = {
@@ -523,14 +524,24 @@ def andre_krav():
     return render_template('andre_krav.html')
 
 
-## LER API-VERSIONER (unprefixed - the LER server's own release history, extest/prod
+## LER-RELEASES (unprefixed - the LER server's own release history, extest/prod
 ## deploy dates hand-copied from each release note into ler_releases.yml)
+
+
+@app.route('/ler_releases/')
+def ler_releases():
+    releases = yaml.safe_load(LER_RELEASES_PATH.read_text())
+    return render_template('ler_releases.html', releases=releases)
+
+
+## API-VERSIONER (unprefixed - which /api/vN/ versions each endpoint has, and which
+## release introduced them; hand-written in ler_api_endpoints.yml from Swagger + C0200)
 
 
 @app.route('/ler_api_versions/')
 def ler_api_versions():
-    releases = yaml.safe_load(LER_RELEASES_PATH.read_text())
-    return render_template('ler_api_versions.html', releases=releases)
+    endpoints = yaml.safe_load(LER_API_ENDPOINTS_PATH.read_text())
+    return render_template('ler_api_versions.html', endpoints=endpoints)
 
 
 ## OVERVIEW PAGES (list like)
@@ -656,6 +667,11 @@ def restriktioner_urls():
 @freezer.register_generator
 def andre_krav_urls():
     yield 'andre_krav', {}
+
+
+@freezer.register_generator
+def ler_releases_urls():
+    yield 'ler_releases', {}
 
 
 @freezer.register_generator

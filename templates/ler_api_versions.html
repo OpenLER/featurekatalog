@@ -1,44 +1,78 @@
 {% extends "base.html" %}
-{% block title %}LER API-versioner{% endblock %}
+{% block title %}API-versioner{% endblock %}
 {% block content %}
-<h1>LER API-versioner</h1>
-<p>LER-serveren udgives i nummererede releases. Hver release lægges først på extest og
-typisk en til to uger senere i produktion. Serveren oplyser ikke selv, hvilken release den
-kører (Swagger-specens <code>info.version</code> er altid <code>v1</code>), så tabellen her er
-den eneste måde at se, hvilken release et miljø kørte på en given dato.</p>
-<p>Release-nummeret følger ikke datamodellens version. Nye versioner af datamodellen rulles ud
-som en del af en server-release: datamodel 2.1.0 kom med release 2.2.4, og datamodel 2.2.0 blev
-rullet ud over release 2.2.8 (<code>nøjagtighedsklasseVertikal</code>) og 2.2.9
-(<code>udnyttelsesgrad</code>). Kolonnen "Datamodel" viser, hvilke releases der indførte en ny
-datamodel, ifølge release noten.</p>
-<p>Jeg har brugt AI til at generere en YAML-fil,
-<a href="https://github.com/OpenLER/lerbogen/blob/main/ler_releases.yml"><code>ler_releases.yml</code></a>,
-med alle releases ud fra de release notes (PDF), der findes på
-<a href="https://ler.dk/Portal/Subsides/P.7.Driftsinformation/P.7.1.Releasenoter.aspx">Driftsinformation → Releasenoter</a>
-på ler.dk. Tabellen herunder viser indholdet fra denne YAML-fil (dog uden at vise alt indholdet for hver release).</p>
-<p>Datoerne er de planlagte deploy-datoer fra hver release note. Hotfixes uden extest-dato blev
-lagt direkte i produktion.</p>
+<h1>API-versioner</h1>
+<p>LER's API har ingen samlet version. Swagger-specens <code>info.version</code> er altid
+<code>v1</code> og siger ikke noget. Til gengæld har hvert endpoint sin egen version i URL'en
+(<code>/api/v1/…</code>), og nogle endpoints findes i flere versioner ved siden af hinanden, fx
+<code>/api/v1/ledningspakke/{id}</code> og <code>/api/v2/ledningspakke/{id}</code>. En ny
+endpoint-version kommer med en server-release (se <a href="{{ url_for('ler_releases') }}">LER-releases</a>),
+men versionsnumrene følger hverken release-nummeret eller datamodellens version.</p>
 
+<h2 class="h4 mt-4">Princippet</h2>
+<p>Når et endpoint får en breaking change, ændres den eksisterende version ikke. I stedet kommer der
+en ny version ved siden af, fx <code>/api/v2/ledningspakke/{id}</code> ved siden af
+<code>/api/v1/ledningspakke/{id}</code>. Den gamle version kører videre i en overgangsperiode og
+fjernes derefter. C0200 – Guide to Web Services skriver:</p>
+<blockquote class="blockquote ps-3 border-start">
+<p class="fs-6">When breaking changes are introduced to an exposed service a new major version is added
+to the API. […] After a period of time the older versions will be phased out and removed from the
+exposed API.</p>
+</blockquote>
+<p>Hvor lang overgangsperioden er, står der ikke. Indtil videre er ingen version blevet fjernet, og
+perioderne har været lange: integration 16 v1 findes stadig, over et år efter at v2 kom, og
+integration 13 v1 og v2 lukkes 1. januar 2027, godt et år efter at v3 kom i produktion.</p>
+<p>Alle endpoints har versionen i URL'en fra starten, også dem der kun findes i én version. Kommer
+der en breaking change til fx integration 19, kommer der bare en <code>v2</code> ved siden af
+<code>v1</code>.</p>
+
+<h2 class="h4 mt-4">Hvorfor starter anmodning ved v4?</h2>
+<p>Integration 10, 11 og 28 (anmodninger) startede ved v4, fordi REST-API'et i LER 2.0 fortsatte
+nummereringen fra det gamle SOAP-baserede API i LER 1.x, som havde version 1–3. C0200 skriver:
+"The existing version 3 which is SOAP based will continue to co-exist with the new version 4 (REST
+based)". Alle andre endpoints startede ved v1.</p>
+
+<h2 class="h4 mt-4">Endpoints</h2>
+<p>Integrationsnumrene er LER's egne og bruges i C0200, i Swagger-specen og i release notes.
+"fra 2.2.x" angiver den server-release, der indførte versionen. Versioner uden "fra" fandtes
+allerede før 2.2.4, som er den ældste release note på ler.dk.</p>
 <div class="table-responsive">
 <table class="table table-sm table-striped table-bordered align-top w-auto">
   <tr>
-    <th class="text-nowrap">Release</th>
-    <th>extest</th>
-    <th>prod</th>
-    <th>Datamodel</th>
-    <th>AI summary</th>
-    <th class="text-nowrap">Release note</th>
+    <th class="text-nowrap">Integration</th>
+    <th>Navn</th>
+    <th>Metode</th>
+    <th>URL</th>
+    <th>Versioner</th>
   </tr>
-  {% for r in releases %}
+  {% for e in endpoints %}
   <tr>
-    <td class="text-nowrap">{{ r.release }}</td>
-    <td class="text-nowrap">{{ r.extest or '' }}</td>
-    <td class="text-nowrap">{{ r.prod }}</td>
-    <td class="text-nowrap">{% if r.datamodel %}<a href="{{ url_for('index', version=r.datamodel) }}">{{ r.datamodel }}</a>{% endif %}</td>
-    <td>{{ r.summary }}</td>
-    <td><a href="{{ r.url }}">pdf</a></td>
+    <td>{{ e.integration or '' }}</td>
+    <td class="text-nowrap">{{ e.name }}</td>
+    <td><code>{{ e.method }}</code></td>
+    <td class="text-nowrap"><code>{{ e.path }}</code></td>
+    <td class="text-nowrap">
+      {% for v in e.versions or [] %}
+      <div><code>{{ v.version }}</code>
+        {%- if v.release %} fra <a href="{{ url_for('ler_releases') }}#{{ v.release }}">{{ v.release }}</a>{% endif %}
+        {%- if v.lukkes %}, lukkes {{ v.lukkes }}{% endif %}</div>
+      {% else %}
+      ingen version
+      {% endfor %}
+    </td>
   </tr>
   {% endfor %}
 </table>
 </div>
+
+<h2 class="h4 mt-4">Kilder</h2>
+<p>Jeg har brugt AI til at generere YAML-filen
+<a href="https://github.com/OpenLER/lerbogen/blob/main/ler_api_endpoints.yml"><code>ler_api_endpoints.yml</code></a>,
+som tabellen herover viser, ud fra:</p>
+<ul>
+  <li>Swagger-specen for prod og extest (hentet 28. juli 2026; de to er identiske)</li>
+  <li>Oversigtstabellen og dokumenthistorikken i
+  <a href="https://ler.dk/Files/C0200_-_Guide_to_Web_Services_version_1.50.pdf">C0200 – Guide to Web Services v1.50</a></li>
+  <li>Release notes, se <a href="{{ url_for('ler_releases') }}">LER-releases</a></li>
+</ul>
 {% endblock %}

@@ -26,7 +26,7 @@ Derfor parser LER-bogen docx og XSD. Det fungerer godt nok i praksis.
 
 ## Kilder
 
-Sitet samler fem slags information fra fem forskellige kilder:
+Sitet samler seks slags information fra disse kilder:
 
 | Information | Kilde | Hentes af |
 |---|---|---|
@@ -35,6 +35,7 @@ Sitet samler fem slags information fra fem forskellige kilder:
 | Andre krav (G1–G4), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/andre_krav.html` |
 | Fejlkoder og navngivne forretningsregler | LERs API (`/api/errorcodes`) | `fetch_errorcodes.py` |
 | LER-serverens releases med datoer for extest og prod | Release notes på ler.dk (Driftsinformation → Releasenoter) | Håndskrevet i `ler_releases.yml` |
+| API-endpoints og deres versioner (`/api/vN/…`) | Swagger-specen, C0200 – Guide to Web Services og release notes | Håndskrevet i `ler_api_endpoints.yml` |
 
 ## Parsing af data fra docx
 

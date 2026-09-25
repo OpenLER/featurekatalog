@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}LER-releases{% endblock %}
+{% block content %}
+<h1>LER-releases</h1>
+<p>LER-serveren udgives i nummererede releases. Hver release lægges først på extest og
+typisk en til to uger senere i produktion. Serveren oplyser ikke selv, hvilken release den
+kører (Swagger-specens <code>info.version</code> er altid <code>v1</code>), så tabellen her er
+den eneste måde at se, hvilken release et miljø kørte på en given dato.</p>
+<p>Release-nummeret følger ikke datamodellens version. Nye versioner af datamodellen rulles ud
+som en del af en server-release: datamodel 2.1.0 kom med release 2.2.4, og datamodel 2.2.0 blev
+rullet ud over release 2.2.8 (<code>nøjagtighedsklasseVertikal</code>) og 2.2.9
+(<code>udnyttelsesgrad</code>). Kolonnen "Datamodel" viser, hvilke releases der indførte en ny
+datamodel, ifølge release noten.</p>
+<p>Jeg har brugt AI til at generere en YAML-fil,
+<a href="https://github.com/OpenLER/lerbogen/blob/main/ler_releases.yml"><code>ler_releases.yml</code></a>,
+med alle releases ud fra de release notes (PDF), der findes på
+<a href="https://ler.dk/Portal/Subsides/P.7.Driftsinformation/P.7.1.Releasenoter.aspx">Driftsinformation → Releasenoter</a>
+på ler.dk. Tabellen herunder viser indholdet fra denne YAML-fil (dog uden at vise alt indholdet for hver release).</p>
+<p>Datoerne er de planlagte deploy-datoer fra hver release note. Hotfixes uden extest-dato blev
+lagt direkte i produktion.</p>
+
+<div class="table-responsive">
+<table class="table table-sm table-striped table-bordered align-top w-auto">
+  <tr>
+    <th class="text-nowrap">Release</th>
+    <th>extest</th>
+    <th>prod</th>
+    <th>Datamodel</th>
+    <th>AI summary</th>
+    <th class="text-nowrap">Release note</th>
+  </tr>
+  {% for r in releases %}
+  <tr id="{{ r.release | replace(' ', '-') }}">
+    <td class="text-nowrap">{{ r.release }}</td>
+    <td class="text-nowrap">{{ r.extest or '' }}</td>
+    <td class="text-nowrap">{{ r.prod }}</td>
+    <td class="text-nowrap">{% if r.datamodel %}<a href="{{ url_for('index', version=r.datamodel) }}">{{ r.datamodel }}</a>{% endif %}</td>
+    <td>{{ r.summary }}</td>
+    <td><a href="{{ r.url }}">pdf</a></td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

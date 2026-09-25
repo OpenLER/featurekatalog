@@ -1,0 +1,106 @@
+# LER's REST-endpoints og deres versioner, håndskrevet ud fra:
+# - Swagger-specen (services-swagger[-extest].ler.dk/swagger/docs/v1, hentet 2026-07-28
+#   via ler-dk-crawler/fetch_api_spec.py; prod og extest er identiske)
+# - Oversigtstabellen i C0200 - Guide to Web Services v1.50 (navne og integrationsnumre)
+# - Release notes (se ler_releases.yml) for hvilken release der indførte en version
+#
+# release: den server-release, der indførte versionen. Tom = fra før 2.2.4, som er den
+# ældste release note på ler.dk. lukkes: varslet lukkedato for versionen.
+
+- integration: 10
+  name: Hent anmodninger
+  method: GET
+  path: /api/[version]/anmodning
+  versions:
+    - version: v4
+- integration: 11
+  name: Kvitter for anmodning
+  method: POST
+  path: /api/[version]/anmodningModtaget/{id}
+  versions:
+    - version: v4
+- integration: 13
+  name: Send graveforespørgselssvar
+  method: POST
+  path: /api/[version]/graveforespoergselSvar/{id}
+  versions:
+    - version: v1
+      lukkes: 2027-01-01
+    - version: v2
+      release: 2.2.5
+      lukkes: 2027-01-01
+    - version: v3
+      release: 2.2.8
+- integration: 15
+  name: Hent status på ledningspakke
+  method: GET
+  path: /api/[version]/ledningspakkeStatus/{id}
+  versions:
+    - version: v1
+- integration: 16
+  name: Hent ledningspakke
+  method: GET
+  path: /api/[version]/ledningspakke/{id}
+  versions:
+    - version: v1
+    - version: v2
+      release: 2.2.5
+- integration: 18
+  name: Indberet graveskade
+  method: POST
+  path: /api/[version]/graveskade
+  versions:
+    - version: v1
+- integration: 19
+  name: Opret graveforespørgsel
+  method: POST
+  path: /api/[version]/graveforespoergsel
+  versions:
+    - version: v1
+- integration: 24
+  name: Hent graveforespørgselskvittering
+  method: GET
+  path: /api/[version]/graveforespoergselKvittering/{id}
+  versions:
+    - version: v1
+- integration: 25
+  name: Hent status på ledningspakker
+  method: GET
+  path: /api/[version]/ledningspakkeStatus
+  versions:
+    - version: v1
+- integration: 26
+  name: Kvitter for ledningspakke
+  method: POST
+  path: /api/[version]/ledningspakkeModtaget/{id}
+  versions:
+    - version: v1
+- integration: 27
+  name: Opret interesseområde
+  method: POST
+  path: /api/[version]/interesseomraade
+  versions:
+    - version: v1
+- integration: 27
+  name: Rediger interesseområde
+  method: POST
+  path: /api/[version]/interesseomraade/{id}
+  versions:
+    - version: v1
+- integration: 28
+  name: Hent anmodning
+  method: GET
+  path: /api/[version]/anmodning/{id}
+  versions:
+    - version: v4
+
+# Endpoints uden version i URL'en
+- name: Hul igennem med korrekt sikkerhed
+  method: GET
+  path: /api/SecureTest
+- name: Hent alle fejlkoder
+  method: GET
+  path: /api/ErrorCodes
+- name: Hent fejlkode
+  method: GET
+  path: /api/errorcodes/{id}
