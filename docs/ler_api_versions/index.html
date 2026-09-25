@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API-versioner · LER-bogen</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  /* Always reserve room for the scrollbar, so the navbar doesn't shift between short and long pages. */
+  html { scrollbar-gutter: stable; }
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+  .pakke-badge { font-size: 0.85em; }
+  /* Same width whether it holds a version or 'alle versioner', so the nav links don't shift. */
+  .version-slot { width: 8.5rem; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">LER-bogen</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item version-slot">
+          <span class="nav-link disabled">alle versioner</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../2.2.0/featuretype_list/index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../2.2.0/featuretype_tree/index.html">Tree</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../2.2.0/restriktioner/index.html">Restriktioner</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../andre_krav/index.html">Andre krav</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../errorcodes/index.html">Fejlkoder</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../ler_releases/index.html">LER-releases</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">API-versioner</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container pb-5">
+<h1>API-versioner</h1>
+<p>LER's API har ingen samlet version. Swagger-specens <code>info.version</code> er altid
+<code>v1</code> og siger ikke noget. Til gengæld har hvert endpoint sin egen version i URL'en
+(<code>/api/v1/…</code>), og nogle endpoints findes i flere versioner ved siden af hinanden, fx
+<code>/api/v1/ledningspakke/{id}</code> og <code>/api/v2/ledningspakke/{id}</code>. En ny
+endpoint-version kommer med en server-release (se <a href="../ler_releases/index.html">LER-releases</a>),
+men versionsnumrene følger hverken release-nummeret eller datamodellens version.</p>
+
+<h2 class="h4 mt-4">Princippet</h2>
+<p>Når et endpoint får en breaking change, ændres den eksisterende version ikke. I stedet kommer der
+en ny version ved siden af, fx <code>/api/v2/ledningspakke/{id}</code> ved siden af
+<code>/api/v1/ledningspakke/{id}</code>. Den gamle version kører videre i en overgangsperiode og
+fjernes derefter. C0200 – Guide to Web Services skriver:</p>
+<blockquote class="blockquote ps-3 border-start">
+<p class="fs-6">When breaking changes are introduced to an exposed service a new major version is added
+to the API. […] After a period of time the older versions will be phased out and removed from the
+exposed API.</p>
+</blockquote>
+<p>Hvor lang overgangsperioden er, står der ikke. Indtil videre er ingen version blevet fjernet, og
+perioderne har været lange: integration 16 v1 findes stadig, over et år efter at v2 kom, og
+integration 13 v1 og v2 lukkes 1. januar 2027, godt et år efter at v3 kom i produktion.</p>
+<p>Alle endpoints har versionen i URL'en fra starten, også dem der kun findes i én version. Kommer
+der en breaking change til fx integration 19, kommer der bare en <code>v2</code> ved siden af
+<code>v1</code>.</p>
+
+<h2 class="h4 mt-4">Hvorfor starter anmodning ved v4?</h2>
+<p>Integration 10, 11 og 28 (anmodninger) startede ved v4, fordi REST-API'et i LER 2.0 fortsatte
+nummereringen fra det gamle SOAP-baserede API i LER 1.x, som havde version 1–3. C0200 skriver:
+"The existing version 3 which is SOAP based will continue to co-exist with the new version 4 (REST
+based)". Alle andre endpoints startede ved v1.</p>
+
+<h2 class="h4 mt-4">Endpoints</h2>
+<p>Integrationsnumrene er LER's egne og bruges i C0200, i Swagger-specen og i release notes.
+"fra 2.2.x" angiver den server-release, der indførte versionen. Versioner uden "fra" fandtes
+allerede før 2.2.4, som er den ældste release note på ler.dk.</p>
+<div class="table-responsive">
+<table class="table table-sm table-striped table-bordered align-top w-auto">
+  <tr>
+    <th class="text-nowrap">Integration</th>
+    <th>Navn</th>
+    <th>Metode</th>
+    <th>URL</th>
+    <th>Versioner</th>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="text-nowrap">Hent anmodninger</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/[version]/anmodning</code></td>
+    <td class="text-nowrap">
+      <div><code>v4</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td class="text-nowrap">Kvitter for anmodning</td>
+    <td><code>POST</code></td>
+    <td class="text-nowrap"><code>/api/[version]/anmodningModtaget/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v4</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td class="text-nowrap">Send graveforespørgselssvar</td>
+    <td><code>POST</code></td>
+    <td class="text-nowrap"><code>/api/[version]/graveforespoergselSvar/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code>, lukkes 2027-01-01</div>
+      <div><code>v2</code> fra <a href="../ler_releases/index.html#2.2.5">2.2.5</a>, lukkes 2027-01-01</div>
+      <div><code>v3</code> fra <a href="../ler_releases/index.html#2.2.8">2.2.8</a></div>
+    </td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td class="text-nowrap">Hent status på ledningspakke</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/[version]/ledningspakkeStatus/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td class="text-nowrap">Hent ledningspakke</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/[version]/ledningspakke/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+      <div><code>v2</code> fra <a href="../ler_releases/index.html#2.2.5">2.2.5</a></div>
+    </td>
+  </tr>
+  <tr>
+    <td>18</td>
+    <td class="text-nowrap">Indberet graveskade</td>
+    <td><code>POST</code></td>
+    <td class="text-nowrap"><code>/api/[version]/graveskade</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>19</td>
+    <td class="text-nowrap">Opret graveforespørgsel</td>
+    <td><code>POST</code></td>
+    <td class="text-nowrap"><code>/api/[version]/graveforespoergsel</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>24</td>
+    <td class="text-nowrap">Hent graveforespørgselskvittering</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/[version]/graveforespoergselKvittering/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>25</td>
+    <td class="text-nowrap">Hent status på ledningspakker</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/[version]/ledningspakkeStatus</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>26</td>
+    <td class="text-nowrap">Kvitter for ledningspakke</td>
+    <td><code>POST</code></td>
+    <td class="text-nowrap"><code>/api/[version]/ledningspakkeModtaget/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>27</td>
+    <td class="text-nowrap">Opret interesseområde</td>
+    <td><code>POST</code></td>
+    <td class="text-nowrap"><code>/api/[version]/interesseomraade</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>27</td>
+    <td class="text-nowrap">Rediger interesseområde</td>
+    <td><code>POST</code></td>
+    <td class="text-nowrap"><code>/api/[version]/interesseomraade/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v1</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td>28</td>
+    <td class="text-nowrap">Hent anmodning</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/[version]/anmodning/{id}</code></td>
+    <td class="text-nowrap">
+      <div><code>v4</code></div>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="text-nowrap">Hul igennem med korrekt sikkerhed</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/SecureTest</code></td>
+    <td class="text-nowrap">
+      ingen version
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="text-nowrap">Hent alle fejlkoder</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/ErrorCodes</code></td>
+    <td class="text-nowrap">
+      ingen version
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="text-nowrap">Hent fejlkode</td>
+    <td><code>GET</code></td>
+    <td class="text-nowrap"><code>/api/errorcodes/{id}</code></td>
+    <td class="text-nowrap">
+      ingen version
+    </td>
+  </tr>
+</table>
+</div>
+
+<h2 class="h4 mt-4">Kilder</h2>
+<p>Jeg har brugt AI til at generere YAML-filen
+<a href="https://github.com/OpenLER/lerbogen/blob/main/ler_api_endpoints.yml"><code>ler_api_endpoints.yml</code></a>,
+som tabellen herover viser, ud fra:</p>
+<ul>
+  <li>Swagger-specen for prod og extest (hentet 28. juli 2026; de to er identiske)</li>
+  <li>Oversigtstabellen og dokumenthistorikken i
+  <a href="https://ler.dk/Files/C0200_-_Guide_to_Web_Services_version_1.50.pdf">C0200 – Guide to Web Services v1.50</a></li>
+  <li>Release notes, se <a href="../ler_releases/index.html">LER-releases</a></li>
+</ul>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

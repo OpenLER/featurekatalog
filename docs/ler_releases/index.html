@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LER-releases · LER-bogen</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  /* Always reserve room for the scrollbar, so the navbar doesn't shift between short and long pages. */
+  html { scrollbar-gutter: stable; }
+  td, dd { white-space: pre-wrap; }
+  code { color: #d6336c; }
+  .pakke-badge { font-size: 0.85em; }
+  /* Same width whether it holds a version or 'alle versioner', so the nav links don't shift. */
+  .version-slot { width: 8.5rem; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">LER-bogen</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item version-slot">
+          <span class="nav-link disabled">alle versioner</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../2.2.0/featuretype_list/index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../2.2.0/featuretype_tree/index.html">Tree</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../2.2.0/restriktioner/index.html">Restriktioner</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../andre_krav/index.html">Andre krav</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../errorcodes/index.html">Fejlkoder</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">LER-releases</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../ler_api_versions/index.html">API-versioner</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container pb-5">
+<h1>LER-releases</h1>
+<p>LER-serveren udgives i nummererede releases. Hver release lægges først på extest og
+typisk en til to uger senere i produktion. Serveren oplyser ikke selv, hvilken release den
+kører (Swagger-specens <code>info.version</code> er altid <code>v1</code>), så tabellen her er
+den eneste måde at se, hvilken release et miljø kørte på en given dato.</p>
+<p>Release-nummeret følger ikke datamodellens version. Nye versioner af datamodellen rulles ud
+som en del af en server-release: datamodel 2.1.0 kom med release 2.2.4, og datamodel 2.2.0 blev
+rullet ud over release 2.2.8 (<code>nøjagtighedsklasseVertikal</code>) og 2.2.9
+(<code>udnyttelsesgrad</code>). Kolonnen "Datamodel" viser, hvilke releases der indførte en ny
+datamodel, ifølge release noten.</p>
+<p>Jeg har brugt AI til at generere en YAML-fil,
+<a href="https://github.com/OpenLER/lerbogen/blob/main/ler_releases.yml"><code>ler_releases.yml</code></a>,
+med alle releases ud fra de release notes (PDF), der findes på
+<a href="https://ler.dk/Portal/Subsides/P.7.Driftsinformation/P.7.1.Releasenoter.aspx">Driftsinformation → Releasenoter</a>
+på ler.dk. Tabellen herunder viser indholdet fra denne YAML-fil (dog uden at vise alt indholdet for hver release).</p>
+<p>Datoerne er de planlagte deploy-datoer fra hver release note. Hotfixes uden extest-dato blev
+lagt direkte i produktion.</p>
+
+<div class="table-responsive">
+<table class="table table-sm table-striped table-bordered align-top w-auto">
+  <tr>
+    <th class="text-nowrap">Release</th>
+    <th>extest</th>
+    <th>prod</th>
+    <th>Datamodel</th>
+    <th>AI summary</th>
+    <th class="text-nowrap">Release note</th>
+  </tr>
+  <tr id="2.2.4">
+    <td class="text-nowrap">2.2.4</td>
+    <td class="text-nowrap">2024-12-18</td>
+    <td class="text-nowrap">2025-01-30</td>
+    <td class="text-nowrap"><a href="../2.1.0/index.html">2.1.0</a></td>
+    <td>Ændringer fra bekendtgørelsen: medietype for gas, vejledende dybde kan være void. Breaking: skærpet validering af AndenLedning.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_4.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.4-Hotfix-1">
+    <td class="text-nowrap">2.2.4 Hotfix 1</td>
+    <td class="text-nowrap">2025-02-25</td>
+    <td class="text-nowrap">2025-03-11</td>
+    <td class="text-nowrap"></td>
+    <td>Rettede restriktioner for udvendig diameter, bredde og højde.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_4_Hotfix_1.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.5">
+    <td class="text-nowrap">2.2.5</td>
+    <td class="text-nowrap">2025-04-29</td>
+    <td class="text-nowrap">2025-05-13</td>
+    <td class="text-nowrap"></td>
+    <td>V2 af integration 13 og 16, ler2signed i integration 27, driftsinformation på LER.dk.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_5.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.5-Hotfix-1">
+    <td class="text-nowrap">2.2.5 Hotfix 1</td>
+    <td class="text-nowrap">2025-05-20</td>
+    <td class="text-nowrap">2025-05-20</td>
+    <td class="text-nowrap"></td>
+    <td>Integration 16 V2 accepterer store og små bogstaver i URL-parametre. Integration 13 V1 svarer 409 Conflict, hvis ledningspakken ikke kan hentes.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_5_Hotfix_1.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.5-Hotfix-2">
+    <td class="text-nowrap">2.2.5 Hotfix 2</td>
+    <td class="text-nowrap">2025-05-26</td>
+    <td class="text-nowrap">2025-05-26</td>
+    <td class="text-nowrap"></td>
+    <td>Integration 13 V1: dobbelt validering fjernet for at forbedre performance.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_5_Hotfix_2.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.6">
+    <td class="text-nowrap">2.2.6</td>
+    <td class="text-nowrap">2025-06-10</td>
+    <td class="text-nowrap">2025-06-24</td>
+    <td class="text-nowrap"></td>
+    <td>Gensend statusmail. Rettelser i kortviser, integration 16 V2 og Swagger.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_6.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.7">
+    <td class="text-nowrap">2.2.7</td>
+    <td class="text-nowrap">2025-09-09</td>
+    <td class="text-nowrap">2025-09-23</td>
+    <td class="text-nowrap"></td>
+    <td>consolidated.gml får oprettelses- og ændringsdatoer.</td>
+    <td><a href="https://ler.dk/Files/ReleaseNote_2_2_7.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.7-Hotfix-1">
+    <td class="text-nowrap">2.2.7 Hotfix 1</td>
+    <td class="text-nowrap"></td>
+    <td class="text-nowrap">2025-10-08</td>
+    <td class="text-nowrap"></td>
+    <td>Lås på consolidated.gml, så V1 og V2 af integration 13 ikke overskriver hinanden.</td>
+    <td><a href="https://ler.dk/Files/ReleaseNote_2_2_7_Hotfix_1.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.8">
+    <td class="text-nowrap">2.2.8</td>
+    <td class="text-nowrap">2025-10-21</td>
+    <td class="text-nowrap">2025-12-10</td>
+    <td class="text-nowrap"><a href="../2.2.0/index.html">2.2.0</a></td>
+    <td>Vertikal nøjagtighedsklasse og integration 13 V3. Breaking fra 01.01.2027: V1 og V2 lukkes.</td>
+    <td><a href="https://ler.dk/Files/ReleaseNote_2_2_8.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.9">
+    <td class="text-nowrap">2.2.9</td>
+    <td class="text-nowrap">2025-11-27</td>
+    <td class="text-nowrap">2025-12-10</td>
+    <td class="text-nowrap"><a href="../2.2.0/index.html">2.2.0</a></td>
+    <td>GIA-forordningen: samføring som formål, ændrede samgravningsannoncer. Ny frivillig attribut udnyttelsesgrad.</td>
+    <td><a href="https://ler.dk/Files/ReleaseNote_2_2_9.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.9-Hotfix-1">
+    <td class="text-nowrap">2.2.9 Hotfix 1</td>
+    <td class="text-nowrap"></td>
+    <td class="text-nowrap">2025-12-15</td>
+    <td class="text-nowrap"></td>
+    <td>Rettet fejl fra 2.2.9, hvor private graveaktører ikke kunne oprette deres første graveforespørgsel.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_9_Hotfix_1.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.10">
+    <td class="text-nowrap">2.2.10</td>
+    <td class="text-nowrap">2025-12-29</td>
+    <td class="text-nowrap">2026-01-15</td>
+    <td class="text-nowrap"></td>
+    <td>Masseindberetning af graveskader for flere CVR-numre. Breaking: ny CSV-fil.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_10.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.10-Hotfix-1">
+    <td class="text-nowrap">2.2.10 Hotfix 1</td>
+    <td class="text-nowrap">2026-01-27</td>
+    <td class="text-nowrap">2026-01-27</td>
+    <td class="text-nowrap"></td>
+    <td>Validering af faktureringskonto ved oprettelse af graveforespørgsel. Rettet &#34;sidste login&#34;.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_10_Hotfix_1.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.10-Hotfix-2">
+    <td class="text-nowrap">2.2.10 Hotfix 2</td>
+    <td class="text-nowrap">2026-02-02</td>
+    <td class="text-nowrap">2026-02-02</td>
+    <td class="text-nowrap"></td>
+    <td>Rettet beregning af svarfrist (arbejdsdag 07-16 på hverdage).</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_10_Hotfix2.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.11">
+    <td class="text-nowrap">2.2.11</td>
+    <td class="text-nowrap">2026-03-30</td>
+    <td class="text-nowrap">2026-04-14</td>
+    <td class="text-nowrap"></td>
+    <td>Fejlrettelser, bl.a. i integration 27, GML-upload til samgravningsannoncer og Graveinfo.</td>
+    <td><a href="https://ler.dk/Files/Releasenote_2_2_11.pdf">pdf</a></td>
+  </tr>
+  <tr id="2.2.12">
+    <td class="text-nowrap">2.2.12</td>
+    <td class="text-nowrap">2026-06-30</td>
+    <td class="text-nowrap">2026-07-07</td>
+    <td class="text-nowrap"></td>
+    <td>Fejlrettelser. Skærpet validering i integration 27 (interesseområder), ny adressevælger, fejlkode 16-410 for arkiverede ledningspakker.</td>
+    <td><a href="https://ler.dk/Files/ReleaseNote_2_2_12.pdf">pdf</a></td>
+  </tr>
+</table>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
