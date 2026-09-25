@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}General constraints{% endblock %}
+{% block title %}Andre krav{% endblock %}
 {% block content %}
-<h1>General constraints</h1>
-<p>Udover XSD constraints og listen med constraints ("restriktioner") fra featurekatalog / XMI, så er der nogle få yderligere.</p>
+<h1>Andre krav</h1>
+<p>Ud over XSD-skemaet og restriktionerne fra featurekataloget (se <a href="{{ url_for('restriktioner', version=latest_version) }}">Restriktioner</a>) stiller LER-serveren nogle få yderligere krav.</p>
 <p>Alle tre regler herunder kan faktisk også udtrykkes i schematron.</p>
 <p>Fejlkoderne har jeg kaldt: G1, G2, G3, G4.</p>
 <p>Denne side er ikke version-præfikset: reglerne handler om GML/XML generelt og håndhæves af

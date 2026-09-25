@@ -512,13 +512,13 @@ def errorcodes():
     return render_template('errorcodes.html', numeric_groups=numeric_groups, named=named)
 
 
-## ANDRE KRAV (unprefixed - hand-written in general_constraints.html from tests against
+## ANDRE KRAV (unprefixed - hand-written in andre_krav.html from tests against
 ## LER's extest-API. G1-G4 concern GML/XML in general, not the versioned datamodel.)
 
 
-@app.route('/general_constraints/')
-def general_constraints():
-    return render_template('general_constraints.html')
+@app.route('/andre_krav/')
+def andre_krav():
+    return render_template('andre_krav.html')
 
 
 ## OVERVIEW PAGES (list like)
@@ -642,8 +642,8 @@ def restriktioner_urls():
 
 
 @freezer.register_generator
-def general_constraints_urls():
-    yield 'general_constraints', {}
+def andre_krav_urls():
+    yield 'andre_krav', {}
 
 
 @freezer.register_generator

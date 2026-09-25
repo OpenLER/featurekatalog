@@ -32,7 +32,7 @@ Sitet samler fire slags information fra fire forskellige kilder:
 |---|---|---|
 | Struktur: elementer, typer og typehierarki | XSD-filerne | `wrapper.py` (`SchemaEx`) |
 | Attributter, restriktioner og associationsroller pr. featuretype | Featurekatalogets docx-fil | `featurekatalog.py` |
-| Andre krav (G1–G4), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/general_constraints.html` |
+| Andre krav (G1–G4), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/andre_krav.html` |
 | Fejlkoder og navngivne forretningsregler | LERs API (`/api/errorcodes`) | `fetch_errorcodes.py` |
 
 ## Parsing af data fra docx
