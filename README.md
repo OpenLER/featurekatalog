@@ -32,7 +32,7 @@ Sitet samler seks slags information fra disse kilder:
 |---|---|---|
 | Struktur: elementer, typer og typehierarki | XSD-filerne | `wrapper.py` (`SchemaEx`) |
 | Attributter, restriktioner og associationsroller pr. featuretype | Featurekatalogets docx-fil | `featurekatalog.py` |
-| Andre krav (G1–G4), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/andre_krav.html` |
+| Andre krav (G1–G6), som ikke er dokumenteret, eller som ikke kommer med i parsingen af docx | Mine egne tests mod LERs extest-API (se `ler-api-experiments`) | Håndskrevet i `templates/andre_krav.html` |
 | Fejlkoder og navngivne forretningsregler | LERs API (`/api/errorcodes`) | `fetch_errorcodes.py` |
 | LER-serverens releases med datoer for extest og prod | Release notes på ler.dk (Driftsinformation → Releasenoter) | Håndskrevet i `ler_releases.yml` |
 | API-endpoints og deres versioner (`/api/vN/…`) | Swagger-specen, C0200 – Guide to Web Services og release notes | Håndskrevet i `ler_api_endpoints.yml` |
