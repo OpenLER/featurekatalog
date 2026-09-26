@@ -1,25 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Fejlkoder{% endblock %}
 {% block content %}
-<h1>Fejlkoder</h1>
-<p>LER's autoritative kilde for API-fejlkoder er endpointet <code>GET /api/errorcodes</code>,
+{% filter markdown %}
+# Fejlkoder
+
+LER's autoritative kilde for API-fejlkoder er endpointet `GET /api/errorcodes`,
 som returnerer alle fejlkoder og navngivne forretningsregler serveren kan returnere
 (hentet direkte fra LER, ikke fra dokumentation der kan halte bagefter – se
-<code>adr/901-ler-api-error-codes.md</code> i repoet).</p>
-<p>Denne side er ikke version-præfikset som resten af LER-bogen: fejlkoderne er
+`adr/901-ler-api-error-codes.md` i repoet).
+
+Denne side er ikke version-præfikset som resten af LER-bogen: fejlkoderne er
 fælles på tværs af LER's datamodel-versioner (2.0, 2.1, 2.2, …) – der er intet der
 tyder på at de nogensinde varierer med datamodellen. De kan til gengæld tænkes at
 variere på tværs af API-integrationsversion (V1/V2/V3 af de enkelte service-endpoints)
-– det er ikke undersøgt endnu, og listen herunder er ikke opdelt efter det.</p>
-<p>Listen falder i to grupper, der opfører sig forskelligt i et API-svar:</p>
-<ul>
-  <li><strong>Nummererede fejlkoder</strong> (<code>XX-XXX</code>) – står direkte i
-  <code>Error.ErrorCode</code> i JSON-svaret. Grupperet efter integration/service herunder.</li>
-  <li><strong>Navngivne forretningsregler</strong> – <em>ikke</em> selvstændige
-  <code>ErrorCode</code>-værdier. De fremgår kun som fritekst i
-  <code>Error.PrettyErrorMessage</code> (typisk <code>&lt;RegelNavn uden "Rule"&gt;: &lt;besked&gt;</code>),
-  mens <code>ErrorCode</code> forbliver den generiske overordnede kode for den service der afviste.</li>
-</ul>
+– det er ikke undersøgt endnu, og listen herunder er ikke opdelt efter det.
+
+Listen falder i to grupper, der opfører sig forskelligt i et API-svar:
+
+- **Nummererede fejlkoder** (`XX-XXX`) – står direkte i
+  `Error.ErrorCode` i JSON-svaret. Grupperet efter integration/service herunder.
+- **Navngivne forretningsregler** – *ikke* selvstændige
+  `ErrorCode`-værdier. De fremgår kun som fritekst i
+  `Error.PrettyErrorMessage` (typisk `<RegelNavn uden "Rule">: <besked>`),
+  mens `ErrorCode` forbliver den generiske overordnede kode for den service der afviste.
+{% endfilter %}
 
 <h2 class="h4 mt-4">Nummererede fejlkoder</h2>
 {% for prefix, codes in numeric_groups %}

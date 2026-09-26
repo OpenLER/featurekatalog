@@ -1,5 +1,6 @@
 flask
 frozen-flask
+markdown
 python-docx
 pyyaml
 requests

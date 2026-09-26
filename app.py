@@ -3,6 +3,7 @@ import json
 import re
 from pathlib import Path
 
+import markdown
 import yaml
 from xmlschema import XMLSchema
 from xmlschema.validators.wildcards import XsdAnyElement, XsdAnyAttribute
@@ -392,6 +393,12 @@ def get_errorcodes():
 @app.template_filter('anchor')
 def anchor_filter(prefixed_name):
     return prefixed_name.lower().replace(':', '-')
+
+
+@app.template_filter('markdown')
+def markdown_filter(text):
+    """Hand-written prose in templates: {% filter markdown %} ... {% endfilter %}."""
+    return Markup(markdown.markdown(text, extensions=['fenced_code', 'tables', 'attr_list']))
 
 
 def get_by_navn(version, navn):
