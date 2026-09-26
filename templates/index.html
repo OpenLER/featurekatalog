@@ -10,4 +10,16 @@ Alt info er en omskrevet udgave af LER's officielle dokumentation.
 Brug menuen ovenfor til at browse featuretyper, restriktioner og XSD-struktur
 for denne version.
 </p>
+<p>
+{% if g.version == '2.2.0' %}
+LER's API bruger denne version: alle tre versioner af integration 13 (Send
+graveforespørgselssvar) XSD-validerer mod 2.2.0, og v3 håndhæver også 2.2.0-restriktionerne.
+{% elif g.version == '2.1.0' %}
+LER's API bruger denne versions restriktioner i integration 13 (Send graveforespørgselssvar)
+v1 og v2, der lukker 2027-01-01. XSD-valideringen sker mod 2.2.0.
+{% else %}
+LER's API bruger ikke længere denne version.
+{% endif %}
+Se <a href="{{ url_for('ler_api_versions') }}#integration-13">API-versioner</a>.
+</p>
 {% endblock %}
