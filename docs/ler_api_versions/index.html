@@ -76,6 +76,10 @@ exposed API.</p>
 <p>Hvor lang overgangsperioden er, står der ikke. Indtil videre er ingen version blevet fjernet, og
 perioderne har været lange: integration 16 v1 findes stadig, over et år efter at v2 kom, og
 integration 13 v1 og v2 lukkes 1. januar 2027, godt et år efter at v3 kom i produktion.</p>
+<p>Princippet er ikke altid overholdt. Eksisterende versioner er flere gange blevet skrappere uden en
+ny version: integration 13 v1 med datamodel 2.1.0 (release 2.2.4) og integration 27 v1 (release
+2.2.12). Man kan altså ikke regne med, at en version aldrig begynder at afvise noget, der virkede
+før.</p>
 <p>Alle endpoints har versionen i URL'en fra starten, også dem der kun findes i én version. Kommer
 der en breaking change til fx integration 19, kommer der bare en <code>v2</code> ved siden af
 <code>v1</code>.</p>
@@ -248,6 +252,29 @@ allerede før 2.2.4, som er den ældste release note på ler.dk.</p>
   </tr>
 </table>
 </div>
+
+<h2 class="h4 mt-4" id="integration-13">Hvilken datamodel bruger integration 13?</h2>
+<p>Alle tre versioner af Send graveforespørgselssvar XSD-validerer mod 2.2.0, men de håndhæver
+restriktionerne fra forskellige versioner af featurekataloget:</p>
+<div class="table-responsive">
+<table class="table table-sm table-striped table-bordered align-top w-auto">
+  <tr>
+    <th>Version</th>
+    <th>XSD</th>
+    <th>Restriktioner</th>
+    <th>Lukkes</th>
+  </tr>
+  <tr><td><code>v1</code></td><td><a href="../2.2.0/index.html">2.2.0</a></td><td><a href="../2.1.0/restriktioner/index.html">2.1.0</a></td><td class="text-nowrap">2027-01-01</td></tr>
+  <tr><td><code>v2</code></td><td><a href="../2.2.0/index.html">2.2.0</a></td><td><a href="../2.1.0/restriktioner/index.html">2.1.0</a></td><td class="text-nowrap">2027-01-01</td></tr>
+  <tr><td><code>v3</code></td><td><a href="../2.2.0/index.html">2.2.0</a></td><td><a href="../2.2.0/restriktioner/index.html">2.2.0</a></td><td></td></tr>
+</table>
+</div>
+<p>Det kan lade sig gøre, fordi de nye elementer i 2.2.0-XSD'en er valgfrie. Kravet om fx
+<code>noejagtighedsklasseVertikal</code> kommer kun fra restriktionerne. <code>schemaVersion</code>
+i XML'en ignoreres; det er endpointet, der bestemmer. Ingen versioner bruger 2.0.x.</p>
+<p>Jeg har målt det selv på extest 2026-09-26 med én testfil pr. versionsgrænse (se
+<code>ler-api-experiments/experiments/endpoint_versioner/</code>). De øvrige endpoints er ikke
+testet.</p>
 
 <h2 class="h4 mt-4">Kilder</h2>
 <p>Jeg har brugt AI til at generere YAML-filen
