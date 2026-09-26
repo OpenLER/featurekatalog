@@ -7,15 +7,15 @@ dokument, med alle fejlkoder. Det er egentligt en fin løsning.
 Men nogen gange vil man måske gerne studere/læse disse koder
 uden at bruge shell kommandoer som curl, jq, grep.
 
-Jeg overvejer at vise disse koder i featurekatalog.
+Jeg overvejer at vise disse koder i lerbogen.
 
 Mange af koderne er vigtig baggrundsinfo for at forstå,
 hvordan jeg bør implementere både ler-xml-validator
-og lermodel. Og hele featurekatalog repo er jo netop
+og lermodel. Og hele lerbogen repo er jo netop
 bygget for at samle den nødvendige dokumentaiton
 for at bygge disse.
 
 ## Beslutning
 
-Jeg tilføjer en side i featurekatalog,
+Jeg tilføjer en side i lerbogen,
 med en liste over alle fejlkoder.
