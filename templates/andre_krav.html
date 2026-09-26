@@ -43,7 +43,7 @@ detaljer.</p>
 
 <h2 class="h4 mt-4" id="G1">G1 - Geometrien skal have 3 tal pr. vertex</h2>
 <p>Bekræftet ved faktiske sends mod LER's rigtige extest-API (ikke kun XSD-validering) - se
-eksperimenterne i <code>ler-api-experiments/experiments/koordinater/</code>.</p>
+eksperimenterne i <code>ler-api-experiments/graveforespoergselssvar/koordinater/</code>.</p>
 <p>Det er aldrig tilladt kun at opgive to tal per vertex - heller ikke hvis man sætter
 <code>srsDimension="2"</code> eksplicit. Begge varianter afvises med identisk fejl fra en navngivet
 regel:</p>
@@ -61,7 +61,7 @@ regel (<code>VejledendeDybdeBetingelse</code>), ikke af Check3DGeometry.</p>
 
 <h2 class="h4 mt-4" id="G2">G2 - srsDimension skal være 3, hvis den er sat</h2>
 <p>Testet ved faktiske sends mod LER's rigtige extest-API - se
-<code>ler-api-experiments/experiments/srsdimension/</code>. Den oprindelige antagelse ("skal
+<code>ler-api-experiments/graveforespoergselssvar/srsdimension/</code>. Den oprindelige antagelse ("skal
 eksplicit sætte <code>srsDimension="3"</code>, ellers afviser LER") holder ikke: en <code>gml:posList</code>
 med korrekt tre tal pr. vertex, men helt uden <code>srsDimension</code>-attribut, blev accepteret.</p>
 <p>Til gengæld er attributten ikke harmløs at sætte forkert. Sætter man
@@ -79,7 +79,7 @@ eksplicit <code>srsDimension="3"</code>. Kilde:
 (fx <code>gml:LineString</code>, arver <code>gml:SRSReferenceGroup</code> fra <code>AbstractGeometryType</code>) og
 på <code>gml:posList</code> selv (som har sin egen <code>SRSReferenceGroup</code>). XSD'en tillader begge dele
 og har ingen regel for hvad der sker ved en konflikt - det er testet direkte (samme mappe,
-<code>ler-api-experiments/experiments/srsdimension/</code>):</p>
+<code>ler-api-experiments/graveforespoergselssvar/srsdimension/</code>):</p>
 <ul>
 <li>At sætte den samme, korrekte værdi begge steder er ikke en fejl - <code>LineString srsDimension="3"</code>
 + <code>posList srsDimension="3"</code> accepteres som normalt.</li>
@@ -177,7 +177,7 @@ skæringsdatoen. <code>before</code> + <code>2023-07-01</code> er ok, <code>befo
 <code>2023</code>), og hvilken underkode LER melder, når flere krav er brudt på én gang.</li>
 </ul>
 <p>Testet med 57 værdier og attributkombinationer mod v3 på extest 2026-09-26, se
-<code>ler-api-experiments/experiments/etableringstidspunkt/</code>.</p>
+<code>ler-api-experiments/graveforespoergselssvar/etableringstidspunkt/</code>.</p>
 
 <h2 class="h4 mt-4" id="G6">G6 - etableringstidspunkt skal være en dato, der findes</h2>
 <p>G6 er ikke et krav fra LER-serveren, men min egen anbefaling.</p>
